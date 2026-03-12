@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "uip-cloudgenz"
+  },
+  "targets": {
+    "uip-cloudgenz": {
+      "hosting": {
+        "dev-site": [
+          "uip-dev-cloudgenz"
+        ],
+        "stage-site": [
+          "uip-stage-cloudgenz"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
