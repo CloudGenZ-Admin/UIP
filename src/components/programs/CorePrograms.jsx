@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PROGRAMS = [
   {
@@ -14,7 +15,8 @@ const PROGRAMS = [
       { title: 'Resettlement Guidance', desc: 'Navigate complexities with community wisdom' }
     ],
     schedule: 'Weekly Circle Sessions',
-    btnText: 'Join Support Circle'
+    btnText: 'Join Support Circle',
+    link: '/programs/peer-support' // New link property
   },
   {
     id: 'wellness',
@@ -29,7 +31,8 @@ const PROGRAMS = [
       { title: 'Holistic Wellness', desc: 'Mind-body practices, meditation, and self-care' }
     ],
     schedule: 'Monthly Workshops',
-    btnText: 'Book Wellness Session'
+    btnText: 'Book Wellness Session',
+    link: '/programs/wellness' // New link property
   },
   {
     id: 'cultural',
@@ -44,7 +47,8 @@ const PROGRAMS = [
       { title: 'Pride & Belonging', desc: 'Experience the joy of being fully seen and celebrated' }
     ],
     schedule: 'Monthly Celebrations (Third Sunday)',
-    btnText: 'Join Celebrations'
+    btnText: 'Join Celebrations',
+    link: '/programs/cultural' // New link property
   },
   {
     id: 'navigation',
@@ -59,7 +63,8 @@ const PROGRAMS = [
       { title: 'Housing & Employment', desc: 'Safe housing options and inclusive opportunities' }
     ],
     schedule: 'Personalized support by appointment',
-    btnText: 'Get Navigation Help'
+    btnText: 'Get Navigation Help',
+    link: '/resources' // Redirects to your existing Resources Page
   }
 ];
 
@@ -114,9 +119,10 @@ export default function CorePrograms() {
                 ))}
               </ul>
 
-              <button className="mt-6 inline-block bg-gradient-cta text-white font-semibold px-8 py-3.5 rounded-full hover:opacity-90 transition-opacity shadow-md">
+              {/* Updated: Changed from <button> to <Link> */}
+              <Link to={program.link} className="mt-6 inline-block bg-gradient-cta text-white font-semibold px-8 py-3.5 rounded-full hover:opacity-90 transition-opacity shadow-md">
                 {program.btnText}
-              </button>
+              </Link>
             </div>
 
           </div>

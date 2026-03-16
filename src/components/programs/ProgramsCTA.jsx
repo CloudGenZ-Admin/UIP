@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 export default function ProgramsCTA() {
   return (
     <section className="py-20 px-6 bg-pride-sand">
@@ -7,7 +7,7 @@ export default function ProgramsCTA() {
         {/* Gradient Border Wrapper */}
         <div className="rounded-3xl p-0.5 shadow-xl" style={{ background: 'linear-gradient(135deg, #b8a7e0, #7dcbb8)' }}>
           <div className="bg-white rounded-[calc(1.5rem-2px)] p-10 md:p-14 text-center">
-            
+
             <span className="text-4xl mb-4 block">🌈</span>
             <h2 className="font-display font-bold text-3xl md:text-5xl text-pride-navy mb-6">
               Your Healing Journey Starts Here
@@ -17,15 +17,15 @@ export default function ProgramsCTA() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <button className="bg-gradient-cta text-white font-semibold px-8 py-3.5 rounded-full shadow-md hover:opacity-90 transition-opacity">
+              <NavLink to="/support" className="bg-gradient-cta text-white font-semibold px-8 py-3.5 rounded-full shadow-md hover:opacity-90 transition-opacity">
                 Join Our Programs
-              </button>
-              <button className="border-2 border-pride-lavender text-pride-purple font-semibold px-8 py-3.5 rounded-full hover:bg-purple-50 transition-colors">
+              </NavLink>
+              <NavLink to="/contact" className="border-2 border-pride-lavender text-pride-purple font-semibold px-8 py-3.5 rounded-full hover:bg-purple-50 transition-colors">
                 Ask Questions
-              </button>
-              <button className="text-pride-muted font-semibold px-6 py-3.5 hover:text-pride-navy transition-colors underline decoration-2 underline-offset-4">
+              </NavLink>
+              <NavLink to="/volunteer" className="text-pride-muted font-semibold px-6 py-3.5 hover:text-pride-navy transition-colors underline decoration-2 underline-offset-4">
                 Become a Peer Leader
-              </button>
+              </NavLink>
             </div>
 
             {/* Newsletter Mini-form */}
@@ -33,9 +33,9 @@ export default function ProgramsCTA() {
               <h4 className="font-bold text-pride-navy mb-2">Stay Connected & Informed</h4>
               <p className="text-sm text-pride-muted mb-4">Get updates on programs, resources, and community news delivered to your inbox</p>
               <div className="flex gap-2">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email" 
+                <input
+                  type="email"
+                  placeholder="Enter your email"
                   className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-5 py-3 outline-none focus:border-pride-purple focus:ring-1 focus:ring-pride-purple transition-all text-sm"
                 />
                 <button className="bg-pride-navy text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all">
