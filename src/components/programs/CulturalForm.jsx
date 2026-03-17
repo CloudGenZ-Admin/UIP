@@ -209,10 +209,10 @@ export default function CulturalForm() {
               <p className="text-sm text-pride-muted mb-8 pb-6 border-b border-gray-100">Mark your calendar for these exciting community events</p>
               
               <div className="space-y-6">
-                <div className="bg-pink-50 rounded-2xl p-4">
+                <div className="bg-pink-50 rounded-2xl p-6">
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-bold text-pride-navy">Pride Month Celebration</h4>
-                    <span className="bg-pink-200 text-pink-800 text-xs font-bold px-2 py-1 rounded-full">Coming Soon</span>
+                    <h4 className="font-bold text-sm text-pride-navy">Pride Month Celebration</h4>
+                    <span className="bg-pink-200 text-pink-800 text-xs font-bold px-4 py-1 rounded-full">Coming soon</span>
                   </div>
                   <p className="text-xs text-pride-muted mb-2">A vibrant celebration of our LGBTQ+ community with food, music, and cultural performances.</p>
                   <p className="text-xs font-semibold text-pink-600">📍 Community Centre</p>
