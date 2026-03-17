@@ -1,8 +1,10 @@
 import React from 'react';
+// Image ko correct relative path se import kiya gaya hai
+import res1Img from '../../assets/Res1.jpg';
 
 export default function ResourceNavigationIntro() {
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-24 px-6 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         
         {/* Left Content */}
@@ -49,19 +51,19 @@ export default function ResourceNavigationIntro() {
         </div>
 
         {/* Right Image/Visual */}
-        <div className="relative">
-          <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl relative bg-gray-100">
-             {/* Replace with your actual image path */}
+        <div className="relative mt-8 lg:mt-0">
+          <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl relative bg-gray-100 group">
+             {/* Actual Image inserted here */}
             <img 
-              src="/api/placeholder/600/750" 
+              src={res1Img} 
               alt="Community support" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-pride-navy/50 to-transparent"></div>
           </div>
 
-          {/* Floating Trusted Partners Box */}
-          <div className="absolute -bottom-8 -left-8 md:-left-12 bg-white rounded-2xl p-6 shadow-xl border border-gray-50 max-w-[280px]">
+          {/* Floating Trusted Partners Box (Responsive Positioning updated) */}
+          <div className="absolute -bottom-6 left-2 sm:-bottom-8 sm:-left-8 md:-left-12 bg-white rounded-2xl p-6 shadow-xl border border-gray-50 max-w-[280px]">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-lg">
                 ✓

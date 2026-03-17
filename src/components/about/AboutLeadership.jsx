@@ -1,4 +1,5 @@
 import React from 'react';
+import aboutImage from '../../../src/assets/About3.png'; 
 
 export default function AboutLeadership() {
   return (
@@ -21,13 +22,13 @@ export default function AboutLeadership() {
               </p>
             </div>
 
-            {/* Placeholder Image Graphic (Can be replaced with actual <img> tag) */}
-            <div className="w-full aspect-[4/5] bg-gradient-to-br from-[#A58CE0] to-[#EFAEC3] rounded-[2.5rem] flex items-center justify-center p-8 shadow-lg relative overflow-hidden group">
-              <div className="absolute inset-0 bg-black/10"></div>
-              <div className="relative text-center">
-                <span className="text-white text-6xl block mb-4 opacity-80">📷</span>
-                <span className="text-white font-display font-bold text-2xl drop-shadow-md">Stella and Hudson</span>
-              </div>
+            {/* Actual Image Area */}
+            <div className="w-full aspect-[4/5] rounded-[2.5rem] shadow-lg relative overflow-hidden group">
+              <img 
+                src={aboutImage} 
+                alt="Stella and Hudson" 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
             </div>
 
             <div className="bg-purple-50 p-6 rounded-3xl border border-purple-100">

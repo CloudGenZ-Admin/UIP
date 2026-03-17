@@ -1,4 +1,6 @@
 import React from 'react';
+// Image ko correct relative path se import kiya gaya hai
+import carepackImg from '../../assets/carepack2.jpg';
 
 const PACK_CONTENTS = [
   {
@@ -42,7 +44,8 @@ const PACK_CONTENTS = [
 export default function CarePackContents() {
   return (
     <section className="py-24 px-6 bg-white">
-      <div className="max-w-6xl mx-auto text-center mb-16">
+      {/* Header Section */}
+      <div className="max-w-6xl mx-auto text-center mb-10">
         <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-4">
           What's Inside Your Care Pack
         </h2>
@@ -51,6 +54,18 @@ export default function CarePackContents() {
         </p>
       </div>
 
+      {/* New Responsive Image Section */}
+      <div className="max-w-5xl mx-auto mb-16">
+        <div className="rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 group relative">
+          <img 
+            src={carepackImg} 
+            alt="Care Pack Items" 
+            className="w-full h-64 md:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </div>
+      </div>
+
+      {/* Grid Section (Unchanged Design) */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {PACK_CONTENTS.map((category) => (
           <div key={category.id} className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
