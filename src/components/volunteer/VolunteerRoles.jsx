@@ -91,11 +91,11 @@ export default function VolunteerPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#3A3556]">
-      <Navbar />
+      {/* <Navbar /> */}
       
-      <main className="relative pt-24 pb-12">
+      <main className="relative pt-4 pb-12">
         
-        {/* HERO SECTION */}
+        {/* HERO SECTION
         <section className="px-6 py-12 md:py-20 bg-purple-50/50">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-[#3A3556] mb-6">
@@ -111,7 +111,7 @@ export default function VolunteerPage() {
               Apply to Volunteer
             </button>
           </div>
-        </section>
+        </section> */}
 
         {/* ROLES SECTION */}
         <section id="roles" className="py-20 px-6 bg-white">
