@@ -4,7 +4,7 @@ import React from 'react';
 import s1 from '../../assets/s1.jpg';
 import s2 from '../../assets/s2.jpg';
 import s3 from '../../assets/s3.jpg';
-import s4 from '../../assets/s4.jpg'; // Agar 4th photo nahi hai, toh is line ko hata dein
+import s4 from '../../assets/s4.jpg'; 
 
 const STORIES = [
   {
@@ -13,7 +13,7 @@ const STORIES = [
     desc: 'After fleeing persecution in Somalia, Ahmed found his voice through United in Pride and now leads peer support groups.',
     tags: ['Leadership', 'Peer Support', 'Community Building'],
     emoji: '🧑🏾', gradient: 'from-[#A58CE0] to-[#EFAEC3]',
-    img: s1 // Image assign ki gayi hai
+    img: s1 
   },
   {
     name: 'Maria S.', origin: 'El Salvador',
@@ -21,7 +21,7 @@ const STORIES = [
     desc: "Maria's journey from hiding her identity to becoming an advocate for trans rights in her new community.",
     tags: ['Trans Rights', 'Healthcare Access', 'Cultural Pride'],
     emoji: '👩🏽', gradient: 'from-[#7dcbb8] to-[#b8a7e0]',
-    img: s2 // Image assign ki gayi hai
+    img: s2 
   },
   {
     name: 'David & Michael', origin: 'Jamaica',
@@ -29,7 +29,7 @@ const STORIES = [
     desc: 'This couple found safety, community, and a new life together after claiming asylum in Canada.',
     tags: ['Couple Support', 'Asylum', 'Marriage Equality'],
     emoji: '👨🏿‍🤝‍👨🏾', gradient: 'from-[#f0a0b8] to-[#f0d060]',
-    img: s3 // Image assign ki gayi hai
+    img: s3 
   },
   {
     name: 'Priya R.', origin: 'India',
@@ -37,7 +37,7 @@ const STORIES = [
     desc: 'Priya created a support network that honors both her Indian heritage and her identity as a lesbian.',
     tags: ['Cultural Integration', 'South Asian', 'Workshop Leadership'],
     emoji: '👩🏾‍🦱', gradient: 'from-[#7dcbb8] to-[#f0d060]',
-    img: s4 // Agar s4.jpg nahi hai toh yahan 'img: null' kar dein, ye wapas emoji dikhane lagega
+    img: s4 
   }
 ];
 
