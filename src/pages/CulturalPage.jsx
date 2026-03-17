@@ -7,7 +7,7 @@ export default function CulturalPage() {
     return (
         <div className="min-h-screen bg-pink-50 font-sans text-pride-navy">
             <Navbar />
-            <main className="relative pt-20">
+            <main className="relative pt-2">
                 <CulturalForm />
             </main>
             <Footer />

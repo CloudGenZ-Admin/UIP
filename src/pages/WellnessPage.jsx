@@ -7,7 +7,7 @@ export default function WellnessPage() {
     return (
         <div className="min-h-screen bg-teal-50 font-sans text-pride-navy">
             <Navbar />
-            <main className="relative pt-20">
+            <main className="relative ">
                 <WellnessForm />
             </main>
             <Footer />
