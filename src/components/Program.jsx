@@ -1,113 +1,87 @@
-const PROGRAMS = [
-  {
-    id: 'art',
-    emoji: '🎨',
-    title: 'Art & Creativity',
-    description: 'Express yourself through painting, writing, and mixed media workshops.',
-    cta: 'Explore →',
-    bg: 'bg-purple-100',
-    featured: false,
-  },
-  {
-    id: 'support',
-    emoji: '💬',
-    title: 'Support Groups',
-    description: 'Peer-led groups for sharing experiences in a safe, confidential environment.',
-    cta: 'Join Now →',
-    bg: 'bg-pink-100',
-    featured: true,
-  },
-  {
-    id: 'education',
-    emoji: '📚',
-    title: 'Education',
-    description: 'Workshops on health, rights, history, and personal development.',
-    cta: 'Learn More →',
-    bg: 'bg-green-100',
-    featured: false,
-  },
-  {
-    id: 'social',
-    emoji: '🎉',
-    title: 'Social Events',
-    description: 'Community dinners, game nights, movie screenings, and celebrations.',
-    cta: 'See Events →',
-    bg: 'bg-yellow-50',
-    featured: false,
-  },
-  {
-    id: 'wellness',
-    emoji: '🧘',
-    title: 'Wellness',
-    description: 'Yoga, meditation, fitness classes, and mental health resources.',
-    cta: 'Get Started →',
-    bg: 'bg-blue-100',
-    featured: false,
-  },
-  {
-    id: 'advocacy',
-    emoji: '📣',
-    title: 'Advocacy',
-    description: 'Fighting for equality, policy change, and community representation.',
-    cta: 'Get Involved →',
-    bg: 'bg-purple-50',
-    featured: false,
-  },
-];
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const borderStyle = {
+  backgroundOrigin: 'border-box',
+  backgroundClip: 'padding-box, border-box',
+  backgroundImage: 'linear-gradient(#fff, #fff), linear-gradient(90deg, #FF6B6B, #A855F7, #3B82F6)',
+};
 
 export default function Programs() {
+  const progs = [
+    { i: "🎨", t: "Art & Creativity", d: "Express yourself through painting, sculpture, digital art, and collaborative murals in our open studio." },
+    { i: "💬", t: "Support Groups", d: "Peer-led and professional support circles for coming out, transitioning, and mental health.", featured: true },
+    { i: "📚", t: "Education", d: "Workshops on queer history, allyship training, legal rights, and 2SLGBTQIA+ cultural competency." },
+    { i: "🎉", t: "Social Events", d: "Movie nights, game evenings, potlucks, dances, and seasonal celebrations for all ages." },
+    { i: "🧘", t: "Wellness", d: "Yoga, meditation, fitness classes, and holistic health workshops in a body-positive environment." },
+    { i: "📢", t: "Advocacy", d: "Community organizing, policy advocacy, and civic engagement to advance 2SLGBTQIA+ rights." }
+  ];
+
+  const ProgramCard = ({ p, i }) => (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }} 
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: i * 0.1 }}
+      className={`p-9 rounded-[20px] transition-all duration-300 hover:-translate-y-1.5 ${
+        p.featured 
+        ? 'bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white shadow-lg' 
+        : 'bg-white shadow-sm border-t-4 border-transparent'
+      }`}
+      style={!p.featured ? borderStyle : {}}
+    >
+      <div className="text-[2.2rem] mb-4">{p.i}</div>
+      <h3 className="text-[1.25rem] font-bold mb-3">{p.t}</h3>
+      <p className={`text-[0.95rem] leading-[1.7] mb-5 ${p.featured ? 'text-white/85' : 'text-[#64748b]'}`}>
+        {p.d}
+      </p>
+      <a href="#" className={`font-semibold text-[0.95rem] transition-opacity hover:opacity-80 ${
+        p.featured ? 'text-white' : 'bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]'
+      }`}>
+        {p.featured ? 'Join Now →' : 'Explore →'}
+      </a>
+    </motion.div>
+  );
+
   return (
-    <section id="programs" className="bg-white py-24 px-6">
-     
-      <div className="max-w-2xl mx-auto text-center mb-16">
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-4">
+    <section id="programs" className="py-[80px] md:py-[100px] bg-[#f1f5f9] px-6">
+      <div className="max-w-[1200px] mx-auto">
+        <p className="text-center text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] font-bold tracking-[2px] uppercase text-sm mb-2">
+          What We Offer
+        </p>
+        <h2 className="text-center text-[2.5rem] font-[800] leading-[1.2] mb-4">
           Our Programs
         </h2>
-        <p className="text-pride-muted text-lg">
-          Discover the many ways we support our community
+        <p className="text-center text-[#64748b] max-w-[560px] mx-auto mb-12">
+          Empowering our community through diverse programs and initiatives.
         </p>
-      </div>
 
-     
-      <div className="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PROGRAMS.map((prog) => (
-          <ProgramCard key={prog.id} {...prog} />
-        ))}
+        {/* First Row */}
+        <div className="grid md:grid-cols-3 gap-7">
+          {progs.slice(0, 3).map((p, i) => (
+            <ProgramCard key={i} p={p} i={i} />
+          ))}
+        </div>
+
+        {/* EXACT SVG WAVE DIVIDER FROM YOUR CODE */}
+        <svg className="w-full h-[30px] my-8" viewBox="0 0 1200 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,15 Q150,0 300,15 T600,15 T900,15 T1200,15" fill="none" stroke="url(#waveGrad1)" strokeWidth="2"/>
+            <defs>
+                <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#FF6B6B"/>
+                    <stop offset="50%" stopColor="#A855F7"/>
+                    <stop offset="100%" stopColor="#3B82F6"/>
+                </linearGradient>
+            </defs>
+        </svg>
+
+        {/* Second Row */}
+        <div className="grid md:grid-cols-3 gap-7">
+          {progs.slice(3, 6).map((p, i) => (
+            <ProgramCard key={i + 3} p={p} i={i} />
+          ))}
+        </div>
       </div>
     </section>
-  );
-}
-
-function ProgramCard({ emoji, title, description, cta, bg, featured }) {
-  return (
-    <article
-      className={`relative rounded-3xl p-8 flex flex-col gap-4 ${bg}
-        ${featured ? 'ring-2 ring-pink-200 shadow-lg scale-[1.02]' : 'shadow-sm hover:shadow-md'}
-        transition-shadow duration-200`}
-    >
-     
-      {featured && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-cta text-white text-xs font-bold px-4 py-1 rounded-full shadow">
-          Featured
-        </span>
-      )}
-
-    
-      <span className="text-4xl">{emoji}</span>
-
-    
-      <h3 className="font-display font-bold text-xl text-pride-navy">{title}</h3>
-
-     
-      <p className="text-pride-muted text-sm leading-relaxed flex-1">{description}</p>
-
-     
-      <a
-        href="#"
-        className="text-pride-purple font-semibold text-sm hover:underline mt-auto"
-      >
-        {cta}
-      </a>
-    </article>
   );
 }

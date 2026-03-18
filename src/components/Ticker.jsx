@@ -1,39 +1,21 @@
-const ANNOUNCEMENTS = [
-  { emoji: '🌿', text: 'New Support Group Starting March 28' },
-  { emoji: '🎨', text: 'Art Workshop Registration Open' },
-  { emoji: '🏠', text: 'Community Dinner — March 20th' },
-  { emoji: '✨', text: 'Volunteer Opportunities Available' },
-  { emoji: '🌈', text: 'Pride Month Celebration Coming Soon' },
-  { emoji: '💜', text: 'Peer Counselling Now Accepting New Members' },
-];
+import React from 'react';
 
+const Ticker = () => {
+  const items = [
+    "🌈 Pride Month Celebrations Coming Soon — Join Us!",
+    "✨ New Youth Support Program Launching This Spring",
+    "💜 Community Art Exhibition — Submissions Open Now",
+    "🎉 Annual Gala Tickets Available — Don't Miss Out!"
+  ];
 
-const ITEMS = [...ANNOUNCEMENTS, ...ANNOUNCEMENTS];
-
-export default function Ticker() {
   return (
-    <div
-      className="relative overflow-hidden py-4"
-      style={{
-        background: 'linear-gradient(90deg, #c4aee8 0%, #98d4c4 50%, #c4aee8 100%)',
-      }}
-    >
-    
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#c4aee8] to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#98d4c4] to-transparent z-10" />
-
-     
-      <div className="flex animate-ticker whitespace-nowrap">
-        {ITEMS.map((item, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center gap-2 mx-8 text-white font-semibold text-sm"
-          >
-            <span>{item.emoji}</span>
-            {item.text}
-          </span>
+    <section className="bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] py-4 overflow-hidden whitespace-nowrap">
+      <div className="flex gap-20 animate-marquee inline-block">
+        {[...items, ...items].map((item, i) => (
+          <span key={i} className="text-white font-semibold text-lg">{item}</span>
         ))}
       </div>
-    </div>
+    </section>
   );
-}
+};
+export default Ticker;

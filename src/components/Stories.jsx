@@ -1,88 +1,103 @@
-const TESTIMONIALS = [
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const STORIES_DATA = [
   {
-    id: 1,
-    quote:
-      '"United in Pride gave me a second family. The support groups helped me find my voice and the courage to be myself. I\'m forever grateful."',
-    name: 'Alex',
-    since: 'Member since 2022',
-    bg: 'bg-purple-100',
-    avatarBg: 'bg-purple-300',
+    name: 'Alex R.',
+    role: 'Member since 2022',
+    text: '"United in Pride gave me the courage to be myself. The support groups changed my life — I finally found people who understand my journey."',
+    gradId: 'tGrad1',
+    colors: ['#FF6B6B', '#A855F7'],
+    initial: 'A'
   },
   {
-    id: 2,
-    quote:
-      '"The art workshops changed my life. I found a creative outlet and a community that celebrates who I am. This place is truly magical."',
-    name: 'Jordan',
-    since: 'Member since 2023',
-    bg: 'bg-pink-100',
-    avatarBg: 'bg-pink-300',
+    name: 'Jordan M.',
+    role: 'Volunteer & Advocate',
+    text: '"As a Two-Spirit person, finding a space that honours both my Indigenous and queer identities has been transformative. This centre is home."',
+    gradId: 'tGrad2',
+    colors: ['#A855F7', '#3B82F6'],
+    initial: 'J'
   },
   {
-    id: 3,
-    quote:
-      '"As a newcomer to Ottawa, United in Pride was the first place I felt truly welcome. The community dinners are my favourite — pure joy!"',
-    name: 'Sam',
-    since: 'Member since 2024',
-    bg: 'bg-teal-50',
-    avatarBg: 'bg-teal-300',
+    name: 'Sam T.',
+    role: 'Program Participant',
+    text: '"The wellness programs helped me reconnect with my body after years of dysphoria. The instructors are so affirming and knowledgeable."',
+    gradId: 'tGrad3',
+    colors: ['#3B82F6', '#06B6D4'],
+    initial: 'S'
   },
 ];
 
 export default function Stories() {
   return (
-    <section id="stories" className="bg-white py-24 px-6">
-      {/* Header */}
-      <div className="max-w-2xl mx-auto text-center mb-16">
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-4">
-          Community Stories
-        </h2>
-        <p className="text-pride-muted text-lg">
-          Hear from the people who make this space special
+    <section id="testimonials" className="py-[100px] px-6 bg-[#FAFAFA]">
+      <div className="max-w-[1200px] mx-auto">
+        {/* Section Headers */}
+        <p className="text-center text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] font-bold tracking-[2px] uppercase text-[0.875rem] mb-2">
+          Community Voices
         </p>
-      </div>
+        <h2 className="text-center text-[2.5rem] font-[800] text-[#1e1e2e] mb-12">
+          Stories of Pride
+        </h2>
 
-      {/* Cards */}
-      <div className="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {TESTIMONIALS.map(({ id, quote, name, since, bg, avatarBg }) => (
-          <TestimonialCard
-            key={id}
-            quote={quote}
-            name={name}
-            since={since}
-            bg={bg}
-            avatarBg={avatarBg}
-          />
-        ))}
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-3 gap-[28px]">
+          {STORIES_DATA.map((story, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-white rounded-[24px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]"
+            >
+              {/* Testimonial Header with EXACT SVG Wave */}
+              <div className="relative h-[80px] flex items-end justify-center">
+                <svg 
+                  className="absolute top-0 left-0 w-full h-[60px]" 
+                  viewBox="0 0 400 30" 
+                  preserveAspectRatio="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path 
+                    d="M0,0 L400,0 L400,15 Q300,30 200,15 T0,15 Z" 
+                    fill={`url(#${story.gradId})`}
+                  />
+                  <defs>
+                    <linearGradient id={story.gradId} x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor={story.colors[0]} />
+                      <stop offset="100%" stopColor={story.colors[1]} />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                
+                {/* Avatar Circle */}
+                <div 
+                  className="w-[56px] h-[56px] rounded-full flex items-center justify-center text-white font-[800] text-[1.3rem] border-[4px] border-white relative z-10 -mb-[28px] shadow-sm"
+                  style={{ background: `linear-gradient(135deg, ${story.colors[0]}, ${story.colors[1]})` }}
+                >
+                  {story.initial}
+                </div>
+              </div>
+
+              {/* Testimonial Body */}
+              <div className="pt-[40px] px-[28px] pb-[28px] text-center">
+                <p className="text-[0.95rem] text-[#475569] leading-[1.8] italic mb-5">
+                  {story.text}
+                </p>
+                <div className="text-center">
+                  <strong className="block text-[1rem] text-[#1e1e2e] font-bold">
+                    {story.name}
+                  </strong>
+                  <span className="text-[0.85rem] text-[#94a3b8]">
+                    {story.role}
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
-  );
-}
-
-function TestimonialCard({ quote, name, since, bg, avatarBg }) {
-  return (
-    <div className="flex flex-col">
-      {/* Bubble */}
-      <div className={`${bg} rounded-3xl p-7 flex-1`}>
-        <p className="text-pride-navy text-sm leading-relaxed italic">{quote}</p>
-      </div>
-
-      {/* Speech-bubble tail (CSS triangle) */}
-      <div className={`w-4 h-3 ml-8 overflow-hidden`}>
-        <div className={`w-4 h-4 ${bg} rotate-45 -translate-y-2`} />
-      </div>
-
-      {/* Author row */}
-      <div className="flex items-center gap-3 mt-3 ml-2">
-        <div
-          className={`w-10 h-10 rounded-full ${avatarBg} flex items-center justify-center font-display font-bold text-white`}
-        >
-          {name[0]}
-        </div>
-        <div>
-          <p className="font-semibold text-pride-navy text-sm">{name}</p>
-          <p className="text-pride-muted text-xs">{since}</p>
-        </div>
-      </div>
-    </div>
   );
 }

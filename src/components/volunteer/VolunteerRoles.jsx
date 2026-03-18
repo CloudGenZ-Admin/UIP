@@ -91,29 +91,9 @@ export default function VolunteerPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#3A3556]">
-      {/* <Navbar /> */}
       
       <main className="relative pt-4 pb-12">
-        
-        {/* HERO SECTION
-        <section className="px-6 py-12 md:py-20 bg-purple-50/50">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-display font-bold text-4xl md:text-5xl lg:text-6xl text-[#3A3556] mb-6">
-              Become a Volunteer
-            </h1>
-            <p className="text-[#87839D] text-lg md:text-xl max-w-2xl mx-auto mb-10">
-              Join our community of dedicated volunteers and help create safe, healing spaces for LGBTQ+ newcomers.
-            </p>
-            <button 
-              onClick={() => handleOpenModal()}
-              className="bg-gradient-to-r from-[#A58CE0] to-[#EFAEC3] text-white font-bold px-10 py-4 rounded-full shadow-md hover:opacity-90 transition-opacity text-lg"
-            >
-              Apply to Volunteer
-            </button>
-          </div>
-        </section> */}
 
-        {/* ROLES SECTION */}
         <section id="roles" className="py-20 px-6 bg-white">
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="font-display font-bold text-3xl md:text-4xl text-[#3A3556] mb-4">

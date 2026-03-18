@@ -1,132 +1,60 @@
-import { useState } from 'react';
-
-const IMPACT_TAGS = [
-  { emoji: '🏠', label: '$25 — One safe space session' },
-  { emoji: '🎨', label: '$50 — Workshop materials' },
-  { emoji: '🎉', label: '$100 — Community event' },
-  { emoji: '💜', label: '$250 — Monthly program sponsor' },
-];
-
-const AMOUNTS = [10, 25, 50, 100, 250];
-
-const RAISED   = 14645;
-const GOAL     = 26000;
-const PROGRESS = Math.round((RAISED / GOAL) * 100);
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Donate() {
-  const [frequency, setFrequency]   = useState('one-time');
-  const [selected,  setSelected]    = useState(25);
-  const [custom,    setCustom]      = useState('');
+  const [freq, setFreq] = useState('once');
+  const [amt, setAmt] = useState(50);
 
   return (
-    <section id="donate" className="bg-pride-sand py-24 px-6">
-      {/* Section header */}
-      <div className="max-w-2xl mx-auto text-center mb-12">
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-4">
-          Support Our Mission
-        </h2>
-        <p className="text-pride-muted text-lg">
-          Every dollar helps us build a more inclusive community
-        </p>
-      </div>
+    <section id="donate" className="relative bg-[#1e1b4b] py-[120px] px-6">
+      <svg className="absolute top-[-2px] left-0 w-full h-[120px]" viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,40 1440,60 L1440,0 L0,0 Z" fill="#FAFAFA"/>
+      </svg>
 
-      {/* Impact pill tags */}
-      <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-3 mb-12">
-        {IMPACT_TAGS.map(({ emoji, label }) => (
-          <span
-            key={label}
-            className="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-5 py-2 text-sm font-medium text-pride-navy shadow-sm"
-          >
-            {emoji} {label}
-          </span>
-        ))}
-      </div>
-
-      {/* Donation card */}
-      <div className="max-w-lg mx-auto">
-        {/* Gradient border wrapper */}
-        <div
-          className="rounded-3xl p-0.5 shadow-xl"
-          style={{ background: 'linear-gradient(135deg, #b8a7e0, #7dcbb8)' }}
-        >
-          <div className="bg-white rounded-[calc(1.5rem-2px)] p-8 space-y-6">
-
-            {/* Progress bar */}
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-pride-purple font-semibold">
-                  ${RAISED.toLocaleString()} raised
-                </span>
-                <span className="text-pride-muted">of ${GOAL.toLocaleString()} goal</span>
+      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-12 items-start">
+        <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}>
+          <p className="text-[#FF6B6B] font-bold tracking-widest uppercase text-sm mb-2">Make a Difference</p>
+          <h2 className="text-white text-[2.5rem] font-extrabold mb-4">Support Our Community</h2>
+          <p className="text-white/80 mb-8 leading-relaxed">Your donation directly funds programs and safe spaces for 2SLGBTQIA+ individuals in Ottawa.</p>
+          <div className="flex flex-col gap-4">
+            {[{a: "$25", d: "Art supplies"}, {a: "$50", d: "Youth workshop"}, {a: "$100", d: "Support group"}].map((imp, i) => (
+              <div key={i} className="flex items-center gap-5 p-5 bg-white/5 rounded-2xl border-l-[3px] border-[#A855F7] backdrop-blur-md">
+                <span className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] shrink-0">{imp.a}</span>
+                <p className="text-white/70 text-sm">{imp.d}</p>
               </div>
-
-              {/* Track */}
-              <div className="h-2.5 rounded-full overflow-hidden bg-gray-100">
-                <div
-                  className="h-full rounded-full"
-                  style={{
-                    width: `${PROGRESS}%`,
-                    background: 'linear-gradient(90deg, #8b5ecf, #e888a8)',
-                  }}
-                />
-              </div>
-              <p className="text-center text-xs text-pride-muted">
-                {PROGRESS}% funded — Help us reach our goal!
-              </p>
-            </div>
-
-            {/* Frequency toggle */}
-            <div className="flex bg-gray-100 rounded-full p-1">
-              {['one-time', 'monthly'].map((freq) => (
-                <button
-                  key={freq}
-                  onClick={() => setFrequency(freq)}
-                  className={`flex-1 py-2.5 text-sm font-semibold rounded-full capitalize transition-all duration-200
-                    ${frequency === freq
-                      ? 'bg-white text-pride-purple shadow-sm'
-                      : 'text-gray-500 hover:text-pride-navy'
-                    }`}
-                >
-                  {freq === 'one-time' ? 'One-Time' : 'Monthly'}
-                </button>
-              ))}
-            </div>
-
-            {/* Amount selector */}
-            <div className="flex flex-wrap gap-3">
-              {AMOUNTS.map((amt) => (
-                <button
-                  key={amt}
-                  onClick={() => { setSelected(amt); setCustom(''); }}
-                  className={`px-5 py-2.5 rounded-xl font-semibold text-sm border-2 transition-all duration-200
-                    ${selected === amt && !custom
-                      ? 'border-pride-purple bg-purple-50 text-pride-purple'
-                      : 'border-gray-200 text-pride-navy hover:border-pride-lavender'
-                    }`}
-                >
-                  ${amt}
-                </button>
-              ))}
-            </div>
-
-            {/* Custom amount input */}
-            <div className="flex items-center gap-2 border-2 border-gray-200 rounded-xl px-4 py-3 focus-within:border-pride-lavender transition-colors">
-              <span className="text-pride-muted font-medium">$</span>
-              <input
-                type="number"
-                placeholder="Custom amount"
-                value={custom}
-                onChange={(e) => { setCustom(e.target.value); setSelected(null); }}
-                className="flex-1 outline-none text-sm text-pride-navy placeholder-gray-400 bg-transparent"
-              />
-            </div>
-
-            {/* Donate button */}
-            <button className="w-full bg-gradient-cta text-white font-bold py-4 rounded-2xl text-lg shadow-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-              Donate Now 💜
-            </button>
+            ))}
           </div>
-        </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white rounded-[24px] p-8 shadow-2xl">
+          <h3 className="text-center text-xl font-bold mb-6">Make Your Gift</h3>
+          <div className="mb-8">
+            <div className="flex justify-between text-sm text-slate-500 mb-2">
+              <span>Raised: <strong>$14,645</strong></span>
+              <span>Goal: <strong>$26,000</strong></span>
+            </div>
+            <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
+              <motion.div initial={{ width: 0 }} whileInView={{ width: '56.3%' }} transition={{ duration: 1 }} className="h-full bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]" />
+            </div>
+          </div>
+
+          <div className="flex bg-slate-100 p-1 rounded-full mb-5">
+            {['once', 'monthly'].map(f => (
+              <button key={f} onClick={() => setFreq(f)} className={`flex-1 py-2 rounded-full font-bold text-sm transition-all ${freq === f ? 'bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white shadow-md' : 'text-slate-500'}`}>
+                {f === 'once' ? 'One-Time' : 'Monthly'}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-4 gap-3 mb-5">
+            {[25, 50, 100, 250].map(val => (
+              <button key={val} onClick={() => setAmt(val)} className={`py-3 rounded-xl border-2 font-black transition-all ${amt === val ? 'border-[#A855F7] bg-purple-50 text-[#A855F7]' : 'border-slate-100'}`}>${val}</button>
+            ))}
+          </div>
+
+          <button className="w-full py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-2xl font-bold shadow-lg mb-4">Donate Now 💜</button>
+          <p className="text-center text-xs text-slate-400">Secure payment · Tax-deductible</p>
+        </motion.div>
       </div>
     </section>
   );

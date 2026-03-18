@@ -1,61 +1,38 @@
-const STATS = [
-  { value: '2,500+', label: 'Members',          color: '#b8a7e0', offset: 40 },
-  { value: '150+',   label: 'Events Yearly',    color: '#f0a0b8', offset: 60 },
-  { value: '$26K',   label: 'Fundraising Goal', color: '#7dcbb8', offset: 75 },
-  { value: '✓',      label: 'Safe Space',       color: '#f0d060', offset: 100 },
-];
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const CIRCUMFERENCE = 220;
+const cardStyle = {
+  backgroundOrigin: 'border-box',
+  backgroundClip: 'padding-box, border-box',
+  backgroundImage: 'linear-gradient(#fff, #fff), linear-gradient(180deg, #FF6B6B, #A855F7)',
+};
 
 export default function Stats() {
+  const stats = [
+    { n: "2,500+", l: "Community Members", d: "Growing stronger together" },
+    { n: "150+", l: "Annual Events", d: "Workshops, socials & more" },
+    { n: "$26K", l: "Fundraising Goal", d: "Help us reach our target" },
+    { n: "∞", l: "Safe Space", d: "Always welcoming, always open" }
+  ];
+
   return (
-    <section className="bg-white py-20 px-6">
-      <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 justify-items-center">
-        {STATS.map((stat) => (
-          <StatRing key={stat.label} {...stat} />
+    <section className="relative z-10 -mt-[100px] pb-[60px] px-6">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((s, i) => (
+          <motion.div 
+            key={i} 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ delay: i * 0.1 }}
+            className="p-8 rounded-[20px] text-center shadow-xl border-l-4 border-transparent" 
+            style={cardStyle}
+          >
+            <div className="text-[2.5rem] font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] mb-1">{s.n}</div>
+            <div className="font-bold text-slate-800 mb-1">{s.l}</div>
+            <div className="text-[0.85rem] text-slate-400">{s.d}</div>
+          </motion.div>
         ))}
       </div>
     </section>
-  );
-}
-
-function StatRing({ value, label, color, offset }) {
-
-  const dashOffset = CIRCUMFERENCE - (CIRCUMFERENCE * offset) / 100;
-
-  return (
-    <div className="flex flex-col items-center gap-3">
-     
-      <div className="relative w-28 h-28 flex items-center justify-center">
-        <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-        
-          <circle
-            cx="50" cy="50" r="38"
-            fill="none"
-            stroke="#f0f0f4"
-            strokeWidth="7"
-          />
-         
-          <circle
-            cx="50" cy="50" r="38"
-            fill="none"
-            stroke={color}
-            strokeWidth="7"
-            strokeLinecap="round"
-            strokeDasharray={CIRCUMFERENCE}
-            strokeDashoffset={dashOffset}
-            className="transition-all duration-700"
-          />
-        </svg>
-
-    
-        <span className="absolute font-display font-bold text-xl text-pride-navy">
-          {value}
-        </span>
-      </div>
-
-  
-      <p className="text-pride-muted text-sm font-medium text-center">{label}</p>
-    </div>
   );
 }

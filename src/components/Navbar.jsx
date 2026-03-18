@@ -1,111 +1,53 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-// Updated Array to include Get Support
-const NAV_LINKS = [
-  { name: 'About', path: '/about' },
-  { name: 'Programs', path: '/programs' },
-  { name: 'Get Support', path: '/support' },
-  { name: 'Donate', path: '/donate' },
-  // { name: 'Events', path: '/events' },
-  { name: 'Resources', path: '/resources' },
-  // { name: 'Gallery', path: '/gallery' },
-  { name: 'Stories', path: '/stories' },
-  { name: 'Care Packs', path: '/care-packs' },
-  { name: 'Contact', path: '/contact' },
-   { name: 'Volunteer', path: '/Volunteer' },
-];
+import React, { useState, useEffect } from 'react';
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const links = ["About", "Programs", "Donate", "Gallery", "Events", "Stories"];
 
   return (
-    <>
-      <header className="sticky top-0 z-50 p-4 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm ">
-        <nav className="max-w-[1600px] mx-auto bg-white rounded-full border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] px-6 h-[72px] flex items-center justify-between">
-          
-          {/* Logo - Navigate to Home */}
-          <Link to="/" className="flex items-center gap-4 font-bold text-2xl text-[#3A3556] tracking-tight">
-            <RainbowIcon />
-            United in Pride
-          </Link>
+    <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-[1200px] z-[1000] rounded-[60px] transition-all duration-300 border border-purple-500/15 ${isScrolled ? 'bg-white/95 shadow-lg py-2' : 'bg-white/85 backdrop-blur-[20px] py-3'}`}>
+      <div className="flex items-center justify-between px-7 relative">
+        <a href="#" className="flex items-center gap-2.5 font-bold text-[1.1rem]">
+          <span className="text-2xl">🌈</span>
+          <span>United in Pride</span>
+        </a>
 
-          {/* Desktop Nav Links */}
-          <ul className="hidden lg:flex items-center gap-12">
-            {NAV_LINKS.map((link) => (
-              <li key={link.name}>
-                <Link
-                  to={link.path}
-                  className="text-[18px] font-medium text-[#87839D] hover:text-[#3A3556] transition-colors duration-200"
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <ul className="hidden md:flex gap-7">
+          {links.map(link => (
+            <li key={link}>
+              <a href={`#${link.toLowerCase()}`} className="font-medium text-[0.925rem] text-slate-600 hover:text-[#A855F7] transition-all relative group">
+                {link}
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            </li>
+          ))}
+        </ul>
 
-          {/* Desktop Donate CTA */}
-          <Link
-            to="/donate"
-            className="hidden lg:flex bg-gradient-to-r from-[#A58CE0] to-[#EFAEC3] text-white text-[20px] font-bold px-7 py-3 rounded-full items-center gap-2 hover:opacity-90 transition-opacity shadow-sm"
-          >
-            Donate <span>💜</span>
-          </Link>
-
-          {/* Mobile Menu Toggle Button */}
-          <button 
-            className="lg:hidden p-2 text-[#3A3556]"
-            onClick={() => setIsMobileMenuOpen(true)}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
+        <div className="flex items-center gap-4">
+          <a href="#donate" className="hidden sm:block py-2.5 px-6 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-semibold text-sm hover:-translate-y-0.5 shadow-md">Donate 💜</a>
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden flex flex-col gap-1.5 p-1">
+            <span className={`w-6 h-[2.5px] bg-slate-600 transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`w-6 h-[2.5px] bg-slate-600 transition-all ${isOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`w-6 h-[2.5px] bg-slate-600 transition-all ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
           </button>
-        </nav>
-      </header>
-
-      {/* MOBILE MENU OVERLAY */}
-      {isMobileMenuOpen && (
-        <div className="fixed top-4 left-4 right-4 z-[60] lg:hidden bg-white rounded-3xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.15)] border border-gray-50 overflow-hidden">
-          
-          <div className="mx-2 mt-2 h-[64px] px-4 flex items-center justify-between border border-gray-100/70 shadow-sm rounded-full bg-white">
-            <Link to="/" className="flex items-center gap-2 font-bold text-[17px] text-[#3A3556] tracking-tight">
-              <RainbowIcon />
-              United in Pride
-            </Link>
-            
-            <button 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 text-[#3A3556] hover:bg-gray-50 rounded-full transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile Links */}
-          <div className="px-8 py-5 pb-7">
-            <ul className="flex flex-col gap-4">
-              {NAV_LINKS.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-[14px] font-medium text-[#87839D] hover:text-[#3A3556] transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+        </div>
+      </div>
+      
+      {isOpen && (
+        <div className="md:hidden absolute top-[calc(100%+12px)] left-0 right-0 bg-white rounded-3xl p-6 shadow-2xl flex flex-col gap-4">
+          {links.map(link => (
+            <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setIsOpen(false)} className="text-slate-600 font-medium p-2 hover:bg-slate-50 rounded-xl transition-all">{link}</a>
+          ))}
         </div>
       )}
-    </>
+    </nav>
   );
-}
-
-function RainbowIcon() {
-  return <span className="text-xl leading-none">🌈</span>;
 }

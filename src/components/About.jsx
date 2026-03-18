@@ -1,74 +1,42 @@
-const FEATURES = [
-  'Peer-led support groups & counselling',
-  'Cultural & educational programming',
-  'Youth & elder-specific programs',
-  'Advocacy & community outreach',
-];
+import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section id="about-centre" className="bg-pride-sand py-24 px-6">
-     
-      <WaveDivider />
+    <section id="about" className="py-[100px] px-6 overflow-hidden">
+      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-[64px] items-center">
+        <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="relative">
+          <div className="aspect-square rounded-[30%_70%_70%_30%/30%_30%_70%_70%] overflow-hidden relative z-[2] bg-gradient-to-br from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] flex flex-col items-center justify-center text-white">
+            <span className="text-[4rem] mb-2">🏳️‍🌈</span>
+            <p className="font-semibold text-xl">Our Community</p>
+          </div>
+          <div className="absolute top-[-20px] right-[-20px] w-[80%] h-[80%] rounded-[70%_30%_30%_70%/70%_70%_30%_30%] bg-purple-500/10 z-[1]"></div>
+        </motion.div>
 
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-       
-        <div className="bg-gradient-about rounded-3xl aspect-[4/3] flex items-center justify-center shadow-lg">
-          <span className="text-white/80 font-display font-medium text-lg">
-            Community Centre
-          </span>
-        </div>
-
-        {/* Text content */}
-        <div className="space-y-6">
-          <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy">
-            About Our Centre
-          </h2>
-
-          <p className="text-pride-muted leading-relaxed">
-            United in Pride is a vibrant community centre for 2SLGBTQIA+
-            individuals and allies, located on the unceded, unsurrendered territory
-            of the Algonquin Anishinaabe people in Odawa/Ottawa.
+        <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}>
+          <p className="text-[#FF6B6B] font-bold tracking-[2px] uppercase text-sm mb-2">Our Story</p>
+          <h2 className="text-[2.5rem] font-extrabold leading-tight mb-4">Who We Are</h2>
+          <p className="text-slate-500 text-[1.05rem] leading-[1.8] mb-8">
+            United in Pride is a vibrant 2SLGBTQIA+ community centre located on the unceded territory of the Algonquin Anishinaabe Nation in Ottawa.
           </p>
-
-          <p className="text-pride-muted leading-relaxed">
-            We provide a welcoming space where everyone can find support,
-            build connections, and celebrate their authentic selves.
-          </p>
-
-          {/* Feature checklist */}
-          <ul className="space-y-3 pt-2">
-            {FEATURES.map((feature) => (
-              <li key={feature} className="flex items-center gap-3">
-                <span className="w-7 h-7 rounded-full bg-pride-teal flex items-center justify-center flex-shrink-0">
-                  <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7l3.5 3.5L12 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </span>
-                <span className="text-pride-muted font-medium">{feature}</span>
-              </li>
+          <div className="flex flex-col gap-5 mb-8">
+            {[ 
+              {i: "🤝", t: "Inclusive Community", d: "Open to all identities"},
+              {i: "🛡️", t: "Safe Space", d: "Affirming environment for everyone"},
+              {i: "🌱", t: "Growth & Healing", d: "Programs for wellness"}
+            ].map((f, i) => (
+              <div key={i} className="flex gap-4 items-start">
+                <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-xl shrink-0">{f.i}</div>
+                <div>
+                  <strong className="block text-slate-800">{f.t}</strong>
+                  <p className="text-slate-400 text-sm">{f.d}</p>
+                </div>
+              </div>
             ))}
-          </ul>
-
-          <a
-            href="#programs"
-            className="inline-block mt-4 bg-gradient-cta text-white font-semibold px-7 py-3 rounded-full hover:opacity-90 transition-opacity shadow-md"
-          >
-            Learn More
-          </a>
-        </div>
+          </div>
+          <a href="#programs" className="px-8 py-3.5 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-bold shadow-lg">Learn More</a>
+        </motion.div>
       </div>
     </section>
-  );
-}
-
-// Subtle wave SVG at the top of the section
-function WaveDivider() {
-  return (
-    <div className="w-full overflow-hidden mb-16 -mt-8">
-      <svg viewBox="0 0 1440 40" className="w-full text-white" fill="currentColor">
-        <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,16 1440,20 L1440,0 L0,0 Z" />
-      </svg>
-    </div>
   );
 }

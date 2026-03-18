@@ -1,51 +1,36 @@
-const GALLERY_ITEMS = [
-  { id: 1, emoji: '🎨', title: 'Art Workshop — Feb 2025', gradient: 'bg-gradient-g1' },
-  { id: 2, emoji: '🎉', title: 'Community Celebration',    gradient: 'bg-gradient-g2' },
-  { id: 3, emoji: '💬', title: 'Support Circle',           gradient: 'bg-gradient-g3' },
-  { id: 4, emoji: '🌈', title: 'Pride March 2024',         gradient: 'bg-gradient-g4' },
-  { id: 5, emoji: '🧘', title: 'Wellness Wednesday',       gradient: 'bg-gradient-g5' },
-  { id: 6, emoji: '📣', title: 'Advocacy Rally',           gradient: 'bg-gradient-g6' },
-];
+import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Gallery() {
-  return (
-    <section id="gallery" className="bg-white py-24 px-6">
-      {/* Section header */}
-      <div className="max-w-2xl mx-auto text-center mb-16">
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-4">
-          Our Community
-        </h2>
-        <p className="text-pride-muted text-lg">
-          Moments of joy, connection, and pride
-        </p>
-      </div>
+  const items = [
+    { t: "Pride March 2024", c: "from-[#FF6B6B] to-[#A855F7]", l: true },
+    { t: "Art Workshop", c: "from-[#A855F7] to-[#3B82F6]" },
+    { t: "Youth Group", c: "from-[#3B82F6] to-[#06B6D4]" },
+    { t: "Community Dinner", c: "from-[#06B6D4] to-[#A855F7]" },
+    { t: "Annual Gala", c: "from-[#F59E0B] to-[#FF6B6B]", l: true },
+    { t: "Wellness Retreat", c: "from-[#10B981] to-[#3B82F6]" }
+  ];
 
-      {/* Image grid */}
-      <div className="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {GALLERY_ITEMS.map(({ id, emoji, title, gradient }) => (
-          <GalleryCard key={id} emoji={emoji} title={title} gradient={gradient} />
-        ))}
+  return (
+    <section id="gallery" className="py-[100px] px-6">
+      <div className="max-w-[1200px] mx-auto">
+        <h2 className="text-center text-[2.5rem] font-extrabold mb-12">Community Gallery</h2>
+        <div className="grid md:grid-cols-3 gap-5 auto-rows-[240px]">
+          {items.map((item, i) => (
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, scale: 0.9 }} 
+              whileInView={{ opacity: 1, scale: 1 }}
+              className={`rounded-[24px] overflow-hidden group cursor-pointer relative ${item.l ? 'md:col-span-2' : ''}`}
+            >
+              <div className={`w-full h-full bg-gradient-to-br ${item.c} flex items-center justify-center text-white font-bold text-xl`}>
+                {item.t}
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-red-400/40 to-purple-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
-  );
-}
-
-function GalleryCard({ emoji, title, gradient }) {
-  return (
-    <figure className="group cursor-pointer">
-      {/* Image area */}
-      <div
-        className={`${gradient} aspect-[4/3] rounded-2xl flex items-center justify-center
-          overflow-hidden shadow-sm group-hover:shadow-md transition-shadow duration-200`}
-      >
-        <span className="text-5xl opacity-80 group-hover:scale-110 transition-transform duration-300">
-          {emoji}
-        </span>
-      </div>
-      {/* Caption */}
-      <figcaption className="mt-3 text-center text-sm font-medium text-pride-muted">
-        {title}
-      </figcaption>
-    </figure>
   );
 }
