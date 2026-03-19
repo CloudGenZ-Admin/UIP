@@ -1,23 +1,45 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function StoriesHero() {
   return (
-    <section className="relative overflow-hidden bg-pride-sand py-24 px-6 text-center">
-      {/* Background Decor */}
-      <div className="absolute top-10 left-10 w-64 h-64 bg-pink-200/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-teal-200/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
-
-      <div className="relative z-10 max-w-4xl mx-auto">
-        <span className="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-white border border-gray-200 text-sm font-semibold text-pride-purple mb-6 shadow-sm">
-          <span>📖</span> Our Stories
-        </span>
-        <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl leading-tight text-pride-navy mb-6">
-          Stories of Courage & <span className="text-transparent bg-clip-text bg-gradient-cta">Community</span>
-        </h1>
-        <p className="text-pride-muted text-xl leading-relaxed max-w-2xl mx-auto">
-          Real stories from LGBTQ+ newcomers who found belonging, strength, and community. Plus the latest news affecting our global LGBTQ+ family.
-        </p>
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-[120px] pb-[160px] px-6">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1e1b4b] via-[#4c1d95] to-[#3b82f6]">
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_20%_50%,rgba(255,107,107,0.3)_0%,transparent_60%),radial-gradient(ellipse_at_80%_20%,rgba(59,130,246,0.3)_0%,transparent_60%)]"></div>
       </div>
+      
+      <div className="relative z-10 text-center max-w-[900px]">
+        <motion.span 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          className="inline-block py-2 px-5 bg-white/12 border border-white/20 rounded-full text-white/90 text-sm font-medium backdrop-blur-md mb-6"
+        >
+          📖 Voices of Resilience
+        </motion.span>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-white text-5xl md:text-[4.5rem] font-extrabold leading-[1.1] mb-8"
+        >
+          Stories of Courage & <br />
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Community</span>
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-white/80 text-lg md:text-[1.25rem] leading-[1.8] max-w-[700px] mx-auto"
+        >
+          Real stories from LGBTQ+ newcomers who found belonging, strength, and community in their new home.
+        </motion.p>
+      </div>
+
+      {/* Signature Wave */}
+      <svg className="absolute bottom-[-2px] left-0 w-full h-[120px] md:h-[180px] z-[3]" viewBox="0 0 1440 180" preserveAspectRatio="none">
+        <path d="M0,80 C240,160 480,0 720,80 C960,160 1200,0 1440,80 L1440,180 L0,180 Z" fill="#FFFFFF"/>
+      </svg>
     </section>
   );
 }

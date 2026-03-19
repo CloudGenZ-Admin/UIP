@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const PROVINCES = [
   "All Provinces/Territories", "Alberta", "British Columbia", "Manitoba", "New Brunswick", 
@@ -26,11 +27,16 @@ const RESOURCES = [
   { id: 12, name: "Halifax Pride", summary: "Maritime LGBTQ+ resource centre offering employment workshops, housing referrals, and community connections.", location: "Halifax, NS", province: "Nova Scotia", type: "Employment/Education", website: "https://halifaxpride.com", phone: "(902) 429-7729" }
 ];
 
+const cardStyle = {
+  backgroundOrigin: 'border-box',
+  backgroundClip: 'padding-box, border-box',
+  backgroundImage: 'linear-gradient(#fff, #fff), linear-gradient(135deg, #FF6B6B22, #A855F722, #3B82F622)',
+};
+
 export default function ResourceDirectory() {
   const [province, setProvince] = useState(PROVINCES[0]);
   const [supportType, setSupportType] = useState(SUPPORT_TYPES[0]);
 
-  // Filtering Logic
   const filteredResources = RESOURCES.filter(res => {
     const matchProvince = province === "All Provinces/Territories" || res.province === province;
     const matchType = supportType === "All Support Types" || res.type === supportType;
@@ -38,16 +44,16 @@ export default function ResourceDirectory() {
   });
 
   return (
-    <section id="directory" className="py-20 px-6 bg-gray-50/50 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto">
+    <section id="directory" className="py-24 px-6 bg-[#f8fafc]">
+      <div className="max-w-[1200px] mx-auto">
         
-        {/* Filter Header */}
-        <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between mb-12 bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-gray-100">
-          <h2 className="font-display font-bold text-2xl text-pride-navy hidden lg:block">Find Resources</h2>
+        {/* Filter Bar */}
+        <div className="flex flex-col lg:flex-row gap-6 items-center justify-between mb-16 bg-white p-6 rounded-[2rem] shadow-xl border border-slate-100">
+          <h2 className="text-2xl font-black text-slate-900 lg:ml-4">Find Resources</h2>
           
           <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
             <select 
-              className="bg-gray-50 border border-gray-200 text-pride-navy rounded-xl px-5 py-3.5 outline-none focus:border-pride-purple focus:ring-1 focus:ring-pride-purple transition-all font-medium appearance-none min-w-[240px]"
+              className="bg-slate-50 border-none rounded-xl px-6 py-4 font-bold text-slate-700 focus:ring-2 focus:ring-[#A855F7] outline-none min-w-[260px] cursor-pointer"
               value={province}
               onChange={(e) => setProvince(e.target.value)}
             >
@@ -55,70 +61,82 @@ export default function ResourceDirectory() {
             </select>
 
             <select 
-              className="bg-gray-50 border border-gray-200 text-pride-navy rounded-xl px-5 py-3.5 outline-none focus:border-pride-purple focus:ring-1 focus:ring-pride-purple transition-all font-medium appearance-none min-w-[240px]"
+              className="bg-slate-50 border-none rounded-xl px-6 py-4 font-bold text-slate-700 focus:ring-2 focus:ring-[#A855F7] outline-none min-w-[260px] cursor-pointer"
               value={supportType}
               onChange={(e) => setSupportType(e.target.value)}
             >
               {SUPPORT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
-
-          <div className="text-pride-muted font-medium bg-gray-50 px-5 py-3.5 rounded-xl border border-gray-100 hidden sm:block">
-            {filteredResources.length} <span className="font-normal">resources found</span>
+          
+          <div className="hidden lg:block mr-4 font-bold text-slate-400 text-sm tracking-widest uppercase">
+            {filteredResources.length} Found
           </div>
         </div>
 
-        {/* Results Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredResources.length > 0 ? (
-            filteredResources.map(res => (
-              <div key={res.id} className="bg-white rounded-3xl p-7 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full group">
-                
-                <div className="flex justify-between items-start mb-5 gap-4">
-                  <h3 className="font-display font-bold text-xl text-pride-navy group-hover:text-pride-purple transition-colors">
-                    {res.name}
-                  </h3>
-                  <span className="inline-block bg-purple-50 text-pride-purple text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap border border-purple-100">
-                    {res.type}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2 mb-4 text-sm font-semibold text-gray-500">
-                  <span>📍</span> {res.location}
-                </div>
-
-                <p className="text-pride-muted text-sm leading-relaxed mb-8 flex-grow">
-                  {res.summary}
-                </p>
-
-                <div className="space-y-4 mt-auto pt-4 border-t border-gray-50">
-                  <div className="flex items-center gap-3 text-sm text-pride-navy font-semibold">
-                    <span className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100">📞</span>
-                    {res.phone}
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode='popLayout'>
+            {filteredResources.length > 0 ? (
+              filteredResources.map(res => (
+                <motion.div 
+                  layout
+                  key={res.id} 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  style={cardStyle}
+                  className="bg-white rounded-[2.5rem] p-8 border-2 border-transparent shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group"
+                >
+                  <div className="flex justify-between items-start mb-6 gap-4">
+                    <h3 className="font-extrabold text-xl text-slate-900 group-hover:text-[#A855F7] transition-colors">
+                      {res.name}
+                    </h3>
+                    <span className="bg-[#FF6B6B]/10 text-[#FF6B6B] text-[0.65rem] font-black uppercase px-3 py-1 rounded-lg">
+                      {res.type}
+                    </span>
                   </div>
-                  
-                  <a href={res.website} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center w-full py-3 rounded-xl bg-gray-50 border border-gray-100 text-pride-navy font-bold text-sm hover:border-pride-purple hover:bg-white hover:text-pride-purple transition-colors shadow-sm">
-                    Visit Website
-                  </a>
-                </div>
 
-              </div>
-            ))
-          ) : (
-            <div className="col-span-full py-20 text-center">
-              <span className="text-6xl block mb-4">🔍</span>
-              <h3 className="font-display font-bold text-2xl text-pride-navy mb-2">No resources found</h3>
-              <p className="text-pride-muted">Try adjusting your filters to see more results.</p>
-              <button 
-                onClick={() => { setProvince(PROVINCES[0]); setSupportType(SUPPORT_TYPES[0]); }}
-                className="mt-6 text-pride-purple font-semibold hover:underline"
-              >
-                Reset Filters
-              </button>
-            </div>
-          )}
+                  <div className="flex items-center gap-2 mb-4 text-sm font-bold text-slate-400">
+                    <span>📍</span> {res.location}
+                  </div>
+
+                  <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-grow">
+                    {res.summary}
+                  </p>
+
+                  <div className="space-y-4 mt-auto pt-6 border-t border-slate-50">
+                    <div className="flex items-center gap-3 text-sm text-slate-900 font-bold">
+                      <span className="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100">📞</span>
+                      {res.phone}
+                    </div>
+                    
+                    <a 
+                      href={res.website} 
+                      target="_blank" 
+                      rel="noreferrer" 
+                      className="inline-flex items-center justify-center w-full py-4 rounded-2xl bg-slate-50 text-slate-900 font-black text-sm hover:bg-slate-900 hover:text-white transition-all shadow-sm"
+                    >
+                      Visit Website
+                    </a>
+                  </div>
+                </motion.div>
+              ))
+            ) : (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="col-span-full py-20 text-center">
+                <span className="text-7xl block mb-6">🔍</span>
+                <h3 className="text-3xl font-black text-slate-900 mb-2">No resources found</h3>
+                <p className="text-slate-500 mb-8">Try adjusting your filters to find support in other areas.</p>
+                <button 
+                  onClick={() => { setProvince(PROVINCES[0]); setSupportType(SUPPORT_TYPES[0]); }}
+                  className="px-8 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-black"
+                >
+                  Reset All Filters
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-
       </div>
     </section>
   );

@@ -1,68 +1,62 @@
 import React from 'react';
-
-const VALUES = [
-  { title: 'Safety First', desc: 'Creating secure environments where vulnerability is protected and honored.', emoji: '🛡️' },
-  { title: 'Inclusive Community', desc: 'Welcoming all identities, backgrounds, and experiences without judgment.', emoji: '🌈' },
-  { title: 'Healing Growth', desc: 'Supporting individual journeys of healing and personal development.', emoji: '🌱' },
-  { title: 'Joy & Celebration', desc: 'Embracing happiness and celebrating achievements as acts of resistance.', emoji: '✨' },
-];
+import { motion } from 'framer-motion';
 
 export default function AboutWhyAndValues() {
   return (
-    <section className="py-24 px-6 bg-pride-navy text-white relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-600/20 rounded-full mix-blend-screen filter blur-3xl"></div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        
-        {/* Our Why Section */}
-        <div className="text-center max-w-4xl mx-auto mb-24">
-          <span className="text-4xl mb-4 block">💜</span>
-          <h2 className="font-display font-bold text-4xl md:text-5xl mb-12">Our Why</h2>
-          
-          <div className="grid md:grid-cols-2 gap-8 text-left mb-16">
-            <div className="bg-white/10 backdrop-blur border border-white/20 p-8 rounded-[2rem]">
-              <h3 className="font-bold text-2xl text-pink-300 mb-3">We Know Rejection</h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                We built this space because we know what it feels like to be rejected — not just by systems, but by our own families, our churches, our communities.
-              </p>
-            </div>
-            <div className="bg-white/10 backdrop-blur border border-white/20 p-8 rounded-[2rem]">
-              <h3 className="font-bold text-2xl text-teal-300 mb-3">We Know Courage</h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                We know what it feels like to hide — and we know the courage it takes to stop hiding.
-              </p>
-            </div>
-          </div>
-
-          <div className="text-2xl md:text-3xl font-display font-bold leading-relaxed">
-            United in Pride exists because we believe in something bigger. Queer immigrants deserve more than survival. <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A58CE0] to-[#EFAEC3]">
-              We deserve to heal. To be loved. To belong.
-            </span>
-          </div>
+    <section className="py-24 px-6 bg-[#1e1b4b] text-white relative overflow-hidden">
+      <div className="max-w-[1200px] mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">Why United in Pride Exists</h2>
+          <p className="text-white/60 max-w-2xl mx-auto text-lg leading-relaxed">
+            We know what it feels like to hide. United in Pride exists because LGBTQ+ newcomers 
+            deserve more than safety at the border—they deserve belonging in everyday life.
+          </p>
         </div>
 
-        {/* Our Values Section */}
-        <div>
-          <div className="text-center mb-12">
-            <h2 className="font-display font-bold text-4xl md:text-5xl mb-4">Our Values</h2>
-            <p className="text-gray-300 text-lg">The principles that guide everything we do</p>
-          </div>
+        <div className="grid md:grid-cols-2 gap-8 mb-20">
+          <motion.div 
+            whileHover={{ y: -10 }}
+            className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm"
+          >
+            <h3 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] mb-4">100+</h3>
+            <p className="text-xl font-bold mb-3">Directly Supported</p>
+            <p className="text-white/60 leading-relaxed">
+              Through peer programs, referrals, and joint community initiatives since our founding in 2025.
+            </p>
+          </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {VALUES.map((val, idx) => (
-              <div key={idx} className="bg-white text-pride-navy p-8 rounded-[2rem] shadow-xl transform hover:-translate-y-2 transition-transform duration-300">
-                <span className="text-4xl mb-4 block">{val.emoji}</span>
-                <h3 className="font-bold text-xl mb-3">{val.title}</h3>
-                <p className="text-pride-muted text-sm leading-relaxed">{val.desc}</p>
-              </div>
-            ))}
-          </div>
+          <motion.div 
+            whileHover={{ y: -10 }}
+            className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm"
+          >
+            <h3 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#A855F7] to-[#3B82F6] mb-4">National</h3>
+            <p className="text-xl font-bold mb-3">Community Movement</p>
+            <p className="text-white/60 leading-relaxed">
+              A volunteer-driven approach working collaboratively with partners like ACOttawa to strengthen safety pathways across Canada.
+            </p>
+          </motion.div>
         </div>
 
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { t: 'Safety First', d: 'Secure environments where vulnerability is protected.', e: '🛡️' },
+            { t: 'Inclusive Community', d: 'Welcoming all identities without judgment.', e: '🌈' },
+            { t: 'Healing Growth', d: 'Supporting journeys of personal development.', e: '🌱' },
+            { t: 'Joy & Celebration', d: 'Embracing happiness as an act of resistance.', e: '✨' }
+          ].map((v, i) => (
+            <div key={i} className="bg-white p-8 rounded-[2rem] text-slate-900 shadow-xl">
+              <span className="text-4xl mb-4 block">{v.e}</span>
+              <h4 className="font-bold text-lg mb-2">{v.t}</h4>
+              <p className="text-sm text-slate-500 leading-relaxed">{v.d}</p>
+            </div>
+          ))}
+        </div>
       </div>
+      
+      {/* Wave bottom decoration */}
+      <svg className="absolute bottom-0 left-0 w-full h-[60px]" viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,30 Q360,60 720,30 T1440,30 L1440,60 L0,60 Z" fill="#FAFAFA"/>
+      </svg>
     </section>
   );
 }

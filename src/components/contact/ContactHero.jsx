@@ -1,48 +1,45 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function ContactHero() {
   return (
-    <section className="relative overflow-hidden bg-pride-sand min-h-[50vh] flex items-center py-20 px-6">
-      {/* Decorative Circles */}
-      <Circle size={300} color="bg-blue-200/50" className="-top-[10%] -left-[5%]" />
-      <Circle size={150} color="bg-pink-200/60" className="top-[20%] right-[10%]" />
-      <Circle size={200} color="bg-yellow-200/50" className="-bottom-[10%] left-[20%]" />
-
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <span className="inline-block py-1 px-4 rounded-full bg-white border border-gray-200 text-sm font-semibold text-pride-purple mb-6 shadow-sm">
-          Get in Touch
-        </span>
-        
-        <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl leading-tight text-pride-navy mb-6">
-          We'd Love to <span className="text-transparent bg-clip-text bg-gradient-cta">Hear From You</span>
-        </h1>
-        
-        <p className="text-pride-muted text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
-          Reach out with questions, ideas, or to learn more about joining our community. We're here to support you on your journey.
-        </p>
+    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-[120px] pb-[160px] px-6">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1e1b4b] via-[#4c1d95] to-[#3b82f6]">
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_20%_50%,rgba(255,107,107,0.3)_0%,transparent_60%),radial-gradient(ellipse_at_80%_20%,rgba(59,130,246,0.3)_0%,transparent_60%)]"></div>
       </div>
       
-      <WaveDivider />
-    </section>
-  );
-}
+      <div className="relative z-10 text-center max-w-[900px]">
+        <motion.span 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          className="inline-block py-2 px-5 bg-white/12 border border-white/20 rounded-full text-white/90 text-sm font-medium backdrop-blur-md mb-6"
+        >
+          Get in Touch
+        </motion.span>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-white text-5xl md:text-[4.5rem] font-extrabold leading-[1.1] mb-8"
+        >
+          We'd Love to <br />
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Hear From You</span>
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-white/80 text-lg md:text-[1.25rem] leading-[1.8] max-w-[700px] mx-auto"
+        >
+          Reach out with questions, ideas, or to learn more about joining our community. We're here to support you on your journey.
+        </motion.p>
+      </div>
 
-function Circle({ size, color, className }) {
-  return (
-    <div
-      aria-hidden="true"
-      className={`absolute rounded-full pointer-events-none blur-xl ${color} ${className}`}
-      style={{ width: size, height: size }}
-    />
-  );
-}
-
-function WaveDivider() {
-  return (
-    <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-      <svg viewBox="0 0 1440 40" className="w-full text-white" fill="currentColor">
-        <path d="M0,20 C360,40 720,0 1080,20 C1260,30 1380,16 1440,20 L1440,0 L0,0 Z" />
+      {/* Signature Wave Divider */}
+      <svg className="absolute bottom-[-2px] left-0 w-full h-[120px] md:h-[180px] z-[3]" viewBox="0 0 1440 180" preserveAspectRatio="none">
+        <path d="M0,80 C240,160 480,0 720,80 C960,160 1200,0 1440,80 L1440,180 L0,180 Z" fill="#FFFFFF"/>
       </svg>
-    </div>
+    </section>
   );
 }

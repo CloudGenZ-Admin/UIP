@@ -1,65 +1,70 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const MISSION_PILLARS = [
-  { emoji: '🤝', title: 'Community Building', desc: 'Creating spaces where authentic connections flourish' },
-  { emoji: '🎉', title: 'Cultural Celebration', desc: 'Honoring diverse backgrounds and identities' },
-  { emoji: '🧠', title: 'Mental Wellness', desc: 'Supporting healing and emotional wellbeing' },
-  { emoji: '📣', title: 'Advocacy & Education', desc: 'Fighting for rights and raising awareness' },
-  { emoji: '🌱', title: 'Healing-Centered', desc: 'Safe environments for processing and growth' },
-  { emoji: '💬', title: 'Peer Support', desc: 'Connecting individuals with shared experiences' },
+  { emoji: '🤝', title: 'Community Building', desc: 'Creating safe, culturally affirming spaces where authentic connections flourish.' },
+  { emoji: '🌱', title: 'Healing-Centered', desc: 'Providing safe environments for processing trauma and reclaiming dignity.' },
+  { emoji: '📣', title: 'Advocacy', desc: 'Lived-experience leadership guiding programs to strengthen newcomer rights.' },
+  { emoji: '🌈', title: 'National Reach', desc: 'A volunteer-led movement supporting queer and trans newcomers across Canada.' }
 ];
 
-const VISION_PILLARS = [
-  { title: 'Live Safely', desc: 'Free from persecution and discrimination', color: 'bg-purple-100', text: 'text-purple-700' },
-  { title: 'Live Openly', desc: 'Authentic expression without hiding', color: 'bg-pink-100', text: 'text-pink-700' },
-  { title: 'Be Celebrated', desc: 'Embraced by inclusive communities', color: 'bg-teal-100', text: 'text-teal-700' },
-];
+const borderStyle = {
+  backgroundOrigin: 'border-box',
+  backgroundClip: 'padding-box, border-box',
+  backgroundImage: 'linear-gradient(#fff, #fff), linear-gradient(90deg, #FF6B6B, #A855F7, #3B82F6)',
+};
 
 export default function AboutMissionVision() {
   return (
-    <section className="py-24 px-6 bg-white">
-      <div className="max-w-6xl mx-auto space-y-32">
-        
-        {/* Mission Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <span className="text-pride-purple font-bold tracking-wider uppercase text-sm mb-3 block">Community Support</span>
-            <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-6">Our Mission</h2>
-            <p className="text-xl text-pride-muted leading-relaxed font-medium">
-              United in Pride Supports and Empowers LGBTQ+ fleeing persecution by Creating Safe, Culturally Affirming Spaces where they can Heal, Connect and reclaim their Dignity and Belonging.
+    <section className="py-24 px-6 bg-[#FAFAFA]">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 items-center">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}>
+            <span className="text-[#FF6B6B] font-bold tracking-widest uppercase text-sm mb-3 block">Our Purpose</span>
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-6 leading-tight">Our Mission</h2>
+            <p className="text-xl text-slate-600 leading-relaxed font-medium">
+              To support LGBTQ+ newcomers, immigrants, and refugees fleeing persecution by creating safe, 
+              culturally affirming spaces where they can heal, connect, and reclaim their dignity and belonging.
             </p>
-          </div>
+          </motion.div>
           
-          <div className="grid sm:grid-cols-2 gap-4">
-            {MISSION_PILLARS.map((pillar, idx) => (
-              <div key={idx} className="bg-gray-50 p-6 rounded-3xl border border-gray-100 hover:shadow-md transition-shadow">
-                <span className="text-3xl mb-3 block">{pillar.emoji}</span>
-                <h3 className="font-bold text-pride-navy mb-1">{pillar.title}</h3>
-                <p className="text-sm text-pride-muted leading-relaxed">{pillar.desc}</p>
-              </div>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {MISSION_PILLARS.map((p, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                style={borderStyle}
+                className="bg-white p-7 rounded-[24px] border-2 border-transparent shadow-sm hover:shadow-md transition-all"
+              >
+                <span className="text-4xl mb-4 block">{p.emoji}</span>
+                <h3 className="font-bold text-slate-800 mb-2">{p.title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{p.desc}</p>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Vision Section */}
-        <div className="bg-pride-sand rounded-[3rem] p-10 md:p-16 text-center shadow-sm">
-          <div className="max-w-3xl mx-auto mb-16">
-            <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-6">Our Vision</h2>
-            <p className="text-xl text-pride-muted leading-relaxed">
-              A Canada where LGBTQ+ People Live openly, Safely and with Pride free from fear, stigma, and isolation. Celebrated and Embraced in Inclusive Communities.
+        {/* Vision Block */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-24 p-12 rounded-[3rem] bg-gradient-to-br from-[#1e1b4b] to-[#4c1d95] text-white text-center shadow-xl relative overflow-hidden"
+        >
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-extrabold mb-6">Our Vision</h2>
+            <p className="text-xl text-white/80 leading-relaxed mb-8">
+              A Canada where LGBTQ+ people live openly and safely, free from fear, stigma, and isolation and are fully embraced in inclusive communities.
             </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {['Live Safely', 'Live Openly', 'Be Celebrated'].map((v, i) => (
+                <span key={i} className="px-6 py-2 bg-white/10 rounded-full border border-white/20 text-sm font-bold">{v}</span>
+              ))}
+            </div>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {VISION_PILLARS.map((vision, idx) => (
-              <div key={idx} className={`${vision.color} p-8 rounded-[2rem] shadow-sm transform hover:-translate-y-2 transition-transform duration-300`}>
-                <h3 className={`font-display font-bold text-2xl mb-2 ${vision.text}`}>{vision.title}</h3>
-                <p className="text-pride-navy font-medium opacity-80">{vision.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#A855F7]/10 rounded-full blur-3xl"></div>
+        </motion.div>
       </div>
     </section>
   );

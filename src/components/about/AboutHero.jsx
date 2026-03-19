@@ -1,45 +1,45 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function AboutHero() {
   return (
-    <section className="relative overflow-hidden bg-pride-sand min-h-[80vh] flex items-center py-20 px-6">
-      {/* Decorative Blur Circles */}
-      <div className="absolute top-[10%] left-[5%] w-72 h-72 bg-purple-200/50 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
-      <div className="absolute top-[20%] right-[10%] w-72 h-72 bg-pink-200/50 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
-      <div className="absolute -bottom-8 left-[20%] w-72 h-72 bg-teal-200/50 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-4000"></div>
-
-      <div className="relative z-10 max-w-5xl mx-auto w-full">
-        {/* Hero Title */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="inline-block py-1 px-4 rounded-full bg-white border border-gray-200 text-sm font-semibold text-pride-purple mb-6 shadow-sm">
-            Our Story
-          </span>
-          <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl leading-tight text-pride-navy mb-6">
-            Building Safety, Pride and <span className="text-transparent bg-clip-text bg-gradient-cta">Belonging</span>
-          </h1>
-          <p className="text-pride-muted text-xl md:text-2xl font-medium">
-            Born from the courage of those who left everything behind for the chance to live authentically.
-          </p>
-        </div>
-
-        {/* Who We Are Content Card */}
-        <div className="bg-white/90 backdrop-blur-lg rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-white max-w-4xl mx-auto">
-          <h2 className="font-display font-bold text-3xl text-pride-navy mb-6 flex items-center gap-3">
-            <span>✨</span> Who We Are
-          </h2>
-          <div className="space-y-6 text-lg text-pride-muted leading-relaxed">
-            <p>
-              United in Pride was born from the lived experiences of LGBTQ+ individuals who made the difficult decision to leave their home countries in search of safety, acceptance, and the freedom to live authentically.
-            </p>
-            <p>
-              We understand that coming to Canada is just the beginning of the journey. The challenges don't end at the border – they transform. Finding community, healing from trauma, navigating new systems, and rebuilding identity in a new land requires support, understanding, and genuine connection.
-            </p>
-            <p className="font-semibold text-pride-purple text-xl">
-              United in Pride exists as a beacon of hope and belonging, where every identity, every story of trauma, and every dream for the future is not just welcomed, but celebrated.
-            </p>
-          </div>
-        </div>
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-[120px] pb-[180px] px-6">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1e1b4b] via-[#4c1d95] to-[#3b82f6]">
+        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_20%_50%,rgba(255,107,107,0.3)_0%,transparent_60%),radial-gradient(ellipse_at_80%_20%,rgba(59,130,246,0.3)_0%,transparent_60%)]"></div>
       </div>
+      
+      <div className="relative z-10 text-center max-w-[900px]">
+        <motion.span 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          className="inline-block py-2 px-5 bg-white/12 border border-white/20 rounded-full text-white/90 text-sm font-medium backdrop-blur-md mb-6"
+        >
+          From Survival to Belonging
+        </motion.span>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-white text-5xl md:text-[4.5rem] font-extrabold leading-[1.1] mb-8"
+        >
+          Building Safety, <br />
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Pride and Belonging</span>
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-white/80 text-lg md:text-[1.25rem] leading-[1.8] max-w-[700px] mx-auto"
+        >
+          For many LGBTQ+ newcomers, migration is not simply about opportunity. It is about survival and the freedom to live openly and safely.
+        </motion.p>
+      </div>
+
+      {/* Hero Wave - Matches your Home Hero */}
+      <svg className="absolute bottom-[-2px] left-0 w-full h-[120px] md:h-[180px] z-[3]" viewBox="0 0 1440 180" preserveAspectRatio="none">
+        <path d="M0,80 C240,160 480,0 720,80 C960,160 1200,0 1440,80 L1440,180 L0,180 Z" fill="#FAFAFA"/>
+      </svg>
     </section>
   );
 }
