@@ -7,24 +7,24 @@ const PROGRAMS = [
     title: 'Peer Support Circles',
     desc: 'Safe, confidential spaces where community members can share experiences, build friendships, and support each other through the challenges of resettlement.',
     emoji: '💬',
-    bgColor: 'bg-purple-50',
-    accent: 'text-purple-600',
+    bgColor: 'bg-indigo-50/60',
+    accent: 'text-indigo-600',
     features: [
       { title: 'Confidential & Safe', desc: 'Privacy-protected spaces where vulnerability is honored' },
       { title: 'Genuine Connection', desc: 'Build lasting friendships with people who understand' },
       { title: 'Resettlement Guidance', desc: 'Navigate complexities with community wisdom' }
     ],
-    schedule: 'Weekly Circle Sessions',
+    schedule: 'Weekly Sessions',
     btnText: 'Join Support Circle',
-    link: '/programs/peer-support' // New link property
+    link: '/support'
   },
   {
     id: 'wellness',
-    title: 'Wellness & Healing Workshops',
+    title: 'Wellness Workshops',
     desc: 'Programs addressing mental health, trauma recovery, and holistic wellness tailored to the specific needs of queer and trans newcomers.',
     emoji: '🧘',
-    bgColor: 'bg-teal-50',
-    accent: 'text-teal-600',
+    bgColor: 'bg-rose-50/60',
+    accent: 'text-rose-600',
     features: [
       { title: 'Mental Health Focus', desc: 'Evidence-based approaches to anxiety and depression' },
       { title: 'Trauma Recovery', desc: 'Culturally-informed approaches to processing experiences' },
@@ -32,101 +32,100 @@ const PROGRAMS = [
     ],
     schedule: 'Monthly Workshops',
     btnText: 'Book Wellness Session',
-    link: '/programs/wellness' // New link property
+    link: '/wellness'
   },
   {
     id: 'cultural',
-    title: 'Cultural Affirmation Events',
+    title: 'Cultural Events',
     desc: 'Celebrations and gatherings that honor the diverse identities and cultures within our community, fostering belonging and pride.',
     emoji: '🎉',
-    bgColor: 'bg-pink-50',
-    accent: 'text-pink-600',
+    bgColor: 'bg-teal-50/60',
+    accent: 'text-teal-600',
     features: [
       { title: 'Cultural Celebration', desc: 'Honor your heritage while celebrating your identity' },
       { title: 'Diverse Community', desc: 'Connect with people from many cultures and backgrounds' },
       { title: 'Pride & Belonging', desc: 'Experience the joy of being fully seen and celebrated' }
     ],
-    schedule: 'Monthly Celebrations (Third Sunday)',
+    schedule: 'Monthly Events',
     btnText: 'Join Celebrations',
-    link: '/programs/cultural' // New link property
+    link: '/events'
   },
   {
     id: 'navigation',
-    title: 'Resource Navigation & Referrals',
+    title: 'Resource Navigation',
     desc: 'Assistance connecting newcomers with essential services such as healthcare, legal aid, housing, and employment in culturally sensitive ways.',
     emoji: '🧭',
-    bgColor: 'bg-yellow-50',
-    accent: 'text-yellow-600',
+    bgColor: 'bg-amber-50/60',
+    accent: 'text-amber-600',
     features: [
       { title: 'Healthcare Access', desc: 'Connect with LGBTQ+-affirming healthcare providers' },
       { title: 'Legal Aid Support', desc: 'Immigration lawyers and refugee claim assistance' },
       { title: 'Housing & Employment', desc: 'Safe housing options and inclusive opportunities' }
     ],
-    schedule: 'Personalized support by appointment',
+    schedule: 'By Appointment',
     btnText: 'Get Navigation Help',
-    link: '/resources' // Redirects to your existing Resources Page
+    link: '/resources'
   }
 ];
 
 export default function CorePrograms() {
   return (
     <section className="py-24 px-6 bg-white">
-      <div className="max-w-3xl mx-auto text-center mb-20">
-        <h2 className="font-display font-bold text-4xl md:text-5xl text-pride-navy mb-4">
-          Our Core Programs
-        </h2>
-        <p className="text-pride-muted text-lg">
-          Four pillars of support designed to nurture every aspect of your journey.
-        </p>
-      </div>
-
-      <div className="max-w-6xl mx-auto space-y-24">
-        {PROGRAMS.map((program, index) => (
-          <div key={program.id} className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-            
-            {/* Visual Side */}
-            <div className={`flex-1 w-full aspect-square md:aspect-[4/3] rounded-[2.5rem] ${program.bgColor} flex items-center justify-center relative shadow-sm`}>
-              <span className="text-8xl md:text-9xl drop-shadow-lg transform hover:scale-110 transition-transform duration-500">
-                {program.emoji}
-              </span>
-              <div className="absolute bottom-6 right-6 bg-white px-5 py-2 rounded-full shadow-md font-semibold text-sm text-pride-navy">
-                {program.schedule}
+      <div className="max-w-[1200px] mx-auto">
+        
+        {/* Main Grid: Side-by-Side on Desktop */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {PROGRAMS.map((program) => (
+            <div 
+              key={program.id} 
+              className={`p-10 md:p-12 rounded-[3rem] ${program.bgColor} border border-transparent hover:border-slate-100 transition-all shadow-sm flex flex-col`}
+            >
+              {/* Header: Emoji & Badge */}
+              <div className="flex items-center justify-between mb-8">
+                <span className="text-5xl">{program.emoji}</span>
+                <span className="bg-white px-4 py-1.5 rounded-full font-black text-[0.6rem] text-slate-900 uppercase tracking-[0.2em] shadow-sm">
+                  {program.schedule}
+                </span>
               </div>
-            </div>
 
-            {/* Content Side */}
-            <div className="flex-1 space-y-6">
-              <h3 className="font-display font-bold text-3xl md:text-4xl text-pride-navy">
-                {program.title}
-              </h3>
-              <p className="text-pride-muted text-lg leading-relaxed">
-                {program.desc}
-              </p>
+              {/* Title & Description */}
+              <div className="mb-8">
+                <h3 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight italic mb-4">
+                  {program.title}
+                </h3>
+                <p className="text-slate-600 text-lg leading-relaxed">
+                  {program.desc}
+                </p>
+              </div>
               
-              <ul className="space-y-4 pt-4">
+              {/* Features List (Stacked inside the card) */}
+              <div className="space-y-6 flex-grow mb-10">
+                <h4 className="font-black text-slate-400 uppercase text-[0.65rem] tracking-[0.25em] mb-4">Key Features:</h4>
                 {program.features.map((feature, i) => (
-                  <li key={i} className="flex gap-4">
-                    <span className={`w-8 h-8 rounded-full ${program.bgColor} ${program.accent} flex items-center justify-center flex-shrink-0 mt-1`}>
-                      <svg className="w-4 h-4" viewBox="0 0 14 14" fill="none">
-                        <path d="M2 7l3.5 3.5L12 3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <div key={i} className="flex gap-4">
+                    <span className={`w-10 h-10 rounded-2xl bg-white ${program.accent} flex items-center justify-center shadow-sm shrink-0`}>
+                      <svg className="w-5 h-5" viewBox="0 0 14 14" fill="none">
+                        <path d="M2 7l3.5 3.5L12 3" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </span>
                     <div>
-                      <h4 className="font-semibold text-pride-navy">{feature.title}</h4>
-                      <p className="text-sm text-pride-muted">{feature.desc}</p>
+                      <h4 className="font-black text-slate-800 uppercase text-[0.7rem] tracking-widest mb-0.5">{feature.title}</h4>
+                      <p className="text-slate-500 text-sm leading-snug">{feature.desc}</p>
                     </div>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
 
-              {/* Updated: Changed from <button> to <Link> */}
-              <Link to={program.link} className="mt-6 inline-block bg-gradient-cta text-white font-semibold px-8 py-3.5 rounded-full hover:opacity-90 transition-opacity shadow-md">
-                {program.btnText}
-              </Link>
+              {/* Action Button */}
+              <div className="pt-6 border-t border-black/5">
+                <Link to={program.link} className="w-full text-center inline-block px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+                  {program.btnText}
+                </Link>
+              </div>
             </div>
+          ))}
+        </div>
 
-          </div>
-        ))}
       </div>
     </section>
   );
