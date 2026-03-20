@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Link import karein
+import { Link } from 'react-router-dom';
+import logoImg from '../assets/Newlogo.png'; 
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,7 +13,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Main Links (Jo hamesha dikhenge)
   const mainLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -21,7 +21,6 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" },
   ];
 
-  // Programs Dropdown Links
   const programLinks = [
     { name: "All Programs", path: "/programs" },
     { name: "Peer Support", path: "/programs/peer-support" },
@@ -31,7 +30,6 @@ export default function Navbar() {
     { name: "Support", path: "/support" },
   ];
 
-  // Other Action Links
   const actionLinks = [
     { name: "Volunteer", path: "/volunteer" },
     { name: "Partnership", path: "/Partnership" },
@@ -41,13 +39,18 @@ export default function Navbar() {
     <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-[1250px] z-[1000] rounded-[60px] transition-all duration-300 border border-purple-500/15 ${isScrolled ? 'bg-white/95 shadow-lg py-2' : 'bg-white/85 backdrop-blur-[20px] py-3'}`}>
       <div className="flex items-center justify-between px-7 relative">
         
-        {/* Logo */}
+      
         <Link to="/" className="flex items-center gap-2.5 font-bold text-[1.1rem]">
-          <span className="text-2xl">🌈</span>
+        
+          <img 
+            src={logoImg} 
+            alt="United in Pride Logo" 
+            className="h-8 w-auto object-contain" 
+          />
           <span className="whitespace-nowrap">United in Pride</span>
         </Link>
 
-        {/* Desktop Menu */}
+       
         <ul className="hidden lg:flex items-center gap-6">
           {mainLinks.map(link => (
             <li key={link.name}>
@@ -58,7 +61,7 @@ export default function Navbar() {
             </li>
           ))}
 
-          {/* Programs Dropdown */}
+        
           <li className="relative group" 
               onMouseEnter={() => setShowProgramsDropdown(true)} 
               onMouseLeave={() => setShowProgramsDropdown(false)}>
@@ -76,7 +79,7 @@ export default function Navbar() {
             )}
           </li>
 
-          {/* More Links */}
+        
           {actionLinks.map(link => (
             <li key={link.name}>
               <Link to={link.path} className="font-medium text-[0.85rem] text-slate-600 hover:text-[#A855F7] transition-all">
@@ -86,13 +89,12 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Right Side Buttons */}
         <div className="flex items-center gap-3">
           <Link to="/donate" className="hidden sm:block py-2.5 px-6 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-semibold text-sm hover:-translate-y-0.5 shadow-md transition-all">
             Donate 💜
           </Link>
           
-          {/* Mobile Toggle */}
+         
           <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden flex flex-col gap-1.5 p-1">
             <span className={`w-6 h-[2.5px] bg-slate-600 transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
             <span className={`w-6 h-[2.5px] bg-slate-600 transition-all ${isOpen ? 'opacity-0' : ''}`}></span>
@@ -101,7 +103,7 @@ export default function Navbar() {
         </div>
       </div>
       
-      {/* Mobile Menu (Scrollable) */}
+     
       {isOpen && (
         <div className="lg:hidden absolute top-[calc(100%+12px)] left-0 right-0 bg-white rounded-3xl p-6 shadow-2xl flex flex-col gap-2 max-h-[80vh] overflow-y-auto">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Main Menu</p>
