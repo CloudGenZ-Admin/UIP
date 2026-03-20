@@ -8,12 +8,12 @@ import s4 from '../../assets/s4.jpg';
 const STORIES = [
   {
     name: 'Ahmed K.',
-    origin: 'Somalia',
-    title: 'From Fear to Community Leadership',
+    // origin: 'Somalia',
+    // title: 'From Fear to Community Leadership',
     desc: 'After fleeing persecution in Somalia, Ahmed found his voice through United in Pride and now leads peer support groups.',
     fullStory: '"When I first arrived in Canada, I was terrified to be open about who I am. The community gatherings at United in Pride showed me that I could be both proudly Somali and proudly gay. Now I facilitate workshops for other newcomers."',
     publishedDate: '2/15/2024',
-    tags: ['Leadership', 'Peer Support', 'Community Building'],
+    // tags: ['Leadership', 'Peer Support', 'Community Building'],
     img: s1,
   },
   {
@@ -93,10 +93,10 @@ export default function CommunityStories() {
                 <motion.div layout className="flex flex-col flex-1">
                   <div className="mb-4">
                     <h3 className="text-2xl font-bold text-slate-900">{story.name}</h3>
-                    <p className="text-[#A855F7] font-semibold text-sm">Originally from {story.origin}</p>
+                    {/* <p className="text-[#A855F7] font-semibold text-sm">Originally from {story.origin}</p> */}
                   </div>
                   
-                  <h4 className="text-xl font-bold text-slate-800 mb-3 italic">"{story.title}"</h4>
+                  {/* <h4 className="text-xl font-bold text-slate-800 mb-3 italic">"{story.title}"</h4> */}
                   
                   {/* Dynamic Content: Description vs Full Story */}
                   <motion.div layout className="text-slate-500 mb-5 flex-1 leading-relaxed">
@@ -110,9 +110,9 @@ export default function CommunityStories() {
                           transition={{ duration: 0.2 }}
                         >
                           <p className="italic text-slate-800 font-medium mb-3">{story.fullStory}</p>
-                          <p className="text-xs text-slate-400 font-semibold uppercase tracking-wide">
+                          {/* <p className="text-xs text-slate-400 font-semibold uppercase tracking-wide">
                             Published: {story.publishedDate}
-                          </p>
+                          </p> */}
                         </motion.div>
                       ) : (
                         <motion.p
@@ -128,13 +128,13 @@ export default function CommunityStories() {
                     </AnimatePresence>
                   </motion.div>
 
-                  <motion.div layout className="flex flex-wrap gap-2 mb-6 mt-auto">
+                  {/* <motion.div layout className="flex flex-wrap gap-2 mb-6 mt-auto">
                     {story.tags.map((tag, i) => (
                       <span key={i} className="px-3 py-1 bg-slate-100 text-slate-600 text-[0.7rem] font-black uppercase tracking-wider rounded-full">
                         {tag}
                       </span>
                     ))}
-                  </motion.div>
+                  </motion.div> */}
 
                   {/* Toggle Button */}
                   <button

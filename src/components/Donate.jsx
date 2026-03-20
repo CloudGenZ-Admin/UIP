@@ -28,16 +28,7 @@ export default function Donate() {
 
         <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} className="bg-white rounded-[24px] p-8 shadow-2xl">
           <h3 className="text-center text-xl font-bold mb-6">Make Your Gift</h3>
-          <div className="mb-8">
-            <div className="flex justify-between text-sm text-slate-500 mb-2">
-              <span>Raised: <strong>$14,645</strong></span>
-              <span>Goal: <strong>$26,000</strong></span>
-            </div>
-            <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
-              <motion.div initial={{ width: 0 }} whileInView={{ width: '56.3%' }} transition={{ duration: 1 }} className="h-full bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]" />
-            </div>
-          </div>
-
+         
           <div className="flex bg-slate-100 p-1 rounded-full mb-5">
             {['once', 'monthly'].map(f => (
               <button key={f} onClick={() => setFreq(f)} className={`flex-1 py-2 rounded-full font-bold text-sm transition-all ${freq === f ? 'bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white shadow-md' : 'text-slate-500'}`}>
