@@ -5,9 +5,9 @@ import PeerSupportForm from '../components/programs/peer-support';
 
 export default function PeerSupportPage() {
     return (
-        <div className="min-h-screen bg-purple-50 font-sans text-pride-navy">
+        <div className="min-h-screen  font-sans text-pride-navy">
             <Navbar />
-            <main className="relative pt-2"> 
+            <main className="relative"> 
                 <PeerSupportForm />
             </main>
             <Footer />
