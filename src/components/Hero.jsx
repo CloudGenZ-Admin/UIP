@@ -20,7 +20,7 @@ export default function Hero() {
           A safe, inclusive space where every identity is celebrated. Join our vibrant community in the heart of Ottawa.
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
-          <a href="#programs" className="px-8 py-3.5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:-translate-y-1 transition-all">Explore Programs</a>
+          <a href="/programs" className="px-8 py-3.5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:-translate-y-1 transition-all">Explore Programs</a>
           <a href="#about" className="px-8 py-3.5 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">Learn More</a>
         </div>
       </div>

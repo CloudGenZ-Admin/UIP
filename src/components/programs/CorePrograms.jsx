@@ -16,7 +16,7 @@ const PROGRAMS = [
     ],
     schedule: 'Weekly Sessions',
     btnText: 'Join Support Circle',
-    link: '/support'
+    link: '/programs/peer-support'
   },
   {
     id: 'wellness',
@@ -32,7 +32,7 @@ const PROGRAMS = [
     ],
     schedule: 'Monthly Workshops',
     btnText: 'Book Wellness Session',
-    link: '/wellness'
+    link: '/programs/wellness'
   },
   {
     id: 'cultural',
@@ -48,7 +48,7 @@ const PROGRAMS = [
     ],
     schedule: 'Monthly Events',
     btnText: 'Join Celebrations',
-    link: '/events'
+    link: '/programs/cultural'
   },
   {
     id: 'navigation',

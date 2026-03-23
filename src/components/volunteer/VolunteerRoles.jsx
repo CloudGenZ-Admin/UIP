@@ -16,9 +16,9 @@ const borderStyle = {
 
 export default function VolunteerRoles() {
   return (
-    <section id="roles" className="py-24 px-6 bg-white">
+    <section id="roles" className="py-2 px-6 bg-white">
       <div className="max-w-[1200px] mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4">Volunteer Opportunities</h2>
           <p className="text-slate-500 text-lg">Find the perfect role that matches your skills and availability</p>
         </div>
@@ -43,7 +43,6 @@ export default function VolunteerRoles() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-3 bg-slate-900 text-white rounded-xl font-bold text-sm hover:bg-black transition-all">Apply Now</button>
             </motion.div>
           ))}
         </div>

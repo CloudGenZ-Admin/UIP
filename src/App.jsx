@@ -15,11 +15,14 @@ import PartnershipPage from './pages/PartnershipPage.jsx';
 import PeerSupportPage from './pages/PeerSupportPage.jsx';
 import WellnessPage from './pages/WellnessPage.jsx';
 import CulturalPage from './pages/CulturalPage.jsx';
-
+import InvolvedPage from './pages/InvoledPage.jsx';
+import ScrollToTop from './pages/ScrollToTop.jsx'
 export default function App() {
    return (
     <Router>
+      <ScrollToTop /> 
       <Routes>
+        
         <Route path="/" element={<Home/>} />
         <Route path="/programs" element={<Programs />} />
         
@@ -37,7 +40,9 @@ export default function App() {
         <Route path="/volunteer" element={<VolunteerPage />} />
         <Route path="/donate" element={<Donate />} /> 
         <Route path="/Partnership" element={<PartnershipPage />} /> 
-
+        
+         <Route path="/involed" element={< InvolvedPage />} /> 
+        
       </Routes>
     </Router>
   );

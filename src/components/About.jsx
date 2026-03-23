@@ -34,7 +34,7 @@ export default function About() {
               </div>
             ))}
           </div>
-          <a href="#programs" className="px-8 py-3.5 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-bold shadow-lg">Learn More</a>
+          <a href="/about" className="px-8 py-3.5 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-bold shadow-lg">Learn More</a>
         </motion.div>
       </div>
     </section>

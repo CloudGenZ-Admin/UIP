@@ -24,7 +24,7 @@ export default function CulturalForm() {
             onClick={() => window.history.back()}
             className="mb-8 inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors font-bold text-sm uppercase tracking-widest"
           >
-            ← Go Back
+            
           </motion.button>
           
           <motion.h1 

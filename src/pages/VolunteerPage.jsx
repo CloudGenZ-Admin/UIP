@@ -41,9 +41,9 @@ export default function VolunteerPage() {
         <VolunteerHero />
         <VolunteerRoles />
         <TrainingSupport />
-        <Donate />
-        <Partnerships />
-        <VolunteerCTA />
+        {/* <Donate /> */}
+        {/* <Partnerships /> */}
+        {/* <VolunteerCTA /> */}
       </main>
       <Footer />
     </div>

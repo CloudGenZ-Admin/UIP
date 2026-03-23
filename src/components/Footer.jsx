@@ -1,44 +1,111 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../assets/Newlogo.png';
+import {
+  Instagram,
+  Facebook,
+  Linkedin, // LinkedIn add kiya gaya hai
+  MapPin,
+  Phone,
+  Mail,
+  Clock
+} from 'lucide-react';
 
 export default function Footer() {
+  
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" 
+    });
+  };
+
+  // Social Media Links Array
+  const socialLinks = [
+    { 
+      i: <Instagram size={19} />, 
+      label: 'Instagram', 
+      href: 'https://www.instagram.com/unite_in_pride?igsh=Z3VtdjJsaTB5ZTR3&utm_source=qr' 
+    },
+    { 
+      i: <Facebook size={19} />, 
+      label: 'Facebook', 
+      href: 'https://www.facebook.com/people/United-in-Pride/61579117565491/?mibextid=wwXIfr&rdid=yKDvw6J1FEk8NY4q&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19nM1NbmSt%2F%3Fmibextid%3DwwXIfr' 
+    },
+    { 
+      i: <Linkedin size={19} />, 
+      label: 'LinkedIn', 
+      href: 'https://www.linkedin.com/company/youpride/' 
+    },
+    { 
+      // TikTok Custom SVG Icon
+      i: (
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+        </svg>
+      ), 
+      label: 'TikTok', 
+      href: 'https://www.tiktok.com/@unitedinpride1?_t=ZS-8yhxvJbUwYi&_r=1' 
+    }
+  ];
+
   return (
     <footer className="relative bg-gradient-to-br from-[#0f0a2e] via-[#1e1b4b] to-[#1a1145] text-white pt-[80px]">
-      
+
       {/* 1. TOP CURVE SVG */}
       <svg className="absolute top-[-2px] left-0 w-full h-[100px]" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="#FAFAFA"/>
+        <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="#FAFAFA" />
       </svg>
 
       <div className="max-w-[1200px] mx-auto px-6">
-        
+
         {/* FOOTER TOP GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 pb-10">
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.2fr_1fr] gap-10 pb-10">
+
           {/* BRAND COLUMN */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="text-[1.4rem] font-[800] mb-4">🌈 United in Pride</div>
-            <p className="text-[rgba(255,255,255,0.6)] text-[0.9rem] leading-[1.7] mb-5 max-w-[320px]">
-              Ottawa's 2SLGBTQIA+ Community Centre on the unceded territory of the Algonquin Anishinaabe Nation in Odawa/Ottawa.
+            <div className="mb-6">
+              <Link to="/" onClick={scrollToTop}>
+                <img
+                  src={logo}
+                  alt="United in Pride Logo"
+                  className="h-[60px] w-auto object-contain"
+                />
+              </Link>
+            </div>
+
+            <p className="text-[rgba(255,255,255,0.7)] text-[0.95rem] leading-[1.7] mb-6 max-w-[340px]">
+              A safe space for LGBTQ+ newcomers, immigrants, and refugees to heal, connect, and thrive.
             </p>
-            
-            {/* SOCIAL LINKS (EXACT STYLING) */}
+
+            {/* SOCIAL LINKS - Updated with your URLs */}
             <div className="flex gap-3">
-              {[
-                { i: '📷', label: 'Instagram' },
-                { i: '🐦', label: 'Twitter' },
-                { i: '📘', label: 'Facebook' },
-                { i: '🎬', label: 'YouTube' }
-              ].map((s, idx) => (
-                <a 
-                  key={idx} 
-                  href="#" 
+              {socialLinks.map((s, idx) => (
+                <a
+                  key={idx}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-[44px] h-[44px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[1.1rem] transition-all duration-300 hover:bg-gradient-to-br hover:from-[#FF6B6B] hover:to-[#A855F7] hover:-translate-y-[3px]"
+                  className="w-[42px] h-[42px] rounded-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-300 hover:bg-gradient-to-br hover:from-[#FF6B6B] hover:to-[#A855F7] hover:-translate-y-[3px] text-[rgba(255,255,255,0.8)] hover:text-white"
                 >
                   {s.i}
                 </a>
               ))}
             </div>
+          </div>
+
+          {/* QUICK LINKS COLUMN */}
+          <div className="text-center md:text-left">
+            <h4 className="font-bold text-[1rem] mb-5 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
+              Quick Links
+            </h4>
+            <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)]">
+              <li><Link to="/about" onClick={scrollToTop} className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/programs" onClick={scrollToTop} className="hover:text-white transition-colors">Our Programs</Link></li>
+              <li><Link to="/involed" onClick={scrollToTop} className="hover:text-white transition-colors">Get Involved</Link></li>
+              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact</Link></li>
+            </ul>
           </div>
 
           {/* PROGRAMS COLUMN */}
@@ -47,44 +114,40 @@ export default function Footer() {
               Programs
             </h4>
             <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)]">
-              <li><a href="#" className="hover:text-white transition-colors">Support Groups</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Art & Creativity</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Education</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Wellness</a></li>
+              <li>Wellness Circles</li>
+              <li>Social Events</li>
+              <li>Sports & Movement</li>
+              <li>Cultural Programs</li>
+              <li>Advocacy & Support</li>
             </ul>
           </div>
 
-          {/* GET INVOLVED COLUMN */}
+          {/* CONTACT & SUPPORT COLUMN */}
           <div className="text-center md:text-left">
             <h4 className="font-bold text-[1rem] mb-5 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
-              Get Involved
+              Support Us
             </h4>
-            <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)]">
-              <li><a href="#" className="hover:text-white transition-colors">Volunteer</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Donate</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Events</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Partnerships</a></li>
+            <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)] mb-6">
+              <li><Link to="/donate" onClick={scrollToTop} className="hover:text-white transition-colors">Donate Now</Link></li>
+              <li><Link to="/Partnership" onClick={scrollToTop} className="hover:text-white transition-colors">Partnerships</Link></li>
+              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact Us</Link></li>
             </ul>
-          </div>
 
-          {/* CONTACT COLUMN */}
-          <div className="text-center md:text-left">
-            <h4 className="font-bold text-[1rem] mb-5 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
-              Contact
-            </h4>
-            <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)]">
-              <li className="flex items-center justify-center md:justify-start gap-2">📍 123 Pride Street, Ottawa ON</li>
-              <li className="flex items-center justify-center md:justify-start gap-2">📞 (613) 555-PRIDE</li>
-              <li className="flex items-center justify-center md:justify-start gap-2">✉️ hello@unitedinpride.ca</li>
-              <li className="flex items-center justify-center md:justify-start gap-2">🕐 Mon–Sat: 9AM–9PM</li>
-            </ul>
+            <div className="flex flex-col gap-3 text-[0.85rem] text-[rgba(255,255,255,0.5)]">
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <MapPin size={14} className="text-[#FF6B6B]" /> Ottawa, Canada
+              </div>
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <Mail size={14} className="text-[#A855F7]" /> hello@unitedinpride.ca
+              </div>
+            </div>
           </div>
 
         </div>
 
         {/* 2. DIVIDER WAVE SVG */}
         <svg className="w-full h-[20px] my-5" viewBox="0 0 1200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,10 Q150,0 300,10 T600,10 T900,10 T1200,10" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
+          <path d="M0,10 Q150,0 300,10 T600,10 T900,10 T1200,10" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
         </svg>
 
         {/* FOOTER BOTTOM BAR */}
@@ -93,14 +156,18 @@ export default function Footer() {
             © 2025 United in Pride. All rights reserved. Made with 💜 in Ottawa.
           </p>
           <div className="flex gap-6">
-            {['Privacy', 'Terms', 'Accessibility'].map((link) => (
-              <a key={link} href="#" className="text-[rgba(255,255,255,0.5)] text-[0.85rem] hover:text-white transition-colors">
-                {link}
-              </a>
+            {['Privacy', 'Terms', 'Accessibility'].map((item) => (
+              <Link 
+                key={item} 
+                to={`/${item.toLowerCase()}`} 
+                onClick={scrollToTop}
+                className="text-[rgba(255,255,255,0.5)] text-[0.85rem] hover:text-white transition-colors"
+              >
+                {item}
+              </Link>
             ))}
           </div>
         </div>
-
       </div>
     </footer>
   );

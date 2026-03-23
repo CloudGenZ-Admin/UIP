@@ -12,18 +12,18 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-   <div className="min-h-screen bg-[#FAFAFA] font-['Outfit'] overflow-x-hidden text-[#1e1e2e]">
+   <div className="min-h-screen bg-[#FAFAFA]  overflow-x-hidden text-[#1e1e2e]">
       <Navbar />
       <main>
         <Hero />
         <Stats />
         <Ticker />
         <About />
-        <Programs />
+        {/* <Programs /> */}
         <Donate />
-        <Gallery />
+        {/* <Gallery /> */}
         <Events />
-        <Stories />
+        {/* <Stories /> */}
       </main>
       <Footer />
     </div>
