@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logoImg from '../assets/Newlogo.png'; 
+import logoImg from '../assets/Newlogo.png';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const navRef = useRef(null);
   const location = useLocation();
 
@@ -47,12 +47,12 @@ export default function Navbar() {
   ];
 
   return (
-    <nav 
-      ref={navRef} 
+    <nav
+      ref={navRef}
       className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-[1250px] z-[1000] rounded-[60px] transition-all duration-300 border border-purple-500/15 ${isScrolled ? 'bg-slate-50 shadow-lg py-2' : 'bg-slate-50 backdrop-blur-[20px] py-3'}`}
     >
       <div className="flex items-center justify-between px-7 relative">
-        
+
         <Link to="/" className="flex items-center gap-2.5 font-bold text-[1.1rem]">
           <img src={logoImg} alt="United in Pride Logo" className="h-8 w-auto object-contain" />
         </Link>
@@ -61,8 +61,8 @@ export default function Navbar() {
         <ul className="hidden lg:flex items-center gap-6">
           {mainLinks.map(link => (
             <li key={link.name}>
-              <Link 
-                to={link.path} 
+              <Link
+                to={link.path}
                 className={`font-medium text-[0.85rem] transition-all relative group ${isActive(link.path) ? 'text-[#A855F7]' : 'text-slate-600 hover:text-[#A855F7]'}`}
               >
                 {link.name}
@@ -73,8 +73,8 @@ export default function Navbar() {
 
           {/* Programs - Now a simple Link, No Dropdown */}
           <li>
-            <Link 
-              to={programsLink.path} 
+            <Link
+              to={programsLink.path}
               className={`font-medium text-[0.85rem] transition-all relative group ${isActive(programsLink.path) ? 'text-[#A855F7]' : 'text-slate-600 hover:text-[#A855F7]'}`}
             >
               {programsLink.name}
@@ -84,8 +84,8 @@ export default function Navbar() {
 
           {actionLinks.map(link => (
             <li key={link.name}>
-              <Link 
-                to={link.path} 
+              <Link
+                to={link.path}
                 className={`font-medium text-[0.85rem] transition-all relative group ${isActive(link.path) ? 'text-[#A855F7]' : 'text-slate-600 hover:text-[#A855F7]'}`}
               >
                 {link.name}
@@ -96,10 +96,15 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <Link to="/donate" className="hidden sm:block py-2.5 px-6 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-semibold text-sm hover:-translate-y-0.5 shadow-md transition-all">
+          <a
+            href="https://www.zeffy.com/embed/donation-form/youre-not-alone?modal=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:block py-2.5 px-6 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-semibold text-sm hover:-translate-y-0.5 shadow-md transition-all"
+          >
             Donate 💜
-          </Link>
-          
+          </a>
+
           <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden flex flex-col gap-1.5 p-1">
             <span className={`w-6 h-[2.5px] bg-slate-600 transition-all ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
             <span className={`w-6 h-[2.5px] bg-slate-600 transition-all ${isOpen ? 'opacity-0' : ''}`}></span>
@@ -107,43 +112,43 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      
+
       {/* Mobile Menu */}
       {isOpen && (
         <div className="lg:hidden absolute top-[calc(100%+12px)] left-0 right-0 bg-white rounded-3xl p-6 shadow-2xl flex flex-col gap-2 max-h-[80vh] overflow-y-auto">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Main Menu</p>
-          
+
           {mainLinks.map(link => (
-            <Link 
-              key={link.name} 
-              to={link.path} 
-              onClick={() => setIsOpen(false)} 
+            <Link
+              key={link.name}
+              to={link.path}
+              onClick={() => setIsOpen(false)}
               className={`font-medium p-2 rounded-xl transition-all border-b border-slate-50 ${isActive(link.path) ? 'bg-purple-50 text-[#A855F7]' : 'text-slate-600 hover:bg-slate-50'}`}
             >
               {link.name}
             </Link>
           ))}
-          
+
           {/* Programs Mobile - Simple Link */}
-          <Link 
-            to={programsLink.path} 
-            onClick={() => setIsOpen(false)} 
+          <Link
+            to={programsLink.path}
+            onClick={() => setIsOpen(false)}
             className={`font-medium p-2 rounded-xl transition-all border-b border-slate-50 ${isActive(programsLink.path) ? 'bg-purple-50 text-[#A855F7]' : 'text-slate-600 hover:bg-slate-50'}`}
           >
             {programsLink.name}
           </Link>
 
           {actionLinks.map(link => (
-            <Link 
-              key={link.name} 
-              to={link.path} 
-              onClick={() => setIsOpen(false)} 
+            <Link
+              key={link.name}
+              to={link.path}
+              onClick={() => setIsOpen(false)}
               className={`font-medium p-2 rounded-xl transition-all border-b border-slate-50 ${isActive(link.path) ? 'bg-purple-50 text-[#A855F7]' : 'text-slate-600 hover:bg-slate-50'}`}
             >
               {link.name}
             </Link>
           ))}
-          
+
           <Link to="/donate" onClick={() => setIsOpen(false)} className="mt-4 text-center py-3 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-xl font-bold">
             Donate Now 💜
           </Link>
