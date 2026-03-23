@@ -82,7 +82,7 @@ export default function VolunteerDetails() {
 
 
         {/* 4. Volunteer Application Form Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start mt-16">
+        <div id="apply-form" className="grid lg:grid-cols-2 gap-16 items-start mt-16">
           <div>
             <h2 className="text-4xl font-black text-slate-900 mb-6">Apply to Volunteer</h2>
             <p className="text-slate-600 text-lg leading-[1.8] mb-10">

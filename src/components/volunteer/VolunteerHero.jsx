@@ -37,7 +37,17 @@ export default function VolunteerHero() {
         </motion.p>
         
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
-          <Link to="/volunteer" className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">Apply to Volunteer</Link>
+
+<Link 
+  to="/volunteer#apply-form" 
+  onClick={() => {
+    const element = document.getElementById('apply-form');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  }}
+  className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform"
+>
+  Apply to Volunteer
+</Link>
           <Link to="/donate" className="px-10 py-4 bg-white/10 border-2 border-white/20 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/20 transition-all">Give Now</Link>
         </motion.div>
       </div>
