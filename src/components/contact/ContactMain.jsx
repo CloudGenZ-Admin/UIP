@@ -1,11 +1,49 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import {
+  Instagram,
+  Facebook,
+  Linkedin, // LinkedIn add kiya gaya hai
+  MapPin,
+  Phone,
+  Mail,
+  Clock
+} from 'lucide-react';
 
 const formCardStyle = {
   backgroundOrigin: 'border-box',
   backgroundClip: 'padding-box, border-box',
   backgroundImage: 'linear-gradient(#fff, #fff), linear-gradient(135deg, #FF6B6B22, #A855F722, #3B82F622)',
 };
+
+ // Social Media Links Array
+  const socialLinks = [
+    { 
+      i: <Instagram size={19} />, 
+      label: 'Instagram', 
+      href: 'https://www.instagram.com/unite_in_pride?igsh=Z3VtdjJsaTB5ZTR3&utm_source=qr' 
+    },
+    { 
+      i: <Facebook size={19} />, 
+      label: 'Facebook', 
+      href: 'https://www.facebook.com/people/United-in-Pride/61579117565491/?mibextid=wwXIfr&rdid=yKDvw6J1FEk8NY4q&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19nM1NbmSt%2F%3Fmibextid%3DwwXIfr' 
+    },
+    { 
+      i: <Linkedin size={19} />, 
+      label: 'LinkedIn', 
+      href: 'https://www.linkedin.com/company/youpride/' 
+    },
+    { 
+      // TikTok Custom SVG Icon
+      i: (
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+        </svg>
+      ), 
+      label: 'TikTok', 
+      href: 'https://www.tiktok.com/@unitedinpride1?_t=ZS-8yhxvJbUwYi&_r=1' 
+    }
+  ];
 
 export default function ContactMain() {
   return (
@@ -81,18 +119,41 @@ export default function ContactMain() {
               <ContactBlock icon="✉️" title="Email Us" detail="info@unitedinpride.ca" sub="We typically respond within 24 hours" />
               <ContactBlock icon="📞" title="Call Us" detail="(437) 665-9413" sub="Monday - Friday, 9AM - 5PM EST" />
               <ContactBlock icon="📍" title="Visit Us" detail="Ottawa, Ontario" sub="Programs held at various community locations" />
+              
+              {/* Added Office Hours Here */}
+              <ContactBlock 
+                icon="🕒" 
+                title="Office Hours" 
+                detail={
+                  <>
+                    <span className="text-lg">Monday - Friday: 9:00 AM - 5:00 PM</span>
+                    <br />
+                    <span className="text-lg">Saturday: 10:00 AM - 2:00 PM</span>
+                  </>
+                } 
+                sub="Programs available evenings and weekends" 
+              />
             </div>
           </div>
 
-          <div className="pt-10 border-t border-slate-100">
+          <div className="pt-5 border-t border-slate-100">
             <h3 className="font-bold text-xl text-slate-900 mb-6">Follow Our Journey</h3>
             <div className="flex gap-4">
-              {['📷', '🐦', '💼', '📘'].map((social, i) => (
-                <button key={i} className="w-14 h-14 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl hover:bg-gradient-to-br hover:from-[#FF6B6B] hover:to-[#A855F7] hover:text-white transition-all shadow-sm">
-                  {social}
-                </button>
+             {socialLinks.map((s, idx) => (
+                <a
+                  key={idx}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="w-[42px] h-[42px] rounded-full bg-[rgba(203,17,17,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-300 hover:bg-gradient-to-br hover:from-[#FF6B6B] hover:to-[#750ad9] hover:-translate-y-[3px] text-[rgba(217,21,21,0.8)] hover:text-white"
+                >
+                  {s.i}
+                </a>
               ))}
+            
             </div>
+              <h1 className='text-sm'>Stay updated with our events, stories, and community highlights</h1>
           </div>
 
           {/* Map */}

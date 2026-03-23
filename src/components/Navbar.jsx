@@ -39,7 +39,7 @@ export default function Navbar() {
 
   const actionLinks = [
     { name: "Care Packs", path: "/care-packs" },
-    { name: "Get Involved", path: "/involed" },
+    // { name: "Get Involved", path: "/involed" },
     { name: "Volunteer", path: "/volunteer" },
     { name: "Partnership", path: "/Partnership" },
     { name: "Contact", path: "/contact" },

@@ -16,8 +16,9 @@ export default function CarePackPage() {
       <main id="care-packs">
         <CarePackHero />
         <CarePackContents />
-        <CarePackFAQ />
+      
         <CarePackFormCTA />
+          <CarePackFAQ />
       </main>
 
       <Footer />

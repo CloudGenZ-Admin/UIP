@@ -45,7 +45,7 @@ export default function ResourcesHero() {
           <a href="#directory" className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
             Find Resources Now
           </a>
-          <a href="/contact" className="px-10 py-4 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">
+          <a href="/support" className="px-10 py-4 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">
             Get Personal Support
           </a>
         </motion.div>
