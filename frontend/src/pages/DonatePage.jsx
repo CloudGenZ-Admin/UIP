@@ -15,7 +15,7 @@ export default function DonatePage() {
 
                  <Donate />
                
-                <VolunteerCTA />
+                {/* <VolunteerCTA /> */}
 
                
             </main>

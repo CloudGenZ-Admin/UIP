@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export default function Donate() {
   const [freq, setFreq] = useState('once');
@@ -15,7 +16,7 @@ export default function Donate() {
         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}>
           <p className="text-[#FF6B6B] font-bold tracking-widest uppercase text-sm mb-2">Make a Difference</p>
           <h2 className="text-white text-[2.5rem] font-extrabold mb-4">Support Our Community</h2>
-          <p className="text-white/80 mb-8 leading-relaxed">Your donation directly funds programs and safe spaces for 2SLGBTQIA+ individuals in Ottawa.</p>
+          <p className="text-white/80 mb-8 leading-relaxed">Your donation directly funds programs and safe spaces for LGBTQ+ individuals in Ottawa.</p>
           <div className="flex flex-col gap-4">
             {[{a: "$25", d: "Art supplies"}, {a: "$50", d: "Youth workshop"}, {a: "$100", d: "Support group"}].map((imp, i) => (
               <div key={i} className="flex items-center gap-5 p-5 bg-white/5 rounded-2xl border-l-[3px] border-[#A855F7] backdrop-blur-md">
@@ -39,11 +40,20 @@ export default function Donate() {
 
           <div className="grid grid-cols-4 gap-3 mb-5">
             {[25, 50, 100, 250].map(val => (
-              <button key={val} onClick={() => setAmt(val)} className={`py-3 rounded-xl border-2 font-black transition-all ${amt === val ? 'border-[#A855F7] bg-purple-50 text-[#A855F7]' : 'border-slate-100'}`}>${val}</button>
+              <button key={val} onClick={() => setAmt(val)} className={`py-3 rounded-xl border-2 font-black transition-all ${amt === val ? 'border-[#A855F7] bg-purple-50 text-[#A855F7]' : 'border-slate-100 hover:border-slate-300'}`}>${val}</button>
             ))}
           </div>
 
-          <button className="w-full py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-2xl font-bold shadow-lg mb-4">Donate Now 💜</button>
+          {/* ================================== */}
+          {/* FIXED DONATE NOW BUTTON UI & HOVER */}
+          {/* ================================== */}
+          <Link 
+            to="/donate" 
+            className="flex items-center justify-center w-full py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-2xl font-bold shadow-lg shadow-purple-500/20 mb-4 transform hover:scale-[1.02] hover:shadow-purple-500/30 hover:shadow-xl active:scale-[0.98] transition-all duration-300 tracking-wide text-base"
+          >
+            Donate Now 💜
+          </Link>
+
           <p className="text-center text-xs text-slate-400">Secure payment · Tax-deductible</p>
         </motion.div>
       </div>

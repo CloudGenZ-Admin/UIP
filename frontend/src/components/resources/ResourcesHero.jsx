@@ -33,7 +33,7 @@ export default function ResourcesHero() {
           transition={{ delay: 0.2 }}
           className="text-white/80 text-lg md:text-[1.25rem] leading-[1.8] max-w-[800px] mx-auto mb-10"
         >
-          Navigating Canada's systems shouldn't feel overwhelming. We connect you with trusted, LGBTQ+-affirming resources across the country—from legal aid to creative expression spaces.
+          Navigating Canada's systems shouldn't feel overwhelming. We connect you with trusted, LGBTQ+ affirming resources across the country—from legal aid to creative expression spaces.
         </motion.p>
 
         <motion.div 

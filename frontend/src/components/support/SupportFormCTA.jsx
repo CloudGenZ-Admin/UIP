@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function SupportFormCTA() {
   return (
-    <section className="py-20 px-6 bg-pride-sand">
+    <section className="py-20 px-6 bg-[#FAFAFA]">
       <div className="max-w-4xl mx-auto">
         {/* Gradient Border Wrapper */}
         <div className="rounded-3xl p-0.5 shadow-xl" style={{ background: 'linear-gradient(135deg, #b8a7e0, #7dcbb8)' }}>

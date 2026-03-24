@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom'; // <-- Imported Link
 import res1Img from '../../assets/Res1.jpg';
 
 const contactCardStyle = {
@@ -45,14 +46,24 @@ export default function ResourceNavigationIntro() {
                 <p className="text-slate-500">Give us a call or send a message—we're here for you</p>
               </div>
             </div>
+            
+            {/* === CHANGED TO LINKS HERE === */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="flex-1 bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-black transition-all">
+              <Link 
+                to="/contact"
+                className="flex-1 flex justify-center items-center bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-black transition-all"
+              >
                 Contact Our Team
-              </button>
-              <button className="flex-1 border-2 border-[#A855F7] text-[#A855F7] px-8 py-4 rounded-2xl font-bold hover:bg-purple-50 transition-all">
+              </Link>
+              <Link 
+                to="/support"
+                className="flex-1 flex justify-center items-center border-2 border-[#A855F7] text-[#A855F7] px-8 py-4 rounded-2xl font-bold hover:bg-purple-50 transition-all"
+              >
                 Get Immediate Help
-              </button>
+              </Link>
             </div>
+            {/* ============================= */}
+            
           </div>
         </motion.div>
 
@@ -75,7 +86,7 @@ export default function ResourceNavigationIntro() {
               <span className="font-black text-slate-900 text-lg">Trusted Partners</span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed font-medium">
-              Connected to 200+ LGBTQ+-affirming organizations across Canada
+              Connected to 200+ LGBTQ+ affirming organizations across Canada
             </p>
           </div>
         </motion.div>

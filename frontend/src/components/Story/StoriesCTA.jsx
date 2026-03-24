@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function StoriesCTA() {
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-24 px-6 bg-[#FAFAFA]">
       <div className="max-w-[1000px] mx-auto">
         <div 
           className="rounded-[3rem] p-[2px] shadow-2xl" 

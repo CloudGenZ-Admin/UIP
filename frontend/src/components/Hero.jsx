@@ -10,7 +10,7 @@ export default function Hero() {
       
       <div className="relative z-10 text-center max-w-[720px]">
         <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="inline-block py-2 px-5 bg-white/12 border border-white/20 rounded-full text-white/90 text-sm font-medium backdrop-blur-md mb-6">
-          Ottawa's 2SLGBTQIA+ Community Centre
+          Ottawa's  LGBTQ+ Community Centre
         </motion.p>
         <h1 className="text-white text-5xl md:text-[4rem] font-extrabold leading-[1.1] mb-5">
           Welcome to<br />
@@ -21,7 +21,7 @@ export default function Hero() {
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <a href="/programs" className="px-8 py-3.5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:-translate-y-1 transition-all">Explore Programs</a>
-          <a href="#about" className="px-8 py-3.5 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">Learn More</a>
+          <a href="/about" className="px-8 py-3.5 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">Learn More</a>
         </div>
       </div>
 

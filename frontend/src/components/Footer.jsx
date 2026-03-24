@@ -155,7 +155,7 @@ export default function Footer() {
           <p className="text-[rgba(255,255,255,0.5)] text-[0.85rem]">
             © 2025 United in Pride. All rights reserved. Made with 💜 in Ottawa.
           </p>
-          <div className="flex gap-6">
+          {/* <div className="flex gap-6">
             {['Privacy', 'Terms', 'Accessibility'].map((item) => (
               <Link 
                 key={item} 
@@ -166,7 +166,7 @@ export default function Footer() {
                 {item}
               </Link>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

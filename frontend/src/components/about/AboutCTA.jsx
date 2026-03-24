@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function AboutCTA() {
   return (
-    <section className="py-24 px-6 bg-pride-sand">
+    <section className="py-24 px-6 bg-[#FAFAFA]">
       <div className="max-w-4xl mx-auto">
         <div className="rounded-3xl p-0.5 shadow-xl" style={{ background: 'linear-gradient(135deg, #b8a7e0, #7dcbb8)' }}>
           <div className="bg-white rounded-[calc(1.5rem-2px)] p-10 md:p-16 text-center">

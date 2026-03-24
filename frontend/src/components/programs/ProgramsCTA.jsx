@@ -3,8 +3,14 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 export default function ProgramsCTA() {
+  
+  // Helper function to scroll to the top of the page when navigating
+  const handleScrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-24 px-6 bg-[#FAFAFA]">
       <div className="max-w-[1000px] mx-auto">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
@@ -22,10 +28,21 @@ export default function ProgramsCTA() {
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <NavLink to="/support" className="px-10 py-5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+              {/* Added onClick scroll handler & removed the '#' from the URL */}
+              <NavLink 
+                to="/programs" 
+                onClick={handleScrollToTop}
+                className="px-10 py-5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-2xl font-black text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+              >
                 Join Our Programs
               </NavLink>
-              <NavLink to="/contact" className="px-10 py-5 border-2 border-slate-200 text-slate-900 rounded-2xl font-black text-lg hover:bg-slate-50 transition-all">
+              
+              {/* Added to contact link as well for a consistent user experience */}
+              <NavLink 
+                to="/contact" 
+                onClick={handleScrollToTop}
+                className="px-10 py-5 border-2 border-slate-200 text-slate-900 rounded-2xl font-black text-lg hover:bg-slate-50 transition-all"
+              >
                 Ask Questions
               </NavLink>
             </div>

@@ -58,7 +58,7 @@ const PROGRAMS = [
     bgColor: 'bg-amber-50/60',
     accent: 'text-amber-600',
     features: [
-      { title: 'Healthcare Access', desc: 'Connect with LGBTQ+-affirming healthcare providers' },
+      { title: 'Healthcare Access', desc: 'Connect with LGBTQ+ affirming healthcare providers' },
       { title: 'Legal Aid Support', desc: 'Immigration lawyers and refugee claim assistance' },
       { title: 'Housing & Employment', desc: 'Safe housing options and inclusive opportunities' }
     ],

@@ -37,7 +37,7 @@ export default function VolunteerDetails() {
   ];
 
   return (
-    <section className="py-24 px-6 bg-white overflow-hidden">
+    <section className="py-24 px-6 bg-[#FAFAFA] overflow-hidden">
       <div className="max-w-[1250px] mx-auto">
 
         <div className="text-center mb-16 ">

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function PartnershipDetails() {
   return (
-    <section className="py-24 px-6 bg-white overflow-hidden">
+    <section className="py-24 px-6 bg-[#FAFAFA] overflow-hidden">
       <div className="max-w-[1250px] mx-auto">
         
         {/* 1. Partnership Types (4 Columns) */}

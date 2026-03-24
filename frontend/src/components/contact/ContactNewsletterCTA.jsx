@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ContactNewsletterCTA() {
   return (
-    <section className="py-24 px-6 bg-white">
+    <section className="py-24 px-6 bg-[#FAFAFA]">
       <div className="max-w-[1000px] mx-auto">
         <div 
           className="rounded-[3.5rem] p-[2px] shadow-2xl shadow-purple-200/50" 

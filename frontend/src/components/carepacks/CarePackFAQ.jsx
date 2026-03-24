@@ -19,7 +19,7 @@ export default function CarePackFAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="py-20 px-6 bg-purple-50">
+    <section className="py-20 px-6 bg-[#FAFAFA]">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-display font-bold text-3xl md:text-4xl text-pride-navy mb-4">
