@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api'; // Apna backend URL yahan dalein
+const API_URL = 'https:mintcream-buffalo-179597.hostingersite.com/api'; // Apna backend URL yahan dalein
 
 // Axios instance create karein
 const apiClient = axios.create({
