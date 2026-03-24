@@ -18,8 +18,8 @@ export default function ResourcesCTA() {
               Can't find what you're looking for? Our support team is here to connect you with the right resources, services, and community care.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <div className="flex flex-wrap justify-center gap-4 mb-16">
+            <div className="flex flex-wrap justify-center gap-4 mb-1">
+              <div className="flex flex-wrap justify-center gap-4 mb-1">
                 {/* Link to /support */}
                 <a href="/support">
                   <button className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
@@ -34,7 +34,7 @@ export default function ResourcesCTA() {
             </div>
 
             {/* Newsletter Integrated */}
-            <div className="max-w-md mx-auto border-t border-slate-100 pt-12">
+            {/* <div className="max-w-md mx-auto border-t border-slate-100 pt-12">
               <h4 className="font-bold text-slate-900 mb-2 text-xl">Stay Connected & Informed</h4>
               <p className="text-sm text-slate-500 mb-8">Get updates on programs, resources, and community news delivered to your inbox</p>
               <form className="flex gap-2 p-1.5 bg-slate-50 rounded-full border border-slate-200" onSubmit={(e) => e.preventDefault()}>
@@ -48,7 +48,7 @@ export default function ResourcesCTA() {
                   Sign Up
                 </button>
               </form>
-            </div>
+            </div> */}
 
           </div>
         </div>

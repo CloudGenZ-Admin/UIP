@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logoImg from '../assets/Newlogo.png';
+import logoImg from '../assets/updatelogo.png';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +54,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between px-7 relative">
 
         <Link to="/" className="flex items-center gap-2.5 font-bold text-[1.1rem]">
-          <img src={logoImg} alt="United in Pride Logo" className="h-8 w-auto object-contain" />
+          <img src={logoImg} alt="United in Pride Logo" className="h-12 w-auto object-contain" />
         </Link>
 
         {/* Desktop Menu */}

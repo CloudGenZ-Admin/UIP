@@ -22,7 +22,9 @@ export const apiService = {
 
   // --- STORIES ---
   submitStory: (data) => apiClient.post('/stories', data),
- getStories: (page = 1) => apiClient.get(`/stories?page=${page}`),
+  getStories: (page = 1) => apiClient.get(`/stories?page=${page}`),
+  getPublishedStories: (page = 1) => apiClient.get(`/stories?page=${page}&isPublished=true`),
+  toggleStoryStatus: (id, isPublished) => apiClient.put(`/stories/${id}`, { isPublished }),
   deleteStory: (id) => apiClient.delete(`/stories/${id}`),
   updateStory: (id, data) => apiClient.put(`/stories/${id}`, data), 
 
@@ -47,5 +49,31 @@ export const apiService = {
   submitEvent: (data) => apiClient.post('/createEvent', data),
   getEvents: () => apiClient.get('/getEvent'),
   deleteEvent: (id) => apiClient.delete(`/events/${id}`),
+
+
+  // --- VOLUNTEERS ---
+  submitVolunteer: (data) => apiClient.post('/volunteers', data),
+  getVolunteers: (page = 1) => apiClient.get(`/volunteers?page=${page}`),
+  deleteVolunteer: (id) => apiClient.delete(`/volunteers/${id}`),
+
+  // --- PARTNERSHIPS ---
+  submitPartnership: (data) => apiClient.post('/partnerships', data),
+  getPartnerships: (page = 1) => apiClient.get(`/partnerships?page=${page}`),
+  deletePartnership: (id) => apiClient.delete(`/partnerships/${id}`),
+
+  // --- SUPPORT REQUESTS ---
+  submitSupportRequest: (data) => apiClient.post('/support-requests', data),
+  getSupportRequests: (page = 1) => apiClient.get(`/support-requests?page=${page}`),
+  deleteSupportRequest: (id) => apiClient.delete(`/support-requests/${id}`),
+ 
+    // --- CONTACT ---
+  submitContact: (data) => apiClient.post('/contact', data),
+  getContacts: () => apiClient.get('/contact'),
+  deleteContact: (id) => apiClient.delete(`/contact/${id}`),
+
+  // --- CARE PACKS ---
+  submitCarePack: (data) => apiClient.post('/care-packs', data),
+  getCarePacks: () => apiClient.get('/care-packs'),
+  deleteCarePack: (id) => apiClient.delete(`/care-packs/${id}`),
 
 };

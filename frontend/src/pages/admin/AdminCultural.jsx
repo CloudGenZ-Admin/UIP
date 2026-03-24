@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { apiService } from '../../api/apiService';
 
 export default function AdminCultural() {
@@ -7,6 +8,9 @@ export default function AdminCultural() {
 
   // State to hold the currently selected cultural registration for the modal
   const [selectedCultural, setSelectedCultural] = useState(null);
+  
+  // State for delete confirmation popup
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,20 +32,22 @@ export default function AdminCultural() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Delete this cultural event registration?')) {
-      try {
-        await apiService.deleteCultural(id);
-        
-        // If deleting the last item on the current page, go back one page
-        if (currentItems.length === 1 && currentPage > 1) {
-          setCurrentPage(currentPage - 1);
-        }
-        
-        loadData();
-      } catch (err) {
-        alert("Failed to delete record.");
+  const confirmDelete = async () => {
+    if (!itemToDelete) return;
+    
+    try {
+      await apiService.deleteCultural(itemToDelete);
+      
+      // If deleting the last item on the current page, go back one page
+      if (currentItems.length === 1 && currentPage > 1) {
+        setCurrentPage(currentPage - 1);
       }
+      
+      loadData();
+    } catch (err) {
+      alert("Failed to delete record.");
+    } finally {
+      setItemToDelete(null); // Close the popup
     }
   };
 
@@ -132,7 +138,7 @@ export default function AdminCultural() {
                             View
                           </button>
                           <button 
-                            onClick={() => handleDelete(item.id)} 
+                            onClick={() => setItemToDelete(item.id)} 
                             className="text-red-500 bg-red-50 hover:bg-red-500 hover:text-white px-4 py-2 rounded-xl font-bold text-sm transition-all"
                           >
                             Delete
@@ -199,7 +205,7 @@ export default function AdminCultural() {
                       View Details
                     </button>
                     <button 
-                      onClick={() => handleDelete(item.id)} 
+                      onClick={() => setItemToDelete(item.id)} 
                       className="w-full text-red-500 bg-red-50 hover:bg-red-500 hover:text-white py-3 rounded-xl font-bold text-sm transition-all"
                     >
                       Delete
@@ -256,132 +262,187 @@ export default function AdminCultural() {
       {/* ======================= */}
       {/* VIEW FULL DETAILS MODAL */}
       {/* ======================= */}
-      {selectedCultural && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 backdrop-blur-sm transition-all">
-          <div className="bg-white rounded-3xl p-6 md:p-8 w-full max-w-4xl shadow-2xl max-h-[90vh] overflow-y-auto">
-            
-            <div className="flex justify-between items-start mb-6 border-b border-slate-100 pb-4">
-              <div>
-                <h2 className="text-2xl font-black text-slate-800">{selectedCultural.name}</h2>
-                <p className="text-slate-500 text-sm font-medium mt-1">Full Registration Details</p>
-              </div>
-              <button 
-                onClick={() => setSelectedCultural(null)}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full w-10 h-10 flex items-center justify-center font-bold transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+      <AnimatePresence>
+        {selectedCultural && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }} 
+              animate={{ scale: 1, opacity: 1, y: 0 }} 
+              exit={{ scale: 0.9, opacity: 0, y: 20 }} 
+              className="bg-white rounded-3xl p-6 md:p-8 w-full max-w-4xl shadow-2xl max-h-[90vh] overflow-y-auto"
+            >
               
-              {/* Attendee Info Column */}
-              <div className="space-y-4">
-                <h3 className="text-sm font-black text-slate-800 border-b border-slate-100 pb-2">Attendee Information</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.email}</div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Phone</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.phone || 'N/A'}</div>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Pronouns</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.pronouns || 'N/A'}</div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Age Group</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.age_group || 'N/A'}</div>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Country</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.country || 'N/A'}</div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Background</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.background || 'N/A'}</div>
-                  </div>
-                </div>
-
-                {/* Emergency Contact */}
-                <div className="bg-red-50 p-4 rounded-xl border border-red-100 mt-4">
-                  <h4 className="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-2">Emergency Contact</h4>
-                  <div className="font-bold text-slate-800 text-sm">{selectedCultural.emergency_name || 'Not provided'}</div>
-                  <div className="text-slate-600 text-sm mt-1">{selectedCultural.emergency_phone || 'N/A'}</div>
-                </div>
-              </div>
-
-              {/* Event Info Column */}
-              <div className="space-y-4">
-                <h3 className="text-sm font-black text-slate-800 border-b border-slate-100 pb-2">Event Preferences</h3>
-                
+              <div className="flex justify-between items-start mb-6 border-b border-slate-100 pb-4">
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Interests</label>
-                  <div className="bg-[#fff0f0] text-[#FF6B6B] font-bold px-4 py-3 rounded-xl text-sm border border-[#ffe0e0]">
-                    {selectedCultural.interests || 'N/A'}
-                  </div>
+                  <h2 className="text-2xl font-black text-slate-800">{selectedCultural.name}</h2>
+                  <p className="text-slate-500 text-sm font-medium mt-1">Full Registration Details</p>
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Volunteering</label>
-                    <div className={`px-4 py-3 rounded-xl text-sm font-bold border ${selectedCultural.volunteering ? 'bg-green-50 text-green-700 border-green-200' : 'bg-slate-50 text-slate-600 border-slate-100'}`}>
-                      {selectedCultural.volunteering ? 'Yes, interested' : 'No'}
+                <button 
+                  onClick={() => setSelectedCultural(null)}
+                  className="bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full w-10 h-10 flex items-center justify-center font-bold transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                
+                {/* Attendee Info Column */}
+                <div className="space-y-4">
+                  <h3 className="text-sm font-black text-slate-800 border-b border-slate-100 pb-2">Attendee Information</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.email}</div>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Phone</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.phone || 'N/A'}</div>
                     </div>
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Photo Consent</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.photo_consent || 'N/A'}</div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Pronouns</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.pronouns || 'N/A'}</div>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Age Group</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.age_group || 'N/A'}</div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Country</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.country || 'N/A'}</div>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Background</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.background || 'N/A'}</div>
+                    </div>
+                  </div>
+
+                  {/* Emergency Contact */}
+                  <div className="bg-red-50 p-4 rounded-xl border border-red-100 mt-4">
+                    <h4 className="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-2">Emergency Contact</h4>
+                    <div className="font-bold text-slate-800 text-sm">{selectedCultural.emergency_name || 'Not provided'}</div>
+                    <div className="text-slate-600 text-sm mt-1">{selectedCultural.emergency_phone || 'N/A'}</div>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Dietary Requirements</label>
-                  <div className="bg-blue-50 px-4 py-3 rounded-xl text-blue-800 text-sm border border-blue-100 leading-relaxed whitespace-pre-wrap">
-                    {selectedCultural.dietary || 'None specified.'}
+                {/* Event Info Column */}
+                <div className="space-y-4">
+                  <h3 className="text-sm font-black text-slate-800 border-b border-slate-100 pb-2">Event Preferences</h3>
+                  
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Interests</label>
+                    <div className="bg-[#fff0f0] text-[#FF6B6B] font-bold px-4 py-3 rounded-xl text-sm border border-[#ffe0e0]">
+                      {selectedCultural.interests || 'N/A'}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Volunteering</label>
+                      <div className={`px-4 py-3 rounded-xl text-sm font-bold border ${selectedCultural.volunteering ? 'bg-green-50 text-green-700 border-green-200' : 'bg-slate-50 text-slate-600 border-slate-100'}`}>
+                        {selectedCultural.volunteering ? 'Yes, interested' : 'No'}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Photo Consent</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm">{selectedCultural.photo_consent || 'N/A'}</div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Dietary Requirements</label>
+                    <div className="bg-blue-50 px-4 py-3 rounded-xl text-blue-800 text-sm border border-blue-100 leading-relaxed whitespace-pre-wrap">
+                      {selectedCultural.dietary || 'None specified.'}
+                    </div>
                   </div>
                 </div>
+
+                {/* Full Width Text Areas */}
+                <div className="col-span-1 md:col-span-2 space-y-4 pt-4 border-t border-slate-100">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-orange-400 uppercase tracking-wider mb-1">Access Needs</label>
+                      <div className="bg-orange-50 px-4 py-3 rounded-xl text-orange-800 text-sm leading-relaxed whitespace-pre-wrap border border-orange-100">
+                        {selectedCultural.access_needs || 'None specified.'}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Additional Comments</label>
+                      <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm leading-relaxed whitespace-pre-wrap border border-slate-100">
+                        {selectedCultural.comments || 'No additional comments provided.'}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
-              {/* Full Width Text Areas */}
-              <div className="col-span-1 md:col-span-2 space-y-4 pt-4 border-t border-slate-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-bold text-orange-400 uppercase tracking-wider mb-1">Access Needs</label>
-                    <div className="bg-orange-50 px-4 py-3 rounded-xl text-orange-800 text-sm leading-relaxed whitespace-pre-wrap border border-orange-100">
-                      {selectedCultural.access_needs || 'None specified.'}
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Additional Comments</label>
-                    <div className="bg-slate-50 px-4 py-3 rounded-xl text-slate-800 text-sm leading-relaxed whitespace-pre-wrap border border-slate-100">
-                      {selectedCultural.comments || 'No additional comments provided.'}
-                    </div>
-                  </div>
-                </div>
+              <div className="flex justify-end mt-8 pt-4 border-t border-slate-100">
+                <button 
+                  onClick={() => setSelectedCultural(null)} 
+                  className="px-8 py-3 rounded-xl font-bold text-sm bg-slate-800 text-white shadow-md hover:bg-slate-700 transition-all"
+                >
+                  Close View
+                </button>
               </div>
+              
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-            </div>
-
-            <div className="flex justify-end mt-8 pt-4 border-t border-slate-100">
-              <button 
-                onClick={() => setSelectedCultural(null)} 
-                className="px-8 py-3 rounded-xl font-bold text-sm bg-slate-800 text-white shadow-md hover:bg-slate-700 transition-all"
-              >
-                Close View
-              </button>
-            </div>
-            
-          </div>
-        </div>
-      )}
+      {/* ======================= */}
+      {/* DELETE CONFIRMATION MODAL */}
+      {/* ======================= */}
+      <AnimatePresence>
+        {itemToDelete && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }} 
+              animate={{ scale: 1, opacity: 1, y: 0 }} 
+              exit={{ scale: 0.9, opacity: 0, y: 20 }} 
+              className="bg-white rounded-[2rem] p-8 md:p-10 max-w-sm w-full text-center shadow-2xl border border-slate-100"
+            >
+              <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-red-100">
+                <span className="text-4xl font-bold">⚠️</span>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-3">Confirm Deletion</h3>
+              <p className="text-slate-500 mb-8 font-medium leading-relaxed">
+                Are you sure you want to delete this <strong className="text-slate-700">cultural event registration</strong>? This action cannot be undone and attendee details will be lost.
+              </p>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setItemToDelete(null)}
+                  className="w-full py-4 bg-slate-100 text-slate-700 font-black rounded-2xl shadow-sm hover:bg-slate-200 transition-all"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={confirmDelete}
+                  className="w-full py-4 bg-red-500 text-white font-black rounded-2xl shadow-md hover:bg-red-600 hover:shadow-xl transition-all"
+                >
+                  Yes, Delete
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

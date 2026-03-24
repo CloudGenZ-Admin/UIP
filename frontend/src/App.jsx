@@ -1,53 +1,3 @@
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Home from './pages/Home';
-// import Programs from './pages/ProgramsPage';
-// import About from './pages/AboutPage.jsx'; 
-// import Stories from './pages/StoriesPage.jsx';
-// import SupportPage from './pages/SupportPage.jsx';
-// import CarePack from './pages/CarePackPage.jsx'
-// import ResourcesPage from './pages/ResourcesPage.jsx';
-// import ContactPage from './pages/ContactPage.jsx';
-// import VolunteerPage from './pages/VolunteerPage.jsx';
-// import Donate from './pages/DonatePage.jsx';
-// import PartnershipPage from './pages/PartnershipPage.jsx';
-
-// // Import the new PAGES we just created!
-// import PeerSupportPage from './pages/PeerSupportPage.jsx';
-// import WellnessPage from './pages/WellnessPage.jsx';
-// import CulturalPage from './pages/CulturalPage.jsx';
-// import InvolvedPage from './pages/InvoledPage.jsx';
-// import ScrollToTop from './pages/ScrollToTop.jsx'
-// export default function App() {
-//    return (
-//     <Router>
-//       <ScrollToTop /> 
-//       <Routes>
-        
-//         <Route path="/" element={<Home/>} />
-//         <Route path="/programs" element={<Programs />} />
-        
-//         {/* The 3 New Routes pointing to your Pages */}
-//         <Route path="/programs/peer-support" element={<PeerSupportPage />} />
-//         <Route path="/programs/wellness" element={<WellnessPage />} />
-//         <Route path="/programs/cultural" element={<CulturalPage />} />
-        
-//         <Route path="/about" element={<About />} />
-//         <Route path="/stories" element={<Stories />} />
-//         <Route path="/support" element={<SupportPage />} />
-//         <Route path='/care-packs' element={<CarePack/>} />
-//         <Route path='/resources' element={<ResourcesPage/>} />
-//         <Route path='/contact' element={<ContactPage/>} />
-//         <Route path="/volunteer" element={<VolunteerPage />} />
-//         <Route path="/donate" element={<Donate />} /> 
-//         <Route path="/Partnership" element={<PartnershipPage />} /> 
-        
-//          <Route path="/involed" element={< InvolvedPage />} /> 
-        
-//       </Routes>
-//     </Router>
-//   );
-// }
-
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // --- PUBLIC PAGES IMPORT ---
@@ -76,7 +26,11 @@ import AdminPeer from './pages/admin/AdminPeer.jsx';
 import AdminWellness from './pages/admin/AdminWellness.jsx';
 import AdminCultural from './pages/admin/AdminCultural.jsx';
 import AdminEvent from './pages/admin/AdminEvents.jsx';
-
+import AdminPartnerships from './pages/admin/AdminPartnerships.jsx';
+import AdminVolunteers from './pages/admin/AdminVolunteers.jsx'
+import AdminSupportRequests from './pages/admin/AdminSupportRequests.jsx'
+import AdminCarePacks from './pages/admin/AdminCarePacks.jsx';
+import AdminContact from './pages/admin/AdminContact.jsx';
 export default function App() {
    return (
     <Router>
@@ -115,6 +69,13 @@ export default function App() {
           <Route path="/admin/wellness" element={<AdminWellness />} />
           <Route path="/admin/cultural" element={<AdminCultural />} />
           <Route path="/admin/events" element={<AdminEvent />} />
+
+          <Route path="/admin/partnerships" element={<AdminPartnerships />} />
+          <Route path="/admin/volunteers" element={<AdminVolunteers />} />
+          <Route path="/admin/support-requests" element={<AdminSupportRequests />} />
+          <Route path="/admin/care-packs" element={<AdminCarePacks />} />
+          <Route path="/admin/contact" element={<AdminContact />} />
+
          
         </Route>
         

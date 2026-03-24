@@ -17,7 +17,7 @@ export default function About() {
           <p className="text-[#FF6B6B] font-bold tracking-[2px] uppercase text-sm mb-2">Our Story</p>
           <h2 className="text-[2.5rem] font-extrabold leading-tight mb-4">Who We Are</h2>
           <p className="text-slate-500 text-[1.05rem] leading-[1.8] mb-8">
-            United in Pride is a vibrant 2SLGBTQIA+ community centre located on the unceded territory of the Algonquin Anishinaabe Nation in Ottawa.
+            United in Pride is a vibrant LGBTQ+ community centre located on the unceded territory of the Algonquin Anishinaabe Nation in Ottawa.
           </p>
           <div className="flex flex-col gap-5 mb-8">
             {[ 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { apiService } from '../../api/apiService';
 
 export default function AdminStories() {
@@ -7,6 +8,9 @@ export default function AdminStories() {
 
   // Edit State
   const [editingStory, setEditingStory] = useState(null);
+  
+  // Delete State
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,12 +24,12 @@ export default function AdminStories() {
   const loadData = async () => {
     try { 
       setLoading(true);
-      // Pass the currentPage to the backend API
+      // Fetch all stories for admin (published & unpublished)
       const res = await apiService.getStories(currentPage); 
       
       setData(res.data.data || []); 
-      setTotalPages(res.data.totalPages || 1); // Set total pages from backend
-      setTotalItems(res.data.totalItems || 0); // Set total count for the badge
+      setTotalPages(res.data.totalPages || 1); 
+      setTotalItems(res.data.totalItems || 0); 
     } catch (err) { 
       console.error(err); 
     } finally {
@@ -37,32 +41,50 @@ export default function AdminStories() {
   const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const goToPage = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleDelete = async (id) => {
-    if(window.confirm('Delete this story permanently?')) {
-      try {
-        await apiService.deleteStory(id);
-        
-        // If deleting the last item on the current page, go back one page
-        if (data.length === 1 && currentPage > 1) {
-          setCurrentPage(currentPage - 1); // This will automatically trigger loadData via useEffect
-        } else {
-          loadData(); // Refresh current page
-        }
-      } catch (error) {
-        alert("Failed to delete story.");
+  // --- DELETE LOGIC ---
+  const handleDelete = (id) => {
+    setItemToDelete(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!itemToDelete) return;
+
+    try {
+      await apiService.deleteStory(itemToDelete);
+      
+      if (data.length === 1 && currentPage > 1) {
+        setCurrentPage(currentPage - 1); 
+      } else {
+        loadData(); 
       }
+    } catch (error) {
+      alert("Failed to delete story.");
+    } finally {
+      setItemToDelete(null);
     }
   };
 
-  // Handle Update Story
+  // --- UPDATE LOGIC (For Edit Modal) ---
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       await apiService.updateStory(editingStory.id, editingStory);
-      setEditingStory(null); // Close modal
-      loadData(); // Refresh data
+      setEditingStory(null); 
+      loadData(); 
     } catch (error) {
       alert("Failed to update story.");
+    }
+  };
+
+  // --- PUBLISH / UNPUBLISH LOGIC ---
+  const handleTogglePublish = async (story) => {
+    try {
+      // Sending only isPublished status to update
+      await apiService.updateStory(story.id, { isPublished: !story.isPublished });
+      loadData(); // Refresh data to show new status
+    } catch (error) {
+      alert("Failed to change story status.");
+      console.error(error);
     }
   };
 
@@ -73,7 +95,7 @@ export default function AdminStories() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <div>
           <h1 className="text-3xl md:text-4xl font-black text-slate-800">📖 Shared Stories</h1>
-          <p className="text-slate-500 mt-2 text-sm md:text-base">Manage submitted community stories and permissions.</p>
+          <p className="text-slate-500 mt-2 text-sm md:text-base">Approve or manage submitted community stories.</p>
         </div>
         <div className="bg-white px-5 py-2.5 rounded-xl shadow-sm border border-slate-200 font-bold text-slate-700 flex items-center gap-2">
           <span>Total Stories:</span> 
@@ -98,9 +120,10 @@ export default function AdminStories() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-slate-50 text-slate-400 text-xs uppercase tracking-widest">
-                    <th className="p-5 font-black border-b border-slate-100 w-1/4">Author</th>
-                    <th className="p-5 font-black border-b border-slate-100 w-1/2">Story Content</th>
+                    <th className="p-5 font-black border-b border-slate-100 w-1/5">Author</th>
+                    <th className="p-5 font-black border-b border-slate-100 w-2/5">Story Content</th>
                     <th className="p-5 font-black border-b border-slate-100 text-center">Permissions</th>
+                    <th className="p-5 font-black border-b border-slate-100 text-center">Status</th>
                     <th className="p-5 font-black border-b border-slate-100 text-center">Action</th>
                   </tr>
                 </thead>
@@ -126,14 +149,31 @@ export default function AdminStories() {
                           </span>
                         </div>
                       </td>
+                      
+                      {/* NEW STATUS COLUMN */}
+                      <td className="p-5 text-center text-xs align-top">
+                        <span className={`px-3 py-1.5 rounded-md font-bold w-24 text-center inline-block ${item.isPublished ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : 'bg-amber-100 text-amber-700 border border-amber-200'}`}>
+                          {item.isPublished ? 'Published' : 'Hidden'}
+                        </span>
+                      </td>
+
                       <td className="p-5 align-top">
                         <div className="flex flex-col gap-2 justify-center">
-                           <button 
+                          {/* PUBLISH / HIDE BUTTON */}
+                          <button 
+                            onClick={() => handleTogglePublish(item)} 
+                            className={`${item.isPublished ? 'text-amber-600 bg-amber-50 hover:bg-amber-500' : 'text-emerald-600 bg-emerald-50 hover:bg-emerald-500'} hover:text-white px-4 py-2 rounded-xl font-bold text-sm transition-all`}
+                          >
+                            {item.isPublished ? 'Unpublish' : 'Publish'}
+                          </button>
+
+                          <button 
                             onClick={() => setEditingStory(item)} 
                             className="text-[#3B82F6] bg-blue-50 hover:bg-[#3B82F6] hover:text-white px-4 py-2 rounded-xl font-bold text-sm transition-all"
                           >
                             Edit
                           </button>
+
                           <button 
                             onClick={() => handleDelete(item.id)} 
                             className="text-red-500 bg-red-50 hover:bg-red-500 hover:text-white px-4 py-2 rounded-xl font-bold text-sm transition-all"
@@ -157,7 +197,11 @@ export default function AdminStories() {
                   <div className="flex justify-between items-start gap-4 border-b border-slate-50 pb-4">
                     <div>
                       <div className="font-bold text-slate-800 text-lg leading-tight mb-1">{item.name}</div>
-                      <div className="text-sm font-medium text-slate-500">{item.email}</div>
+                      <div className="text-sm font-medium text-slate-500 mb-2">{item.email}</div>
+                      {/* STATUS BADGE IN MOBILE */}
+                      <span className={`px-2 py-1 rounded-md font-bold text-[10px] uppercase ${item.isPublished ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                        {item.isPublished ? 'Status: Published' : 'Status: Hidden'}
+                      </span>
                     </div>
                     <div className="flex flex-col gap-1.5 shrink-0">
                       <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded w-full text-center ${item.consent_pub ? 'bg-green-100 text-green-700' : 'bg-red-50 text-red-500'}`}>
@@ -173,13 +217,22 @@ export default function AdminStories() {
                     "{item.story_text}"
                   </div>
 
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                    {/* PUBLISH / HIDE BUTTON (MOBILE) */}
+                    <button 
+                      onClick={() => handleTogglePublish(item)} 
+                      className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${item.isPublished ? 'text-amber-600 bg-amber-50 hover:bg-amber-500 hover:text-white' : 'text-emerald-600 bg-emerald-50 hover:bg-emerald-500 hover:text-white'}`}
+                    >
+                      {item.isPublished ? 'Unpublish' : 'Publish'}
+                    </button>
+                    
                     <button 
                       onClick={() => setEditingStory(item)} 
                       className="w-full text-[#3B82F6] bg-blue-50 hover:bg-[#3B82F6] hover:text-white py-3 rounded-xl font-bold text-sm transition-all"
                     >
                       Edit
                     </button>
+                    
                     <button 
                       onClick={() => handleDelete(item.id)} 
                       className="w-full text-red-500 bg-red-50 hover:bg-red-500 hover:text-white py-3 rounded-xl font-bold text-sm transition-all"
@@ -292,6 +345,47 @@ export default function AdminStories() {
           </div>
         </div>
       )}
+
+     
+      <AnimatePresence>
+        {itemToDelete && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }} 
+              animate={{ scale: 1, opacity: 1, y: 0 }} 
+              exit={{ scale: 0.9, opacity: 0, y: 20 }} 
+              className="bg-white rounded-[2rem] p-8 md:p-10 max-w-sm w-full text-center shadow-2xl border border-slate-100"
+            >
+              <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-red-100">
+                <span className="text-4xl font-bold">⚠️</span>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-3">Confirm Deletion</h3>
+              <p className="text-slate-500 mb-8 font-medium leading-relaxed">
+                Are you sure you want to delete this <strong className="text-slate-700">shared story</strong>? It will be permanently removed.
+              </p>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setItemToDelete(null)}
+                  className="w-full py-4 bg-slate-100 text-slate-700 font-black rounded-2xl shadow-sm hover:bg-slate-200 transition-all"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={confirmDelete}
+                  className="w-full py-4 bg-red-500 text-white font-black rounded-2xl shadow-md hover:bg-red-600 hover:shadow-xl transition-all"
+                >
+                  Yes, Delete
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

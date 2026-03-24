@@ -17,15 +17,15 @@ export default function CommunityStories() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+ // CommunityStories.jsx mein bas useEffect ke andar ye change karein:
+
   useEffect(() => {
     const fetchStories = async () => {
       setIsLoading(true);
       try {
-        // Pass currentPage to your API service. Make sure apiService is updated to accept it
-        // e.g., axios.get(`/api/stories?page=${currentPage}`)
-        const response = await apiService.getStories(currentPage); 
+        // Change from getStories to getPublishedStories
+        const response = await apiService.getPublishedStories(currentPage); 
         
-        // Update state with new paginated response structure
         setStories(response.data.data || []);
         setTotalPages(response.data.totalPages || 1);
         
@@ -37,7 +37,7 @@ export default function CommunityStories() {
     };
 
     fetchStories();
-  }, [currentPage]); // Re-fetch when page changes
+  }, [currentPage]);
 
   const toggleStory = (idx) => {
     setExpandedId(expandedId === idx ? null : idx);

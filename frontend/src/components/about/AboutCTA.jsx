@@ -25,7 +25,7 @@ export default function AboutCTA() {
             </div>
 
             {/* Newsletter Subscription */}
-            <div className="max-w-md mx-auto border-t border-gray-100 pt-10">
+            {/* <div className="max-w-md mx-auto border-t border-gray-100 pt-10">
               <h4 className="font-bold text-pride-navy mb-2 text-lg">Stay Connected & Informed</h4>
               <p className="text-sm text-pride-muted mb-6">Get updates on programs, resources, and community news delivered to your inbox</p>
               <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
@@ -39,7 +39,7 @@ export default function AboutCTA() {
                   Sign Up
                 </button>
               </form>
-            </div>
+            </div> */}
 
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { apiService } from '../../api/apiService';
 
 export default function AdminWellness() {
@@ -7,6 +8,9 @@ export default function AdminWellness() {
 
   // State to hold the currently selected wellness booking for the modal
   const [selectedWellness, setSelectedWellness] = useState(null);
+
+  // Delete State
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,20 +42,26 @@ export default function AdminWellness() {
   const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const goToPage = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this wellness booking?')) {
-      try {
-        await apiService.deleteWellness(id);
-        
-        // If deleting the last item on the current page, go back one page
-        if (currentItems.length === 1 && currentPage > 1) {
-          setCurrentPage(currentPage - 1);
-        }
-        
-        loadData();
-      } catch (err) {
-        alert("Failed to delete record.");
+  const handleDelete = (id) => {
+    setItemToDelete(id);
+  };
+
+  const confirmDelete = async () => {
+    if (!itemToDelete) return;
+
+    try {
+      await apiService.deleteWellness(itemToDelete);
+      
+      // If deleting the last item on the current page, go back one page
+      if (currentItems.length === 1 && currentPage > 1) {
+        setCurrentPage(currentPage - 1);
       }
+      
+      loadData();
+    } catch (err) {
+      alert("Failed to delete record.");
+    } finally {
+      setItemToDelete(null);
     }
   };
 
@@ -360,6 +370,49 @@ export default function AdminWellness() {
           </div>
         </div>
       )}
+
+      {/* ======================= */}
+      {/* DELETE CONFIRMATION MODAL */}
+      {/* ======================= */}
+      <AnimatePresence>
+        {itemToDelete && (
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }} 
+              animate={{ scale: 1, opacity: 1, y: 0 }} 
+              exit={{ scale: 0.9, opacity: 0, y: 20 }} 
+              className="bg-white rounded-[2rem] p-8 md:p-10 max-w-sm w-full text-center shadow-2xl border border-slate-100"
+            >
+              <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-red-100">
+                <span className="text-4xl font-bold">⚠️</span>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-3">Confirm Deletion</h3>
+              <p className="text-slate-500 mb-8 font-medium leading-relaxed">
+                Are you sure you want to delete this <strong className="text-slate-700">wellness booking</strong>? The appointment details will be permanently lost.
+              </p>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setItemToDelete(null)}
+                  className="w-full py-4 bg-slate-100 text-slate-700 font-black rounded-2xl shadow-sm hover:bg-slate-200 transition-all"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={confirmDelete}
+                  className="w-full py-4 bg-red-500 text-white font-black rounded-2xl shadow-md hover:bg-red-600 hover:shadow-xl transition-all"
+                >
+                  Yes, Delete
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );

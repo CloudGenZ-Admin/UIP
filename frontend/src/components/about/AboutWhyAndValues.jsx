@@ -5,48 +5,65 @@ export default function AboutWhyAndValues() {
   return (
     <section className="py-24 px-6 bg-[#1e1b4b] text-white relative overflow-hidden">
       <div className="max-w-[1200px] mx-auto relative z-10">
+        
+        {/* Our Why Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">Why United in Pride Exists</h2>
-          <p className="text-white/60 max-w-2xl mx-auto text-lg leading-relaxed">
-            We know what it feels like to hide. United in Pride exists because LGBTQ+ newcomers 
-            deserve more than safety at the border—they deserve belonging in everyday life.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-8">Our Why</h2>
+          <div className="text-white/70 max-w-3xl mx-auto text-lg leading-relaxed space-y-5">
+            <p>
+              <strong className="text-white font-bold">We Know Rejection.</strong> We built this space because we know what it feels like to be rejected — not just by systems, but by our own families, our churches, our communities.
+            </p>
+            <p>
+              <strong className="text-white font-bold">We Know Courage.</strong> We know what it feels like to hide — and we know the courage it takes to stop hiding.
+            </p>
+            <p className="text-2xl text-white font-semibold pt-4 leading-snug">
+              United in Pride exists because we believe in something bigger. Queer immigrants deserve more than survival. We deserve to heal. To be loved. To belong.
+            </p>
+          </div>
         </div>
 
+        {/* Leadership & Growth Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
           <motion.div 
             whileHover={{ y: -10 }}
-            className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm"
+            className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm flex flex-col justify-center"
           >
-            <h3 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] mb-4">100+</h3>
-            <p className="text-xl font-bold mb-3">Directly Supported</p>
-            <p className="text-white/60 leading-relaxed">
-              Through peer programs, referrals, and joint community initiatives since our founding in 2025.
+            <h3 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] mb-4">Leadership</h3>
+            <p className="text-2xl font-bold mb-3">Our Foundation</p>
+            <p className="text-white/70 leading-relaxed text-lg">
+              United in Pride is founded by Stella Nakitende, a Ugandan lesbian dedicated and committed to empowering 2SLGBTQ+ newcomers, immigrants, and refugees fleeing persecution.
             </p>
           </motion.div>
 
           <motion.div 
             whileHover={{ y: -10 }}
-            className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm"
+            className="p-10 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-sm flex flex-col justify-center"
           >
-            <h3 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#A855F7] to-[#3B82F6] mb-4">National</h3>
-            <p className="text-xl font-bold mb-3">Community Movement</p>
-            <p className="text-white/60 leading-relaxed">
-              A volunteer-driven approach working collaboratively with partners like ACOttawa to strengthen safety pathways across Canada.
+            <h3 className="text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#A855F7] to-[#3B82F6] mb-4">Growth</h3>
+            <p className="text-2xl font-bold mb-3">Scaling Our Impact</p>
+            <p className="text-white/70 leading-relaxed text-lg">
+              As her impact grows, she is preparing to scale: expanding peer circles, launching new wellness initiatives, and building a dedicated Advisory Board to steward our growth.
             </p>
           </motion.div>
         </div>
 
+        {/* Values Header */}
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Our Values</h2>
+          <p className="text-white/60 text-lg">The principles that guide everything we do</p>
+        </div>
+
+        {/* Values Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { t: 'Safety First', d: 'Secure environments where vulnerability is protected.', e: '🛡️' },
-            { t: 'Inclusive Community', d: 'Welcoming all identities without judgment.', e: '🌈' },
-            { t: 'Healing Growth', d: 'Supporting journeys of personal development.', e: '🌱' },
-            { t: 'Joy & Celebration', d: 'Embracing happiness as an act of resistance.', e: '✨' }
+            { t: 'Safety First', d: 'Creating secure environments where vulnerability is protected and honored.', e: '🛡️' },
+            { t: 'Inclusive Community', d: 'Welcoming all identities, backgrounds, and experiences without judgment.', e: '🌈' },
+            { t: 'Healing Growth', d: 'Supporting individual journeys of healing and personal development.', e: '🌱' },
+            { t: 'Joy & Celebration', d: 'Embracing happiness and celebrating achievements as acts of resistance.', e: '✨' }
           ].map((v, i) => (
-            <div key={i} className="bg-white p-8 rounded-[2rem] text-slate-900 shadow-xl">
+            <div key={i} className="bg-white p-8 rounded-[2rem] text-slate-900 shadow-xl flex flex-col h-full">
               <span className="text-4xl mb-4 block">{v.e}</span>
-              <h4 className="font-bold text-lg mb-2">{v.t}</h4>
+              <h4 className="font-bold text-xl mb-3">{v.t}</h4>
               <p className="text-sm text-slate-500 leading-relaxed">{v.d}</p>
             </div>
           ))}

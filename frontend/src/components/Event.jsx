@@ -2,6 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { apiService } from '../api/apiService'; 
 
+// --- Helpers to format backend 'date' and 'time' fields ---
+const formatDateParts = (dateString) => {
+  if (!dateString) return { day: '', month: '' };
+  const [year, month, day] = dateString.split('-'); // Format: YYYY-MM-DD
+  const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  return {
+    day: parseInt(day, 10), // Remove leading zeros for the UI (e.g. "05" -> "5")
+    month: monthNames[parseInt(month, 10) - 1]
+  };
+};
+
+const formatTime12hr = (timeString) => {
+  if (!timeString) return '';
+  const [hour, minute] = timeString.split(':'); // Format: HH:mm
+  const h = parseInt(hour, 10);
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const h12 = h % 12 || 12;
+  return `${h12}:${minute} ${ampm}`;
+};
+
 const featuredCardStyle = {
   border: '2px solid transparent',
   backgroundOrigin: 'border-box',
@@ -15,14 +35,47 @@ export default function Events() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFiltered, setIsFiltered] = useState(false); // Track if user has clicked a specific date
 
+  // Helper function to get default Top 3 events
+  const getDefaultEvents = (data) => {
+    // Get today's date in YYYY-MM-DD strictly
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    const localTodayStr = `${yyyy}-${mm}-${dd}`;
+
+    // 1. Filter out past events (keep present and future)
+    const upcomingEvents = data.filter(ev => ev.date >= localTodayStr);
+
+    // 2. Group by date, keeping only the latest event for each date
+    const groupedByDate = upcomingEvents.reduce((acc, ev) => {
+      if (!acc[ev.date]) {
+        acc[ev.date] = ev;
+      } else {
+        // Compare time (HH:mm string comparison works natively), keep the latest
+        if (ev.time > acc[ev.date].time) {
+          acc[ev.date] = ev;
+        }
+      }
+      return acc;
+    }, {});
+
+    // 3. Convert object back to array, sort by date (upcoming first), and slice top 3
+    const defaultEventsList = Object.values(groupedByDate)
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .slice(0, 3);
+
+    return defaultEventsList;
+  };
+
   // Fetch events from Backend
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await apiService.getEvents();
         setEventsData(response.data);
-        // Sirf first 3 events initially UI me render honge
-        setVisibleEvents(response.data.slice(0, 3));
+        // Show filtered top 3 events initially
+        setVisibleEvents(getDefaultEvents(response.data));
       } catch (error) {
         console.error("Error fetching events:", error);
       } finally {
@@ -35,7 +88,7 @@ export default function Events() {
 
   // Handler to clear calendar selection and show default top 3 events
   const handleClearSelection = () => {
-    setVisibleEvents(eventsData.slice(0, 3));
+    setVisibleEvents(getDefaultEvents(eventsData));
     setIsFiltered(false);
   };
 
@@ -89,49 +142,53 @@ export default function Events() {
                   No events found for this selection.
                 </div>
               ) : (
-                visibleEvents.map((ev, i) => (
-                  <motion.div 
-                    id={`event-${parseInt(ev.day, 10)}`} // Added ID so calendar click can scroll here
-                    key={ev.id || i} 
-                    initial={{ opacity: 0, x: 20 }} 
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className={`relative ${ev.featured ? 'featured' : ''} scroll-mt-32`}
-                  >
-                    {/* Event Node (The dot on the line) */}
-                    <div className={`absolute left-[-48px] top-6 rounded-full border-[3px] border-[#f1f5f9] bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] z-10 transition-all 
-                      ${ev.featured ? 'w-[22px] h-[22px] left-[-51px] top-[21px] shadow-[0_0_0_6px_rgba(168,85,247,0.2)]' : 'w-4 h-4'}`} 
-                    />
-
-                    {/* Event Card */}
-                    <div 
-                      className="bg-white p-7 rounded-[20px] flex flex-col md:flex-row gap-5 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:translate-x-1.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
-                      style={ev.featured ? featuredCardStyle : {}}
+                visibleEvents.map((ev, i) => {
+                  const { day, month } = formatDateParts(ev.date);
+                  
+                  return (
+                    <motion.div 
+                      id={`event-${ev.date}`} // Unique ID based on exact date
+                      key={ev.id || i} 
+                      initial={{ opacity: 0, x: 20 }} 
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className={`relative ${ev.featured ? 'featured' : ''} scroll-mt-32`}
                     >
-                      {/* Date Block */}
-                      <div className="bg-gradient-to-br from-[rgba(255,107,107,0.08)] to-[rgba(168,85,247,0.08)] p-3 rounded-[16px] flex flex-row md:flex-col items-center justify-center shrink-0 min-w-[64px] gap-2 md:gap-0">
-                        <span className="text-[1.8rem] font-black text-[#A855F7] leading-none">{ev.day}</span>
-                        <span className="text-[0.75rem] font-bold text-slate-400 tracking-wider uppercase">{ev.month}</span>
-                      </div>
+                      {/* Event Node (The dot on the line) */}
+                      <div className={`absolute left-[-48px] top-6 rounded-full border-[3px] border-[#f1f5f9] bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] z-10 transition-all 
+                        ${ev.featured ? 'w-[22px] h-[22px] left-[-51px] top-[21px] shadow-[0_0_0_6px_rgba(168,85,247,0.2)]' : 'w-4 h-4'}`} 
+                      />
 
-                      {/* Details Block */}
-                      <div className="flex-1">
-                        <h3 className="text-[1.1rem] font-bold text-slate-800 mb-1.5">{ev.title}</h3>
-                        <p className="text-slate-500 text-[0.9rem] leading-[1.6] mb-2.5">{ev.desc}</p>
-                        <div className="flex flex-wrap gap-4 text-[0.8rem] text-slate-400">
-                          <span className="flex items-center gap-1">📍 {ev.loc}</span>
-                          <span className="flex items-center gap-1">🕐 {ev.time}</span>
+                      {/* Event Card */}
+                      <div 
+                        className="bg-white p-7 rounded-[20px] flex flex-col md:flex-row gap-5 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:translate-x-1.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
+                        style={ev.featured ? featuredCardStyle : {}}
+                      >
+                        {/* Date Block */}
+                        <div className="bg-gradient-to-br from-[rgba(255,107,107,0.08)] to-[rgba(168,85,247,0.08)] p-3 rounded-[16px] flex flex-row md:flex-col items-center justify-center shrink-0 min-w-[64px] gap-2 md:gap-0">
+                          <span className="text-[1.8rem] font-black text-[#A855F7] leading-none">{day}</span>
+                          <span className="text-[0.75rem] font-bold text-slate-400 tracking-wider uppercase">{month}</span>
                         </div>
-                        {ev.featured && (
-                          <span className="inline-block mt-3 px-3.5 py-1 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full text-[0.75rem] font-bold shadow-sm">
-                            Featured Event
-                          </span>
-                        )}
+
+                        {/* Details Block */}
+                        <div className="flex-1">
+                          <h3 className="text-[1.1rem] font-bold text-slate-800 mb-1.5">{ev.title}</h3>
+                          <p className="text-slate-500 text-[0.9rem] leading-[1.6] mb-2.5">{ev.desc}</p>
+                          <div className="flex flex-wrap gap-4 text-[0.8rem] text-slate-400">
+                            <span className="flex items-center gap-1">📍 {ev.loc}</span>
+                            <span className="flex items-center gap-1">🕐 {formatTime12hr(ev.time)}</span>
+                          </div>
+                          {ev.featured && (
+                            <span className="inline-block mt-3 px-3.5 py-1 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full text-[0.75rem] font-bold shadow-sm">
+                              Featured Event
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))
+                    </motion.div>
+                  );
+                })
               )}
             </div>
           </div>
@@ -165,8 +222,11 @@ export default function Events() {
                 {Array.from({length: daysInMonth}, (_, i) => {
                   const day = i + 1;
                   
-                  // Filter events falling on this day from FULL dataset
-                  const dayEvents = eventsData.filter(ev => parseInt(ev.day, 10) === day);
+                  // Construct calendar date string "YYYY-MM-DD" to compare with DB
+                  const calendarDateStr = `${currentYear}-${String(currentMonthIdx + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                  
+                  // Filter events falling exactly on this date string
+                  const dayEvents = eventsData.filter(ev => ev.date === calendarDateStr);
                   const hasEvent = dayEvents.length > 0;
                   const isFeatured = hasEvent && dayEvents.some(ev => ev.featured);
                   
@@ -180,23 +240,18 @@ export default function Events() {
                   
                   if (hasEvent) {
                     if (isPast) {
-                      // Past Event: Grayed out but interactive
                       colorClass = 'bg-slate-200 text-slate-500 opacity-75 cursor-pointer hover:bg-slate-300 transition-colors shadow-inner';
                     } else if (isToday) {
-                      // Present Event: Blue distinct highlight with pulse effect
                       colorClass = 'bg-[#3B82F6] text-white font-bold cursor-pointer shadow-md animate-pulse ring-2 ring-blue-200';
                     } else if (isFuture) {
-                      // Future Event: Existing vibrant gradient/purple styles
                       colorClass = isFeatured 
                         ? 'bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] text-white font-bold shadow-md cursor-pointer hover:scale-110 transform transition-all'
                         : 'bg-purple-100 text-[#A855F7] font-bold cursor-pointer hover:bg-purple-200 transition-colors';
                     }
                   } else if (isToday) {
-                    // Today (No event): Subtle border indicator
                     colorClass = 'text-slate-800 font-bold border border-slate-300 bg-slate-50';
                   }
 
-                  // Title displayed natively on hover
                   const hoverTitle = hasEvent 
                     ? dayEvents.map(ev => ev.title).join(' | ') 
                     : isToday 
@@ -206,31 +261,37 @@ export default function Events() {
                   return (
                     <span 
                       key={day} 
-                      title={hoverTitle}
                       onClick={() => {
-                     
                         if (hasEvent) {
+                          // Show ALL events for this clicked date
                           setVisibleEvents(dayEvents);
-                          setIsFiltered(true); // Enable the clear button
-                          
+                          setIsFiltered(true); 
                           
                           setTimeout(() => {
-                            const targetElement = document.getElementById(`event-${day}`);
+                            const targetElement = document.getElementById(`event-${calendarDateStr}`);
                             if (targetElement) {
                               targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }
                           }, 100);
                         }
                       }}
-                      className={`p-2 rounded-lg transition-all ${colorClass}`}
+                      className={`relative group p-2 rounded-lg transition-all ${colorClass}`}
                     >
                       {day}
+
+                      {/* --- Custom Tooltip Design --- */}
+                      {hoverTitle && (
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[200px] px-3 py-2 bg-slate-800 text-white text-[0.7rem] font-medium leading-tight rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[60] pointer-events-none text-center">
+                          {hoverTitle}
+                          {/* Tooltip Arrow */}
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-800"></div>
+                        </div>
+                      )}
                     </span>
                   );
                 })}
               </div>
 
-             
               {isFiltered && (
                 <div className="mt-5 text-center">
                   <button

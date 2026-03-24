@@ -38,9 +38,18 @@ export default function Donate() {
             <input type="text" placeholder="Custom Amount" value={customAmount} onChange={handleCustomChange} className="w-full pl-12 pr-6 py-4 bg-slate-50 border-none rounded-2xl font-bold text-slate-900 focus:ring-2 focus:ring-[#A855F7] outline-none" />
           </div>
 
-          <button className="w-full py-5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-[1.5rem] font-black text-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all mb-4">
+          {/* ================================== */}
+          {/* UPDATED GIVE BUTTON WITH ZEFFY LINK */}
+          {/* ================================== */}
+          <a 
+            href="https://www.zeffy.com/en-CA/embed/donation-form/youre-not-alone?modal"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-center w-full py-5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-[1.5rem] font-black text-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all mb-4"
+          >
             Give ${currentAmt || 0}{isMonthly ? '/mo' : ''} 💜
-          </button>
+          </a>
+          
           <p className="text-center text-[0.7rem] text-slate-400 font-bold uppercase tracking-[0.2em]">Secure Tax-Deductible Donation</p>
         </motion.div>
 
