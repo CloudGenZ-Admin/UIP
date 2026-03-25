@@ -35,15 +35,18 @@ export default function Events() {
   const [isLoading, setIsLoading] = useState(true);
   const [isFiltered, setIsFiltered] = useState(false); // Track if user has clicked a specific date
 
+  // State to manage the calendar view's current month/year
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  // Get exact today's date string once for accurate global comparisons
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const localTodayStr = `${yyyy}-${mm}-${dd}`;
+
   // Helper function to get default Top 3 events
   const getDefaultEvents = (data) => {
-    // Get today's date in YYYY-MM-DD strictly
-    const d = new Date();
-    const yyyy = d.getFullYear();
-    const mm = String(d.getMonth() + 1).padStart(2, '0');
-    const dd = String(d.getDate()).padStart(2, '0');
-    const localTodayStr = `${yyyy}-${mm}-${dd}`;
-
     // 1. Filter out past events (keep present and future)
     const upcomingEvents = data.filter(ev => ev.date >= localTodayStr);
 
@@ -92,11 +95,18 @@ export default function Events() {
     setIsFiltered(false);
   };
 
+  // --- Calendar Navigation Handlers ---
+  const handlePrevMonth = () => {
+    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+  };
+
   // --- Dynamic Calendar Configuration ---
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonthIdx = today.getMonth();
-  const todayDay = today.getDate();
+  const currentYear = currentDate.getFullYear();
+  const currentMonthIdx = currentDate.getMonth();
 
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const currentMonthName = monthNames[currentMonthIdx];
@@ -208,9 +218,33 @@ export default function Events() {
                 backgroundImage: 'linear-gradient(#fff, #fff), linear-gradient(135deg, #FF6B6B22, #A855F722, #3B82F622)',
               }}
             >
-              <div className="text-center font-bold text-[1.1rem] mb-5 bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
-                {currentMonthName} {currentYear}
+              {/* Calendar Header with Navigation */}
+              <div className="flex justify-between items-center mb-5">
+                <button 
+                  onClick={handlePrevMonth} 
+                  className="p-1.5 text-slate-400 hover:text-[#FF6B6B] transition-colors rounded-full hover:bg-slate-50"
+                  aria-label="Previous Month"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
+                </button>
+                
+                <div className="text-center font-bold text-[1.1rem] bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
+                  {currentMonthName} {currentYear}
+                </div>
+
+                <button 
+                  onClick={handleNextMonth} 
+                  className="p-1.5 text-slate-400 hover:text-[#A855F7] transition-colors rounded-full hover:bg-slate-50"
+                  aria-label="Next Month"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
               </div>
+
               <div className="grid grid-cols-7 gap-1 text-center text-[0.8rem]">
                 {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
                   <span key={d} className="font-bold p-2 text-slate-800 text-[0.7rem]">{d}</span>
@@ -232,16 +266,15 @@ export default function Events() {
                   const hasEvent = dayEvents.length > 0;
                   const isFeatured = hasEvent && dayEvents.some(ev => ev.featured);
 
-                  // Time-based checks
-                  const isToday = day === todayDay;
-                  const isPast = day < todayDay;
-                  const isFuture = day > todayDay;
+                  // Time-based checks properly based on full date strings
+                  const isToday = calendarDateStr === localTodayStr;
+                  const isPast = calendarDateStr < localTodayStr;
+                  const isFuture = calendarDateStr > localTodayStr;
 
                   // Define Dynamic Colors and Interactivity Based on Rules
                   let colorClass = 'text-slate-500 hover:bg-slate-50 cursor-default';
 
                   if (hasEvent) {
-                    
                     if (isPast) {
                       colorClass = 'bg-slate-200 text-slate-500 opacity-75 cursor-pointer hover:bg-slate-300 transition-colors shadow-inner';
                     } else if (isToday) {
