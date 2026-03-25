@@ -73,15 +73,9 @@ export default function Events() {
     const fetchEvents = async () => {
       try {
         const response = await apiService.getEvents();
-
-        // 🔴 Defensive extraction
-        const eventsArray = Array.isArray(response.data)
-          ? response.data
-          : response.data?.data || response.data?.events || [];
-
-        setEventsData(eventsArray);
-        setVisibleEvents(getDefaultEvents(eventsArray));
-
+        setEventsData(response.data);
+        // Show filtered top 3 events initially
+        setVisibleEvents(getDefaultEvents(response.data));
       } catch (error) {
         console.error("Error fetching events:", error);
       } finally {
@@ -247,7 +241,7 @@ export default function Events() {
                   let colorClass = 'text-slate-500 hover:bg-slate-50 cursor-default';
 
                   if (hasEvent) {
-                    u
+                    
                     if (isPast) {
                       colorClass = 'bg-slate-200 text-slate-500 opacity-75 cursor-pointer hover:bg-slate-300 transition-colors shadow-inner';
                     } else if (isToday) {
