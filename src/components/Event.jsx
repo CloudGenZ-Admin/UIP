@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { apiService } from '../api/apiService'; 
+import { apiService } from '../api/apiService';
 
 // --- Helpers to format backend 'date' and 'time' fields ---
 const formatDateParts = (dateString) => {
@@ -73,9 +73,15 @@ export default function Events() {
     const fetchEvents = async () => {
       try {
         const response = await apiService.getEvents();
-        setEventsData(response.data);
-        // Show filtered top 3 events initially
-        setVisibleEvents(getDefaultEvents(response.data));
+
+        // 🔴 Defensive extraction
+        const eventsArray = Array.isArray(response.data)
+          ? response.data
+          : response.data?.data || response.data?.events || [];
+
+        setEventsData(eventsArray);
+        setVisibleEvents(getDefaultEvents(eventsArray));
+
       } catch (error) {
         console.error("Error fetching events:", error);
       } finally {
@@ -117,7 +123,7 @@ export default function Events() {
         </h2>
 
         <div className="grid lg:grid-cols-[1fr_360px] gap-12 items-start">
-          
+
           {/* Timeline Section */}
           <div className="relative pl-[60px]">
             {/* SVG Timeline Curve */}
@@ -135,7 +141,7 @@ export default function Events() {
             <div className="flex flex-col gap-10">
               {isLoading ? (
                 <div className="flex justify-center py-10">
-                   <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-[#A855F7] border-solid"></div>
+                  <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-[#A855F7] border-solid"></div>
                 </div>
               ) : visibleEvents.length === 0 ? (
                 <div className="text-center text-slate-500 font-medium py-10 bg-white rounded-[20px] shadow-sm">
@@ -144,12 +150,12 @@ export default function Events() {
               ) : (
                 visibleEvents.map((ev, i) => {
                   const { day, month } = formatDateParts(ev.date);
-                  
+
                   return (
-                    <motion.div 
+                    <motion.div
                       id={`event-${ev.date}`} // Unique ID based on exact date
-                      key={ev.id || i} 
-                      initial={{ opacity: 0, x: 20 }} 
+                      key={ev.id || i}
+                      initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1 }}
@@ -157,11 +163,11 @@ export default function Events() {
                     >
                       {/* Event Node (The dot on the line) */}
                       <div className={`absolute left-[-48px] top-6 rounded-full border-[3px] border-[#f1f5f9] bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] z-10 transition-all 
-                        ${ev.featured ? 'w-[22px] h-[22px] left-[-51px] top-[21px] shadow-[0_0_0_6px_rgba(168,85,247,0.2)]' : 'w-4 h-4'}`} 
+                        ${ev.featured ? 'w-[22px] h-[22px] left-[-51px] top-[21px] shadow-[0_0_0_6px_rgba(168,85,247,0.2)]' : 'w-4 h-4'}`}
                       />
 
                       {/* Event Card */}
-                      <div 
+                      <div
                         className="bg-white p-7 rounded-[20px] flex flex-col md:flex-row gap-5 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:translate-x-1.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-300"
                         style={ev.featured ? featuredCardStyle : {}}
                       >
@@ -194,12 +200,12 @@ export default function Events() {
           </div>
 
           {/* Calendar Sidebar */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="sticky top-[100px]"
           >
-            <div 
+            <div
               className="bg-white p-7 rounded-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.04)]"
               style={{
                 border: '2px solid transparent',
@@ -212,24 +218,26 @@ export default function Events() {
                 {currentMonthName} {currentYear}
               </div>
               <div className="grid grid-cols-7 gap-1 text-center text-[0.8rem]">
-                {['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => (
+                {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(d => (
                   <span key={d} className="font-bold p-2 text-slate-800 text-[0.7rem]">{d}</span>
                 ))}
-                
+
                 {/* Dynamically render empty slots for the current month */}
                 {[...Array(startDayOfMonth)].map((_, i) => <span key={`empty-${i}`} />)}
-                
-                {Array.from({length: daysInMonth}, (_, i) => {
+
+                {Array.from({ length: daysInMonth }, (_, i) => {
                   const day = i + 1;
-                  
+
                   // Construct calendar date string "YYYY-MM-DD" to compare with DB
                   const calendarDateStr = `${currentYear}-${String(currentMonthIdx + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                  
+
                   // Filter events falling exactly on this date string
-                  const dayEvents = eventsData.filter(ev => ev.date === calendarDateStr);
+                  const dayEvents = Array.isArray(eventsData)
+                    ? eventsData.filter(ev => ev.date === calendarDateStr)
+                    : [];
                   const hasEvent = dayEvents.length > 0;
                   const isFeatured = hasEvent && dayEvents.some(ev => ev.featured);
-                  
+
                   // Time-based checks
                   const isToday = day === todayDay;
                   const isPast = day < todayDay;
@@ -237,14 +245,15 @@ export default function Events() {
 
                   // Define Dynamic Colors and Interactivity Based on Rules
                   let colorClass = 'text-slate-500 hover:bg-slate-50 cursor-default';
-                  
+
                   if (hasEvent) {
+                    u
                     if (isPast) {
                       colorClass = 'bg-slate-200 text-slate-500 opacity-75 cursor-pointer hover:bg-slate-300 transition-colors shadow-inner';
                     } else if (isToday) {
                       colorClass = 'bg-[#3B82F6] text-white font-bold cursor-pointer shadow-md animate-pulse ring-2 ring-blue-200';
                     } else if (isFuture) {
-                      colorClass = isFeatured 
+                      colorClass = isFeatured
                         ? 'bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] text-white font-bold shadow-md cursor-pointer hover:scale-110 transform transition-all'
                         : 'bg-purple-100 text-[#A855F7] font-bold cursor-pointer hover:bg-purple-200 transition-colors';
                     }
@@ -252,21 +261,21 @@ export default function Events() {
                     colorClass = 'text-slate-800 font-bold border border-slate-300 bg-slate-50';
                   }
 
-                  const hoverTitle = hasEvent 
-                    ? dayEvents.map(ev => ev.title).join(' | ') 
-                    : isToday 
-                      ? "Today" 
+                  const hoverTitle = hasEvent
+                    ? dayEvents.map(ev => ev.title).join(' | ')
+                    : isToday
+                      ? "Today"
                       : "";
 
                   return (
-                    <span 
-                      key={day} 
+                    <span
+                      key={day}
                       onClick={() => {
                         if (hasEvent) {
                           // Show ALL events for this clicked date
                           setVisibleEvents(dayEvents);
-                          setIsFiltered(true); 
-                          
+                          setIsFiltered(true);
+
                           setTimeout(() => {
                             const targetElement = document.getElementById(`event-${calendarDateStr}`);
                             if (targetElement) {
