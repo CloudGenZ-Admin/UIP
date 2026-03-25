@@ -1,13 +1,11 @@
 import axios from 'axios';
 
-const API_URL = 'https:mintcream-buffalo-179597.hostingersite.com/api'; // Apna backend URL yahan dalein
-
-// Axios instance create karein
+const API_URL = 'https:mintcream-buffalo-179597.hostingersite.com/api'; 
 const apiClient = axios.create({
   baseURL: API_URL,
 });
 
-// Request Interceptor: Admin token attach karne ke liye
+
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem('adminToken');
   if (token) {
