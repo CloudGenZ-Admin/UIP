@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import carepackImg from '../../assets/carepack2.jpg';
-
+import carepackImg from '../../assets/WhatsApp Image 2026-03-26 at 10.51.14 AM.jpeg';
 const PACK_CONTENTS = [
   {
     id: 'apparel',

@@ -1,18 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// Adjust this relative path depending on where your About.jsx file is located!
+// Assuming About.jsx is inside src/components/, then ../assets/ is correct.
+import aboutImage from '../assets/WhatsApp Image 2026-03-26 at 10.51.06 AM (1).jpeg';
+
 export default function About() {
   return (
     <section id="about" className="py-[100px] px-6 overflow-hidden">
       <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-[64px] items-center">
+        
+        {/* Left Side: Image */}
         <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} className="relative">
-          <div className="aspect-square rounded-[30%_70%_70%_30%/30%_30%_70%_70%] overflow-hidden relative z-[2] bg-gradient-to-br from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] flex flex-col items-center justify-center text-white">
-            <span className="text-[4rem] mb-2">🏳️‍🌈</span>
-            <p className="font-semibold text-xl">Our Community</p>
+          <div className="aspect-square rounded-[30%_70%_70%_30%/30%_30%_70%_70%] overflow-hidden relative z-[2]">
+            <img 
+              src={aboutImage} 
+              alt="Our Community" 
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="absolute top-[-20px] right-[-20px] w-[80%] h-[80%] rounded-[70%_30%_30%_70%/70%_70%_30%_30%] bg-purple-500/10 z-[1]"></div>
         </motion.div>
 
+        {/* Right Side: Text */}
         <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }}>
           <p className="text-[#FF6B6B] font-bold tracking-[2px] uppercase text-sm mb-2">Our Story</p>
           <h2 className="text-[2.5rem] font-extrabold leading-tight mb-4">Who We Are</h2>
@@ -36,6 +46,7 @@ export default function About() {
           </div>
           <a href="/about" className="px-8 py-3.5 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full font-bold shadow-lg">Learn More</a>
         </motion.div>
+        
       </div>
     </section>
   );

@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom'; // <-- Imported Link
-import res1Img from '../../assets/Res1.jpg';
-
+import res1Img from '../../assets/WhatsApp Image 2026-03-26 at 10.51.07 AM (1).jpeg';
 const contactCardStyle = {
   backgroundOrigin: 'border-box',
   backgroundClip: 'padding-box, border-box',

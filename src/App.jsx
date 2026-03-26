@@ -45,13 +45,13 @@ export default function App() {
         <Route path="/programs/cultural" element={<CulturalPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/stories" element={<Stories />} />
-        <Route path="/support" element={<SupportPage />} />
+        {/* <Route path="/support" element={<SupportPage />} /> */}
         <Route path='/care-packs' element={<CarePack/>} />
         <Route path='/resources' element={<ResourcesPage/>} />
         <Route path='/contact' element={<ContactPage/>} />
-        <Route path="/volunteer" element={<VolunteerPage />} />
+        {/* <Route path="/volunteer" element={<VolunteerPage />} /> */}
         <Route path="/donate" element={<Donate />} /> 
-        <Route path="/Partnership" element={<PartnershipPage />} /> 
+        <Route path="/Waystogive" element={<PartnershipPage />} /> 
         <Route path="/involed" element={<InvolvedPage />} /> 
 
         {/* ===================== ADMIN ROUTES ===================== */}

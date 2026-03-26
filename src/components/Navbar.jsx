@@ -40,16 +40,16 @@ export default function Navbar() {
   const actionLinks = [
     { name: "Care Packs", path: "/care-packs" },
     // { name: "Get Involved", path: "/involed" },
-    { name: "Volunteer", path: "/volunteer" },
-    { name: "Partnership", path: "/Partnership" },
+    // { name: "Volunteer", path: "/volunteer" },
+    { name: "Ways To Give", path: "/Waystogive" },
     { name: "Contact", path: "/contact" },
-    { name: "Support", path: "/support" },
+    // { name: "Support", path: "/support" },
   ];
 
   return (
     <nav
       ref={navRef}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-[1250px] z-[1000] rounded-[60px] transition-all duration-300 border border-purple-500/15 ${isScrolled ? 'bg-slate-50 shadow-lg py-2' : 'bg-slate-50 backdrop-blur-[20px] py-3'}`}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-48px)] max-w-[1150px] z-[1000] rounded-[60px] transition-all duration-300 border border-purple-500/15 ${isScrolled ? 'bg-slate-50 shadow-lg py-2' : 'bg-slate-50 backdrop-blur-[20px] py-3'}`}
     >
       <div className="flex items-center justify-between px-7 relative">
 

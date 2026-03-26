@@ -6,6 +6,7 @@ import ResourcesHero from '../components/resources/ResourcesHero';
 import ResourceNavigationIntro from '../components/resources/ResourceNavigationIntro';
 import ResourceDirectory from '../components/resources/ResourceDirectory';
 import ResourcesCTA from '../components/resources/ResourcesCTA';
+import SupportFormCTA from '../components/support/SupportFormCTA';
 
 export default function ResourcesPage() {
   return (
@@ -19,7 +20,8 @@ export default function ResourcesPage() {
         <ResourcesHero />
         <ResourceNavigationIntro />
         <ResourceDirectory />
-        <ResourcesCTA />
+        {/* <ResourcesCTA /> */}
+        <SupportFormCTA/>
       </main>
 
       {/* 3. Global Footer */}
