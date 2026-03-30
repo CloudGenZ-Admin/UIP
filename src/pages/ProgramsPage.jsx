@@ -4,8 +4,10 @@ import CorePrograms from '../components/programs/CorePrograms';
 import ProgramImpact from '../components/programs/ProgramImpact';
 import JourneySteps from '../components/programs/JourneySteps';
 import ProgramsCTA from '../components/programs/ProgramsCTA';
+import CommunityGallery from '../components/CommunityGallery';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+
 export default function ProgramsPage() {
   return (
     <div className="min-h-screen bg-white font-sans text-pride-navy">
@@ -18,6 +20,7 @@ export default function ProgramsPage() {
       <main id="programs" className="relative">
         <ProgramsHero />
         <CorePrograms />
+        <CommunityGallery />
         <ProgramImpact />
         <JourneySteps />
         
