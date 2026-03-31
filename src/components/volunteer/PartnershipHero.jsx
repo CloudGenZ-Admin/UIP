@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-// IMPORTANT: Adjust this path to wherever your apiService is located!
+import { motion, AnimatePresence } from 'framer-motion';
 import { apiService } from '../../api/apiService'; 
 
 export default function WaysToGiveOptions() {
@@ -68,7 +67,7 @@ export default function WaysToGiveOptions() {
   };
 
   return (
-    <section className="py-24 px-6 bg-[#FAFAFA]">
+    <section className="py-24 px-6 bg-[#FAFAFA] relative">
       <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-8">
         
         {/* ======================= */}
@@ -200,12 +199,6 @@ export default function WaysToGiveOptions() {
 
           <div className="flex-[1.5] w-full bg-slate-50 p-8 md:p-10 rounded-[2rem] border border-slate-100">
             <h3 className="text-2xl font-black text-slate-900 mb-6">Community Partner Form</h3>
-            
-            {submitMessage.text && (
-              <div className={`p-4 mb-6 rounded-xl font-medium text-sm ${submitMessage.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                {submitMessage.text}
-              </div>
-            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-5">
@@ -318,6 +311,49 @@ export default function WaysToGiveOptions() {
         </motion.div>
 
       </div>
+
+      {/* ======================= */}
+      {/* SUCCESS / ERROR MODAL   */}
+      {/* ======================= */}
+      <AnimatePresence>
+        {submitMessage.text && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white p-8 md:p-10 rounded-3xl max-w-sm w-full text-center shadow-2xl"
+            >
+              <div className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 text-4xl shadow-inner ${
+                submitMessage.type === 'success' ? 'bg-green-100 text-green-500' : 'bg-red-100 text-red-500'
+              }`}>
+                {submitMessage.type === 'success' ? '✅' : '❌'}
+              </div>
+              
+              <h3 className="text-2xl font-black text-slate-800 mb-3">
+                {submitMessage.type === 'success' ? 'Success!' : 'Oops!'}
+              </h3>
+              
+              <p className="text-slate-600 font-medium mb-8 leading-relaxed">
+                {submitMessage.text}
+              </p>
+              
+              <button 
+                onClick={() => setSubmitMessage({ type: '', text: '' })}
+                className="w-full py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-black transition-colors"
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </section>
   );
 }
