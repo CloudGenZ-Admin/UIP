@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const MISSION_PILLARS = [
-  { emoji: '🤝', title: 'Community Building', desc: 'Creating safe, culturally affirming spaces where authentic connections flourish.' },
-  { emoji: '🌱', title: 'Healing-Centered', desc: 'Providing safe environments for processing trauma and reclaiming dignity.' },
-  { emoji: '📣', title: 'Advocacy', desc: 'Lived-experience leadership guiding programs to strengthen newcomer rights.' },
-  { emoji: '🌈', title: 'National Reach', desc: 'A volunteer-led movement supporting queer and trans newcomers across Canada.' }
+  { title: 'Community Building', desc: 'Creating safe, culturally affirming spaces where authentic connections flourish.' },
+  { title: 'Healing-Centered', desc: 'Providing safe environments for processing trauma and reclaiming dignity.' },
+  { title: 'Advocacy', desc: 'Lived-experience leadership guiding programs to strengthen newcomer rights.' },
+  { title: 'National Reach', desc: 'A volunteer-led movement supporting queer and trans newcomers across Canada.' }
 ];
 
 const borderStyle = {
@@ -36,10 +36,9 @@ export default function AboutMissionVision() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 style={borderStyle}
-                className="bg-white p-7 rounded-[24px] border-2 border-transparent shadow-sm hover:shadow-md transition-all"
+                className="bg-white p-7 rounded-[24px] border-2 border-transparent shadow-sm hover:shadow-md transition-all flex flex-col justify-center"
               >
-                <span className="text-4xl mb-4 block">{p.emoji}</span>
-                <h3 className="font-bold text-slate-800 mb-2">{p.title}</h3>
+                <h3 className="font-bold text-slate-800 text-lg mb-2">{p.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}

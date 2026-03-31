@@ -23,6 +23,7 @@ export default function AdminSidebar() {
         { name: 'Peer Support', path: '/admin/peer-support', icon: '🤝' },
         { name: 'Wellness Sessions', path: '/admin/wellness', icon: '🧘' },
         { name: 'Cultural Events', path: '/admin/cultural', icon: '🎉' },
+        { name: 'Contact Partnerships', path: '/admin/contactPartnerships', icon: '✉️' }
       ]
     },
     {

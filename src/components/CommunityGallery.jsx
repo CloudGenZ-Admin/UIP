@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 
-// Updated imports: g1 to g10
 import img1 from '../assets/gallery/g1.jpeg';
 import img2 from '../assets/gallery/g2.jpeg';
 import img3 from '../assets/gallery/g3.jpeg';
@@ -20,10 +19,8 @@ const GALLERY_IMAGES = [
 export default function CommunityGallery() {
   const scrollRef = useRef(null);
 
-  // Smooth scroll function for the buttons
   const scroll = (direction) => {
     if (scrollRef.current) {
-      // Calculates scroll amount based on screen size
       const scrollAmount = window.innerWidth < 768 ? window.innerWidth * 0.8 : 380;
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
@@ -33,39 +30,19 @@ export default function CommunityGallery() {
   };
 
   return (
-    <section className="py-24 bg-[#f8fafc] overflow-hidden relative">
+    // Removed bg-[#f8fafc] and reduced padding so it fits in the Hero
+    <div className="py-8 w-full overflow-hidden relative">
       
-      {/* Hide scrollbars globally for this component but keep functionality */}
       <style>{`
         .hide-scroll {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
         .hide-scroll::-webkit-scrollbar {
-          display: none; /* Chrome, Safari and Opera */
+          display: none;
         }
       `}</style>
 
-      {/* Standard Header matching your design system */}
-      <div className="max-w-[1200px] mx-auto px-6 mb-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-4 leading-tight">
-            Community <br className="hidden md:block" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] italic">
-              in Action
-            </span>
-          </h2>
-          <p className="text-slate-500 text-lg max-w-md">
-            Real moments of connection, joy, and empowerment from our community programs and cultural events.
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Scrollable Gallery Wrapper with Absolute Floating Buttons */}
       <div className="relative w-full group">
         
         {/* Floating Left Button */}
@@ -94,7 +71,8 @@ export default function CommunityGallery() {
         <div 
           ref={scrollRef}
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scroll pb-12 pt-4 pr-12 scroll-smooth"
-          style={{ paddingLeft: 'max(1.5rem, calc((100vw - 1200px) / 2 + 1.5rem))' }}
+          // This keeps the first image aligned nicely with standard max-width, while letting the track extend off-screen
+          style={{ paddingLeft: 'max(1.5rem, calc((100vw - 1000px) / 2))' }}
         >
           {GALLERY_IMAGES.map((src, i) => (
             <motion.div
@@ -103,27 +81,21 @@ export default function CommunityGallery() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.05, duration: 0.5, ease: "easeOut" }}
-              className="relative shrink-0 snap-center group w-[80vw] sm:w-[50vw] md:w-[320px] lg:w-[380px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-slate-100/50 cursor-grab active:cursor-grabbing"
+              className="relative shrink-0 snap-center group w-[80vw] sm:w-[50vw] md:w-[320px] lg:w-[380px] aspect-[4/5] rounded-[3rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20 cursor-grab active:cursor-grabbing"
             >
-              {/* Image */}
               <img 
                 src={src} 
                 alt={`Gallery Moment ${i + 1}`} 
                 loading="lazy"
-                draggable="false" // Prevents ghost dragging conflict with touch scroll
+                draggable="false"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              
-              {/* Overlay Gradient on Hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-              
-              {/* Inner Border Ring */}
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/30 rounded-[3rem] transition-colors duration-300 pointer-events-none z-10"></div>
             </motion.div>
           ))}
         </div>
       </div>
-
-    </section>
+    </div>
   );
 }

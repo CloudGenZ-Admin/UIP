@@ -18,9 +18,10 @@ export default function ProgramsPage() {
       {/* 2. Main Content wrapped in a tag with id="programs" 
              This makes the navbar link href="#programs" work perfectly */}
       <main id="programs" className="relative">
+         {/* <CommunityGallery /> */}
         <ProgramsHero />
         <CorePrograms />
-        <CommunityGallery />
+       
         <ProgramImpact />
         <JourneySteps />
         

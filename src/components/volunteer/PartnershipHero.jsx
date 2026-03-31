@@ -1,47 +1,335 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+// IMPORTANT: Adjust this path to wherever your apiService is located!
+import { apiService } from '../../api/apiService'; 
 
-export default function PartnershipHero() {
-  return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-[120px] pb-[160px] px-6 text-center">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1e1b4b] via-[#4c1d95] to-[#3b82f6]">
-        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_20%_50%,rgba(255,107,107,0.3)_0%,transparent_60%),radial-gradient(ellipse_at_80%_20%,rgba(59,130,246,0.3)_0%,transparent_60%)]"></div>
-      </div>
+export default function WaysToGiveOptions() {
+  const [formData, setFormData] = useState({
+    orgName: '',
+    contactName: '',
+    email: '',
+    phone: '',
+    interests: [],
+    otherInterest: '',
+    description: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState({ type: '', text: '' });
+  
+  // State to toggle the inline Zeffy form
+  const [showZeffy, setShowZeffy] = useState(false);
+
+  const partnershipOptions = [
+    "Sponsoring an event or program",
+    "Donating goods or services",
+    "Hosting a fundraiser",
+    "Employee giving or workplace campaign",
+    "Community outreach or promotion"
+  ];
+
+  const handleCheckboxChange = (option) => {
+    setFormData((prev) => {
+      if (prev.interests.includes(option)) {
+        return { ...prev, interests: prev.interests.filter((item) => item !== option) };
+      } else {
+        return { ...prev, interests: [...prev.interests, option] };
+      }
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitMessage({ type: '', text: '' });
+    
+    try {
+      // Calling the backend using your apiService
+      await apiService.submitPartnership(formData);
       
-      <div className="relative z-10 max-w-[1000px]">
-        <motion.span 
-          initial={{ opacity: 0, y: 20 }} 
-          whileInView={{ opacity: 1, y: 0 }} 
-          className="inline-block py-2 px-5 bg-white/12 border border-white/20 rounded-full text-white/90 text-sm font-medium backdrop-blur-md mb-6"
-        >
-          Systemic Change
-        </motion.span>
-        
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }} 
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-white text-5xl md:text-[4.5rem] font-extrabold leading-[1.1] mb-8"
-        >
-          Partnership <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Opportunities</span>
-        </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }} 
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-white/80 text-lg md:text-[1.2rem] leading-[1.8] max-w-[750px] mx-auto mb-10"
-        >
-          Join us in creating systemic change and building more inclusive communities. Together, we can expand our reach and impact for LGBTQ+ newcomers across Canada.
-        </motion.p>
-      </div>
+      setSubmitMessage({ 
+        type: 'success', 
+        text: "Thank you! Your community partnership request has been submitted successfully." 
+      });
+      
+      // Reset form on success
+      setFormData({
+        orgName: '', contactName: '', email: '', phone: '',
+        interests: [], otherInterest: '', description: ''
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitMessage({ 
+        type: 'error', 
+        text: "Oops! Something went wrong while submitting. Please try again later." 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-      {/* Wave Divider */}
-      <svg className="absolute bottom-[-2px] left-0 w-full h-[120px] md:h-[180px] z-[3]" viewBox="0 0 1440 180" preserveAspectRatio="none">
-        <path d="M0,80 C240,160 480,0 720,80 C960,160 1200,0 1440,80 L1440,180 L0,180 Z" fill="#FFFFFF"/>
-      </svg>
+  return (
+    <section className="py-24 px-6 bg-[#FAFAFA]">
+      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-8">
+        
+        {/* ======================= */}
+        {/* 1. DONATE CARD          */}
+        {/* ======================= */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="lg:col-span-2 bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-slate-100"
+        >
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            <div className="flex-1 w-full">
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-6">Donate</h2>
+              <p className="text-slate-600 text-lg mb-6">Your support can help us:</p>
+              <ul className="space-y-4 mb-10">
+                {[
+                  'Host safe community gatherings', 
+                  'Provide transit support for participants', 
+                  'Purchase workshop and program materials', 
+                  'Support peer-led programs and outreach'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-slate-700 font-medium">
+                    <span className="text-[#FF6B6B] font-black mt-0.5">✓</span> {item}
+                  </li>
+                ))}
+              </ul>
+              
+              <button 
+                onClick={() => setShowZeffy(!showZeffy)}
+                className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-2xl font-black shadow-lg hover:scale-105 transition-transform"
+              >
+                {showZeffy ? 'Close Donation Form' : 'Donate via Zeffy'}
+              </button>
+            </div>
+
+            <div className="flex-1 bg-slate-50 p-8 rounded-[2rem] w-full border border-slate-100">
+              <h3 className="font-black text-slate-900 mb-6 text-xl">Suggested Giving Options</h3>
+              <div className="space-y-4">
+                <GiveOption amt="$25" desc="Helps cover refreshments or materials for a community gathering" />
+                <GiveOption amt="$50" desc="Provides transit support for a participant" />
+                <GiveOption amt="$100" desc="Supports a workshop or safe space event" />
+                <GiveOption amt="$150+" desc="Helps sponsor a community gathering" />
+              </div>
+            </div>
+          </div>
+
+          {/* Inline Zeffy Embed Section */}
+          {showZeffy && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="w-full mt-12 pt-8 border-t border-slate-100 overflow-hidden"
+            >
+              <h3 className="text-2xl font-black text-slate-900 mb-6 text-center">Secure Donation Form</h3>
+              <iframe 
+                src="https://www.zeffy.com/en-CA/embed/donation-form/youre-not-alone" 
+                title="Zeffy Donation"
+                className="w-full h-[850px] md:h-[900px] border-0 rounded-2xl shadow-inner bg-white"
+                allow="payment" 
+              />
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* ======================= */}
+        {/* 2. DONATE ITEMS CARD    */}
+        {/* ======================= */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="lg:col-span-2 bg-gradient-to-br from-[#1e1b4b] to-[#4c1d95] text-white rounded-[2.5rem] p-8 md:p-14 shadow-xl flex flex-col lg:flex-row gap-12 items-center"
+        >
+          <div className="flex-1">
+            <h2 className="text-3xl md:text-4xl font-black mb-6">Donate Items</h2>
+            <p className="text-white/80 text-lg mb-10 leading-relaxed">
+              Many newcomers arrive with very few belongings. Donating practical items can help someone feel more comfortable, supported, and welcome.
+            </p>
+            <a href="#" className="inline-flex items-center justify-center px-10 py-4 bg-white text-[#4c1d95] rounded-2xl font-black shadow-lg hover:scale-105 transition-transform">
+              View Our Wishlist
+            </a>
+          </div>
+
+          <div className="flex-1 w-full">
+            <h3 className="font-bold mb-6 text-[#FF6B6B] uppercase tracking-widest text-sm">Most-needed items:</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                'Hygiene products', 
+                'Grocery gift cards', 
+                'Transit passes', 
+                'Winter accessories', 
+                'Journals and self-care items', 
+                'Backpacks and phone chargers'
+              ].map((item, i) => (
+                <div key={i} className="bg-white/10 backdrop-blur-sm p-4 rounded-xl text-sm font-bold border border-white/10 flex items-center">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ======================= */}
+        {/* 3. PARTNER FORM SECTION */}
+        {/* ======================= */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="lg:col-span-2 bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-slate-100 flex flex-col lg:flex-row gap-12 items-start"
+        >
+          <div className="flex-1 lg:sticky lg:top-10">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">Partner With Us</h2>
+            <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+              Businesses, organizations, and community groups can support United in Pride through sponsorship, donated resources, or community partnerships. 
+            </p>
+            <p className="text-slate-600 text-lg mb-8 leading-relaxed font-bold">
+              Together, we can create more safe spaces and reach more LGBTQ+ newcomers.
+            </p>
+            
+            <div className="hidden lg:flex w-20 h-20 rounded-full bg-purple-50 items-center justify-center">
+              <span className="text-3xl">🤝</span>
+            </div>
+          </div>
+
+          <div className="flex-[1.5] w-full bg-slate-50 p-8 md:p-10 rounded-[2rem] border border-slate-100">
+            <h3 className="text-2xl font-black text-slate-900 mb-6">Community Partner Form</h3>
+            
+            {submitMessage.text && (
+              <div className={`p-4 mb-6 rounded-xl font-medium text-sm ${submitMessage.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                {submitMessage.text}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-5">
+                <input 
+                  type="text" required placeholder="Organization / Business Name" 
+                  value={formData.orgName} onChange={e => setFormData({...formData, orgName: e.target.value})}
+                  className="w-full p-4 bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#A855F7] outline-none text-sm font-medium" 
+                />
+                <input 
+                  type="text" required placeholder="Contact Name" 
+                  value={formData.contactName} onChange={e => setFormData({...formData, contactName: e.target.value})}
+                  className="w-full p-4 bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#A855F7] outline-none text-sm font-medium" 
+                />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-5">
+                <input 
+                  type="email" required placeholder="Email Address" 
+                  value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})}
+                  className="w-full p-4 bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#A855F7] outline-none text-sm font-medium" 
+                />
+                <input 
+                  type="tel" required placeholder="Phone Number" 
+                  value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})}
+                  className="w-full p-4 bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#A855F7] outline-none text-sm font-medium" 
+                />
+              </div>
+
+              <div className="pt-2">
+                <p className="text-sm font-bold text-slate-800 mb-4">What type of partnership are you interested in?</p>
+                <div className="space-y-3">
+                  {partnershipOptions.map((option) => (
+                    <label key={option} className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        checked={formData.interests.includes(option)}
+                        onChange={() => handleCheckboxChange(option)}
+                        className="w-5 h-5 accent-[#A855F7] rounded cursor-pointer" 
+                      />
+                      <span className="text-sm font-bold text-slate-600 group-hover:text-slate-900 transition-colors">{option}</span>
+                    </label>
+                  ))}
+                  
+                  <div className="flex items-center gap-3 pt-2">
+                    <label className="flex items-center gap-3 cursor-pointer group whitespace-nowrap">
+                      <input 
+                        type="checkbox" 
+                        checked={formData.interests.includes('Other')}
+                        onChange={() => handleCheckboxChange('Other')}
+                        className="w-5 h-5 accent-[#A855F7] rounded cursor-pointer" 
+                      />
+                      <span className="text-sm font-bold text-slate-600 group-hover:text-slate-900 transition-colors">Other:</span>
+                    </label>
+                    <input 
+                      type="text" 
+                      placeholder="Please specify"
+                      value={formData.otherInterest}
+                      onChange={e => setFormData({...formData, otherInterest: e.target.value})}
+                      disabled={!formData.interests.includes('Other')}
+                      className="w-full p-3 bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#A855F7] outline-none text-sm font-medium disabled:opacity-50" 
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <p className="text-sm font-bold text-slate-800 mb-3">Tell us a little about your organization and how you would like to support United in Pride</p>
+                <textarea 
+                  required
+                  placeholder="Share your ideas..."
+                  value={formData.description}
+                  onChange={e => setFormData({...formData, description: e.target.value})}
+                  className="w-full p-4 bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#A855F7] outline-none text-sm font-medium resize-none h-32"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black shadow-lg hover:bg-black transition-colors disabled:opacity-70"
+              >
+                {isSubmitting ? 'Submitting...' : 'Become a Community Partner'}
+              </button>
+            </form>
+          </div>
+        </motion.div>
+
+        {/* ======================= */}
+        {/* 4. SHARE OUR WORK BANNER*/}
+        {/* ======================= */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="lg:col-span-2 bg-slate-100 rounded-[2.5rem] p-8 md:p-14 shadow-sm border border-slate-200 flex flex-col md:flex-row gap-10 items-center text-center md:text-left"
+        >
+          <div className="flex-1">
+            <h2 className="text-3xl font-black text-slate-900 mb-4">Share Our Work</h2>
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Not everyone can donate, and that is okay. Sharing our work is one of the most powerful ways to help. Follow us, invite others to our events, and help us spread the word.
+            </p>
+          </div>
+          
+          <div className="flex-1 w-full bg-white p-8 rounded-[2rem] border-l-8 border-[#3B82F6] shadow-md">
+            <p className="font-black text-slate-800 text-xl italic leading-snug">
+              "Awareness creates connection. Connection creates belonging."
+            </p>
+          </div>
+        </motion.div>
+
+      </div>
     </section>
+  );
+}
+
+// Internal component for the suggested giving amounts
+function GiveOption({ amt, desc }) {
+  return (
+    <div className="flex gap-4 items-start bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+      <span className="bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] text-white font-black px-4 py-1.5 rounded-lg shadow-sm">
+        {amt}
+      </span>
+      <p className="text-sm font-bold text-slate-600 mt-1 leading-snug">{desc}</p>
+    </div>
   );
 }

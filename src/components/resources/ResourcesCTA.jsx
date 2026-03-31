@@ -10,7 +10,12 @@ export default function ResourcesCTA() {
         >
           <div className="bg-white rounded-[calc(3.5rem-2px)] py-16 px-8 md:px-20 text-center">
 
-            <span className="text-6xl mb-8 block">🤝</span>
+            <div className="w-20 h-20 mx-auto mb-8 bg-gradient-to-br from-[#FF6B6B]/10 to-[#A855F7]/10 rounded-full flex items-center justify-center">
+               <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-[#A855F7]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+               </svg>
+            </div>
+
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">
               Need More Help?
             </h2>
@@ -18,37 +23,18 @@ export default function ResourcesCTA() {
               Can't find what you're looking for? Our support team is here to connect you with the right resources, services, and community care.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4 mb-1">
-              <div className="flex flex-wrap justify-center gap-4 mb-1">
-                {/* Link to /support */}
-                <a href="/support">
-                  <button className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
-                    Find Help Near You
-                  </button>
-                </a>
-
-                <button className="px-10 py-4 border-2 border-[#A855F7] text-[#A855F7] rounded-full font-bold hover:bg-purple-50 transition-all">
-                  Download Guide
+            <div className="flex flex-wrap justify-center gap-4">
+              {/* Link to /support */}
+              <a href="/support">
+                <button className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+                  Find Help Near You
                 </button>
-              </div>
+              </a>
+
+              <button className="px-10 py-4 border-2 border-[#A855F7] text-[#A855F7] rounded-full font-bold hover:bg-purple-50 transition-all">
+                Download Guide
+              </button>
             </div>
-
-            {/* Newsletter Integrated */}
-            {/* <div className="max-w-md mx-auto border-t border-slate-100 pt-12">
-              <h4 className="font-bold text-slate-900 mb-2 text-xl">Stay Connected & Informed</h4>
-              <p className="text-sm text-slate-500 mb-8">Get updates on programs, resources, and community news delivered to your inbox</p>
-              <form className="flex gap-2 p-1.5 bg-slate-50 rounded-full border border-slate-200" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 bg-transparent border-none rounded-full px-6 py-3 outline-none font-bold text-slate-700"
-                  required
-                />
-                <button type="submit" className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-black transition-all shadow-md">
-                  Sign Up
-                </button>
-              </form>
-            </div> */}
 
           </div>
         </div>

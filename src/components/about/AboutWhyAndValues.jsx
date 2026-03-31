@@ -56,13 +56,12 @@ export default function AboutWhyAndValues() {
         {/* Values Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { t: 'Safety First', d: 'Creating secure environments where vulnerability is protected and honored.', e: '🛡️' },
-            { t: 'Inclusive Community', d: 'Welcoming all identities, backgrounds, and experiences without judgment.', e: '🌈' },
-            { t: 'Healing Growth', d: 'Supporting individual journeys of healing and personal development.', e: '🌱' },
-            { t: 'Joy & Celebration', d: 'Embracing happiness and celebrating achievements as acts of resistance.', e: '✨' }
+            { t: 'Safety First', d: 'Creating secure environments where vulnerability is protected and honored.' },
+            { t: 'Inclusive Community', d: 'Welcoming all identities, backgrounds, and experiences without judgment.' },
+            { t: 'Healing Growth', d: 'Supporting individual journeys of healing and personal development.' },
+            { t: 'Joy & Celebration', d: 'Embracing happiness and celebrating achievements as acts of resistance.' }
           ].map((v, i) => (
-            <div key={i} className="bg-white p-8 rounded-[2rem] text-slate-900 shadow-xl flex flex-col h-full">
-              <span className="text-4xl mb-4 block">{v.e}</span>
+            <div key={i} className="bg-white p-8 rounded-[2rem] text-slate-900 shadow-xl flex flex-col h-full border-t-4 border-[#A855F7]">
               <h4 className="font-bold text-xl mb-3">{v.t}</h4>
               <p className="text-sm text-slate-500 leading-relaxed">{v.d}</p>
             </div>

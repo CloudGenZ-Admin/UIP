@@ -19,7 +19,7 @@ export default function PartnershipPage() {
 
                 {/* 2. Main Partnership Content Built Above */}
                 <Partnerships />
-                <VolunteerRoles />
+                {/* <VolunteerRoles /> */}
                 <TrainingSupport />
                
                 {/* 3. Call to Action (Reused from Volunteer) */}

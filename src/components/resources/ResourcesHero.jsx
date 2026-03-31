@@ -22,30 +22,21 @@ export default function ResourcesHero() {
           initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-white text-5xl md:text-[4.5rem] font-extrabold leading-[1.1] mb-8"
+          className="text-white text-5xl md:text-[4.5rem] font-extrabold leading-[1.1] mb-12"
         >
           Your Journey to <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Safety & Belonging</span> Starts Here
         </motion.h1>
-        
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }} 
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-white/80 text-lg md:text-[1.25rem] leading-[1.8] max-w-[800px] mx-auto mb-10"
-        >
-          Navigating Canada's systems shouldn't feel overwhelming. We connect you with trusted, LGBTQ+ affirming resources across the country—from legal aid to creative expression spaces.
-        </motion.p>
 
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2 }}
           className="flex flex-wrap justify-center gap-4"
         >
           <a href="#directory" className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
             Find Resources Now
           </a>
-          <a href="/support" className="px-10 py-4 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">
+          <a href="/Waystogive" className="px-10 py-4 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">
             Get Personal Support
           </a>
         </motion.div>

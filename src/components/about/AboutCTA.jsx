@@ -24,22 +24,7 @@ export default function AboutCTA() {
               </Link>
             </div>
 
-            {/* Newsletter Subscription */}
-            {/* <div className="max-w-md mx-auto border-t border-gray-100 pt-10">
-              <h4 className="font-bold text-pride-navy mb-2 text-lg">Stay Connected & Informed</h4>
-              <p className="text-sm text-pride-muted mb-6">Get updates on programs, resources, and community news delivered to your inbox</p>
-              <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
-                <input 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-6 py-3.5 outline-none focus:border-pride-purple focus:ring-1 focus:ring-pride-purple transition-all text-sm"
-                  required
-                />
-                <button type="submit" className="bg-pride-navy text-white px-8 py-3.5 rounded-full text-sm font-bold hover:bg-opacity-90 transition-all shadow-md">
-                  Sign Up
-                </button>
-              </form>
-            </div> */}
+          
 
           </div>
         </div>

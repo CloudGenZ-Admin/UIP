@@ -117,11 +117,11 @@ export default function PartnershipDetails() {
             <div className="space-y-6">
               <div className="flex items-center gap-4 text-lg font-bold text-slate-800">
                 <span className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">✉</span>
-                partnerships@unitedinpride.org
+              info@unitedinpride.ca
               </div>
               <div className="flex items-center gap-4 text-lg font-bold text-slate-800">
                 <span className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">📞</span>
-                (416) 555-PARTNER
+                (437) 665-9413
               </div>
             </div>
           </div>

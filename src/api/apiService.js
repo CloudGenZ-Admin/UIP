@@ -74,4 +74,12 @@ export const apiService = {
   getCarePacks: () => apiClient.get('/care-packs'),
   deleteCarePack: (id) => apiClient.delete(`/care-packs/${id}`),
 
+   // --- PARTNERSHIPS ---
+  // Submits the community form data to the backend
+  submitPartnership: (data) => apiClient.post('/contactpartnerships', data),
+  // Fetches data for the admin panel (with pagination)
+  getPartnerships: (page = 1) => apiClient.get(`/contactpartnerships?page=${page}`),
+  // Deletes a specific submission in the admin panel
+  deletePartnership: (id) => apiClient.delete(`/contactpartnerships/${id}`),
+
 };
