@@ -14,6 +14,7 @@ const supportController = require('../controllers/supportRequestController');
 const partnershipController = require('../controllers/partnershipController');
 const contactController = require('../controllers/contactController');
 const carePackController = require('../controllers/carePackController');
+const contactPartnershipController = require('../controllers/contactpartnershipController');
 
 router.post('/volunteers', volunteerController.create);
 router.get('/volunteers', authMiddleware, volunteerController.getAll); 
@@ -75,5 +76,12 @@ router.get('/getEvent', eventController.getEvents);
 // Admin routes to create and delete events (authMiddleware ke sath)
 router.post('/createEvent', authMiddleware, eventController.createEvent); 
 router.delete('/events/:id', authMiddleware, eventController.deleteEvent); 
+
+router.post('/contactpartnerships', contactPartnershipController.create); 
+
+// Protected routes - Admin panel fetches and deletes from here
+router.get('/contactpartnerships', authMiddleware, contactPartnershipController.getAll); 
+router.delete('/contactpartnerships/:id', authMiddleware, contactPartnershipController.delete);
+
 
 module.exports = router;
