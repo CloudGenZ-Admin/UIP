@@ -18,7 +18,7 @@ export default function PartnershipPage() {
                 <PartnershipHero />
 
                 {/* 2. Main Partnership Content Built Above */}
-                <Partnerships />
+                {/* <Partnerships /> */}
                 {/* <VolunteerRoles /> */}
                 <TrainingSupport />
                

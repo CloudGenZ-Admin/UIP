@@ -13,7 +13,7 @@ export default function AboutPage() {
       <Navbar />
       <main>
         <AboutHero />
-        <AboutVideo />
+        {/* <AboutVideo /> */}
         <AboutMissionVision />
         <AboutLeadership />
         <AboutWhyAndValues />

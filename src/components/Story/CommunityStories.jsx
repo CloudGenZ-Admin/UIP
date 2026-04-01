@@ -166,7 +166,7 @@ export default function CommunityStories() {
         >
           <iframe 
             className="absolute top-0 left-0 w-full h-full"
-            src="https://embed.jasperplayer.com?brand=CTV_NEWS&destination=ctvnews_web&language=EN&contentId=3191690" 
+            src="https://embed.jasperplayer.com/?brand=CTV_NEWS&destination=ctvnews_web&language=EN&contentId=3191690" 
             frameBorder="0"
             scrolling="no" /* <-- Added this to hide the scrollbar */
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" 

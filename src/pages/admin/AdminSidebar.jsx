@@ -31,7 +31,7 @@ export default function AdminSidebar() {
       icon: '⚙️',
       links: [
         { name: 'Volunteers', path: '/admin/volunteers', icon: '🙋' },
-        { name: 'Partnerships', path: '/admin/partnerships', icon: '🤝' },
+        // { name: 'Partnerships', path: '/admin/partnerships', icon: '🤝' },
         { name: 'Support Requests', path: '/admin/support-requests', icon: '❤️' },
         { name: 'Care Packs', path: '/admin/care-packs', icon: '📦' },
         { name: 'Contact Messages', path: '/admin/contact', icon: '✉️' }
