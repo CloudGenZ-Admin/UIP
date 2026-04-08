@@ -31,7 +31,7 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Stories", path: "/stories" },
-    { name: "Resources", path: "/resources" },
+    { name: "OurPartners", path: "/ourpartners" },
   ];
 
   // Programs ko yahan simple link ki tarah add kiya hai

@@ -153,8 +153,8 @@ export default function ContactMain() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="(Optional)"
-                  className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none"
+                  placeholder="(optional – only if you prefer to be contacted this way)"
+                  className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none placeholder:text-sm"
                 />
               </div>
               <div className="space-y-2">
@@ -187,6 +187,11 @@ export default function ContactMain() {
                 required
               ></textarea>
             </div>
+            
+            {/* Added Confidentiality Statement */}
+            <p className="text-sm text-slate-500 italic px-2">
+              Your information is kept confidential and used only to support you and connect you to appropriate resources.
+            </p>
 
             {/* Status Messages */}
             {status.success && (
@@ -219,22 +224,20 @@ export default function ContactMain() {
           <div>
             <h2 className="text-3xl font-black text-slate-900 mb-8">Connect With Us</h2>
             <div className="space-y-8">
-              <ContactBlock icon="✉️" title="Email Us" detail="info@unitedinpride.ca" sub="We typically respond within 24 hours" />
-              <ContactBlock icon="📞" title="Call Us" detail="(437) 665-9413" sub="Monday - Friday, 9AM - 5PM EST" />
-              <ContactBlock icon="📍" title="Visit Us" detail="Ottawa, Ontario" sub="Programs held at various community locations" />
+              <ContactBlock icon="✉️" title="Email Us" detail="info@unitedinpride.ca" sub="We typically respond within 24–48 hours" />
+              <ContactBlock icon="📱" title="Instagram" detail="@unitedinpride" sub="Prefer a quicker response? Reach out via Instagram" />
+              <ContactBlock icon="📍" title="Location" detail="Ottawa, Ontario" sub="Programs are hosted at trusted community partner spaces across the city" />
 
               {/* Added Office Hours Here */}
               <ContactBlock
                 icon="🕒"
-                title="Office Hours"
+                title="Availability"
                 detail={
-                  <>
-                    <span className="text-lg">Monday - Friday: 9:00 AM - 5:00 PM</span>
-                    <br />
-                    <span className="text-lg">Saturday: 10:00 AM - 2:00 PM</span>
-                  </>
+                  <span className="text-base leading-snug block">Our team operates flexibly to support community needs.</span>
                 }
-                sub="Programs available evenings and weekends"
+                sub="Most responses are provided within 24–48 hours.
+                  Your information is kept confidential and used only to support you and connect you to appropriate resources.
+                "
               />
             </div>
           </div>

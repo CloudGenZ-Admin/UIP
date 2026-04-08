@@ -38,6 +38,8 @@ export default function CarePackHero() {
           transition={{ delay: 0.2 }}
           className="text-white/80 text-lg md:text-[1.3rem] leading-[1.8] max-w-[800px] mx-auto mb-12"
         >
+          {/* ---> ADDED NEW LINE HERE <--- */}
+          A small gesture of care can make a big difference when starting over. <br className="hidden md:block" />
           Essential items delivered with love and care to support your journey. 
           Each pack is thoughtfully curated to help you feel comfortable, connected, 
           and supported during your first months in Canada.

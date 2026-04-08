@@ -75,10 +75,13 @@ export default function Footer() {
             </div>
 
             <p className="text-[rgba(255,255,255,0.7)] text-[0.95rem] leading-[1.7] mb-6 max-w-[340px]">
-              A safe space for LGBTQ+ newcomers, immigrants, and refugees to heal, connect, and thrive.
+              A community for LGBTQ+ newcomers, immigrants, and refugees to heal, connect, and build a sense of belonging in a new home.
             </p>
 
             {/* SOCIAL LINKS - Updated with your URLs */}
+            <h4 className="font-bold text-[1rem] mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
+              Follow Our Journey
+            </h4>
             <div className="flex gap-3">
               {socialLinks.map((s, idx) => (
                 <a
@@ -101,8 +104,9 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)]">
-              <li><Link to="/about" onClick={scrollToTop} className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/programs" onClick={scrollToTop} className="hover:text-white transition-colors">Our Programs</Link></li>
+              <li><Link to="/about" onClick={scrollToTop} className="hover:text-white transition-colors">About</Link></li>
+              <li><Link to="/programs" onClick={scrollToTop} className="hover:text-white transition-colors">Programs</Link></li>
+              <li><Link to="/support" onClick={scrollToTop} className="hover:text-white transition-colors">Get Support</Link></li>
               <li><Link to="/involed" onClick={scrollToTop} className="hover:text-white transition-colors">Get Involved</Link></li>
               <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
@@ -114,23 +118,24 @@ export default function Footer() {
               Programs
             </h4>
             <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)]">
-              <li>Wellness Circles</li>
-              <li>Social Events</li>
-              <li>Sports & Movement</li>
-              <li>Cultural Programs</li>
-              <li>Advocacy & Support</li>
+              <li>Peer Support Circles</li>
+              <li>Wellness Workshops</li>
+              <li>Cultural & Community Events</li>
+              <li>Resource Navigation</li>
+              <li>Youth & Newcomer Programs</li>
             </ul>
           </div>
 
           {/* CONTACT & SUPPORT COLUMN */}
           <div className="text-center md:text-left">
             <h4 className="font-bold text-[1rem] mb-5 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
-              Support Us
+              Support
             </h4>
             <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)] mb-6">
-              <li><Link to="/donate" onClick={scrollToTop} className="hover:text-white transition-colors">Donate Now</Link></li>
-              <li><Link to="/Partnership" onClick={scrollToTop} className="hover:text-white transition-colors">Partnerships</Link></li>
-              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact Us</Link></li>
+              <li><Link to="/donate" onClick={scrollToTop} className="hover:text-white transition-colors">Donate</Link></li>
+              <li><Link to="/Partnership" onClick={scrollToTop} className="hover:text-white transition-colors">Partner With Us</Link></li>
+              <li><Link to="/volunteer" onClick={scrollToTop} className="hover:text-white transition-colors">Volunteer With Us</Link></li>
+              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
 
             <div className="flex flex-col gap-3 text-[0.85rem] text-[rgba(255,255,255,0.5)]">
@@ -138,8 +143,11 @@ export default function Footer() {
                 <MapPin size={14} className="text-[#FF6B6B]" /> Ottawa, Canada
               </div>
               <div className="flex items-center justify-center md:justify-start gap-2">
-                <Mail size={14} className="text-[#A855F7]" /> hello@unitedinpride.ca
+                <Mail size={14} className="text-[#A855F7]" /> info@unitedinpride.ca
               </div>
+              <p className="mt-2 italic leading-relaxed text-[rgba(255,255,255,0.4)]">
+                Your privacy matters. All communication is handled with care and confidentiality.
+              </p>
             </div>
           </div>
 
@@ -152,8 +160,8 @@ export default function Footer() {
 
         {/* FOOTER BOTTOM BAR */}
         <div className="py-6 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-[rgba(255,255,255,0.08)]">
-          <p className="text-[rgba(255,255,255,0.5)] text-[0.85rem]">
-            © 2025 United in Pride. All rights reserved. Made with 💜 in Ottawa.
+          <p className="text-[rgba(255,255,255,0.5)] text-[0.85rem] text-center md:text-left">
+            © 2025 United in Pride. All rights reserved. Built with love in Ottawa for LGBTQ+ newcomers across Canada.
           </p>
           {/* <div className="flex gap-6">
             {['Privacy', 'Terms', 'Accessibility'].map((item) => (

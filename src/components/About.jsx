@@ -1,13 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-// Adjust this relative path depending on where your About.jsx file is located!
-// Assuming About.jsx is inside src/components/, then ../assets/ is correct.
 import aboutImage from '../assets/WhatsApp Image 2026-03-26 at 10.51.06 AM (1).jpeg';
 
 export default function About() {
   return (
-    <section id="about" className="py-[100px] px-6 overflow-hidden">
+    <section id="about" className="py-[100px] px-6 overflow-hidden bg-[#FAFAFA]">
       <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 gap-[64px] items-center">
         
         {/* Left Side: Image */}

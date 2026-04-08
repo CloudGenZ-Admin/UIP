@@ -81,7 +81,10 @@ export default function WaysToGiveOptions() {
         >
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="flex-1 w-full">
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-6">Donate</h2>
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">Donate</h2>
+              <p className="text-xl font-bold text-[#A855F7] mb-6">
+                Your support helps create spaces where people feel seen, supported, and connected.
+              </p>
               <p className="text-slate-600 text-lg mb-6">Your support can help us:</p>
               <ul className="space-y-4 mb-10">
                 {[
@@ -190,6 +193,9 @@ export default function WaysToGiveOptions() {
         >
           <div className="flex-1 lg:sticky lg:top-10">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">Partner With Us</h2>
+            <p className="text-slate-600 text-lg mb-4 leading-relaxed font-bold">
+              We work with partners who believe in dignity, inclusion, and community-led impact.
+            </p>
             <p className="text-slate-600 text-lg mb-8 leading-relaxed">
               Businesses, organizations, and community groups can support United in Pride through sponsorship, donated resources, or community partnerships.
             </p>
@@ -292,13 +298,39 @@ export default function WaysToGiveOptions() {
         </motion.div>
 
         {/* ======================= */}
-        {/* 4. SHARE OUR WORK BANNER*/}
+        {/* 4. VOLUNTEER WITH US    */}
+        {/* ======================= */}
+        {/* <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="lg:col-span-2 bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-slate-100 flex flex-col md:flex-row gap-10 items-center text-center md:text-left"
+        >
+          <div className="flex-1">
+            <h2 className="text-3xl font-black text-slate-900 mb-4">Volunteer With Us</h2>
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Your time and skills can make a direct impact. Join our team of dedicated volunteers and help us build a stronger, more inclusive community.
+            </p>
+          </div>
+          <div className="flex-1 w-full md:text-right">
+             <a
+              href="/volunteer" 
+              className="inline-flex items-center justify-center px-10 py-4 bg-slate-900 text-white rounded-2xl font-black shadow-lg hover:bg-black transition-colors"
+            >
+              Apply to Volunteer
+            </a>
+          </div>
+        </motion.div> */}
+
+        {/* ======================= */}
+        {/* 5. SHARE OUR WORK BANNER*/}
         {/* ======================= */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.4 }}
           className="lg:col-span-2 bg-slate-100 rounded-[2.5rem] p-8 md:p-14 shadow-sm border border-slate-200 flex flex-col md:flex-row gap-10 items-center text-center md:text-left"
         >
           <div className="flex-1">

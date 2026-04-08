@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-
 const cardStyle = {
   backgroundOrigin: 'border-box',
   backgroundClip: 'padding-box, border-box',
@@ -19,11 +18,7 @@ export default function Stats() {
   ];
 
   return (
-    <section className="relative z-10 -mt-[100px] pb-[100px] px-6 overflow-visible">
-      
-
-
-      {/* Main Stats Grid */}
+    <section className="relative z-10 -mt-[100px] pb-[100px] px-6 overflow-visible bg-[#FAFAFA]">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
         {stats.map((s, i) => (
           <motion.div 

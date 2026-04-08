@@ -9,6 +9,8 @@ import Gallery from '../components/Gallery';
 import Events from '../components/Event';
 import Stories from '../components/Stories';
 import Footer from '../components/Footer';
+import Partners from '../components/Partners';
+import WhatWeDo from '../components/WhatWeDo';
 
 export default function Home() {
   return (
@@ -18,7 +20,9 @@ export default function Home() {
         <Hero />
         <Stats />
         <Ticker />
+        <WhatWeDo />
         <About />
+        <Partners />
         {/* <Programs /> */}
         <Donate />
         {/* <Gallery /> */}

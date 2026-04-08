@@ -103,22 +103,22 @@ export default function VolunteerDetails() {
         {/* --- Form Section --- */}
         <div id="apply-form" className="grid lg:grid-cols-2 gap-16 items-start">
           <div>
-            <h2 className="text-4xl font-black text-slate-900 mb-6">Apply to Volunteer</h2>
+            <h2 className="text-4xl font-black text-slate-900 mb-6">Volunteer With Us</h2>
             <p className="text-slate-600 text-lg leading-[1.8] mb-10">
-              Join us in building a national movement. Together, we're creating lasting change for LGBTQ+ newcomers across Canada. Your voice, your time, and your support make all the difference.
+              Join us in building a national movement. Together, we're creating lasting change for LGBTQ+ newcomers across Canada. 
+              <br />
+              Your support helps create spaces where people feel seen, supported, and connected.
+              <br />
+              Volunteering with United in Pride means becoming part of a community, not just offering your time.
             </p>
             
             {/* --- UPDATED CONTACT INFO HERE --- */}
-            <div className="space-y-6">
+            {/* <div className="space-y-6">
               <div className="flex items-center gap-4 text-lg font-bold text-slate-800">
                 <span className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">✉</span>
                 info@unitedinpride.ca
               </div>
-              <div className="flex items-center gap-4 text-lg font-bold text-slate-800">
-                <span className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">📞</span>
-                (437) 665-9413
-              </div>
-            </div>
+            </div> */}
             {/* --------------------------------- */}
             
           </div>

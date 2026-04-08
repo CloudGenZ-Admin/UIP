@@ -23,8 +23,8 @@ export default function AboutMissionVision() {
             <span className="text-[#FF6B6B] font-bold tracking-widest uppercase text-sm mb-3 block">Our Purpose</span>
             <h2 className="text-4xl font-extrabold text-slate-900 mb-6 leading-tight">Our Mission</h2>
             <p className="text-xl text-slate-600 leading-relaxed font-medium">
-              To support LGBTQ+ newcomers, immigrants, and refugees fleeing persecution by creating safe, 
-              culturally affirming spaces where they can heal, connect, and reclaim their dignity and belonging.
+              United in Pride creates inclusive, culturally affirming spaces where LGBTQ+ newcomers can heal, build community, access support, and rediscover a sense of belonging.
+
             </p>
           </motion.div>
           

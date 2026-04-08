@@ -49,7 +49,7 @@ export default function App() {
         <Route path="/stories" element={<Stories />} />
         {/* <Route path="/support" element={<SupportPage />} /> */}
         <Route path='/care-packs' element={<CarePack/>} />
-        <Route path='/resources' element={<ResourcesPage/>} />
+        <Route path='/ourpartners' element={<ResourcesPage/>} />
         <Route path='/contact' element={<ContactPage/>} />
         {/* <Route path="/volunteer" element={<VolunteerPage />} /> */}
         <Route path="/donate" element={<Donate />} /> 

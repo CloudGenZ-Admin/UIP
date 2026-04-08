@@ -15,7 +15,7 @@ export default function ResourcesHero() {
           whileInView={{ opacity: 1, y: 0 }} 
           className="inline-block py-2 px-5 bg-white/12 border border-white/20 rounded-full text-white/90 text-sm font-medium backdrop-blur-md mb-6"
         >
-          Resource Directory
+          Our Partners
         </motion.span>
         
         <motion.h1 
@@ -24,7 +24,7 @@ export default function ResourcesHero() {
           transition={{ delay: 0.1 }}
           className="text-white text-5xl md:text-[4.5rem] font-extrabold leading-[1.1] mb-12"
         >
-          Your Journey to <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Safety & Belonging</span> Starts Here
+          Community <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Connection & Support</span> Starts Here
         </motion.h1>
 
         <motion.div 
@@ -33,10 +33,10 @@ export default function ResourcesHero() {
           transition={{ delay: 0.2 }}
           className="flex flex-wrap justify-center gap-4"
         >
-          <a href="#directory" className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
-            Find Resources Now
+          <a href="#partners" className="px-10 py-4 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+            Meet Our Partners
           </a>
-          <a href="/Waystogive" className="px-10 py-4 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">
+          <a href="/support" className="px-10 py-4 bg-white/15 border-2 border-white/40 backdrop-blur-md text-white rounded-full font-bold hover:bg-white/25 transition-all">
             Get Personal Support
           </a>
         </motion.div>

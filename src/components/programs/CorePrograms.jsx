@@ -5,66 +5,114 @@ const PROGRAMS = [
   {
     id: 'peer-support',
     title: 'Peer Support Circles',
-    desc: 'Safe, confidential spaces where community members can share experiences, build friendships, and support each other through the challenges of resettlement.',
+    desc: 'Warm, welcoming spaces where we come together to share our stories, build real friendships, and support one another as we navigate our new lives.',
     emoji: '💬',
     bgColor: 'bg-indigo-50/60',
     accent: 'text-indigo-600',
     features: [
-      { title: 'Confidential & Safe', desc: 'Privacy-protected spaces where vulnerability is honored' },
-      { title: 'Genuine Connection', desc: 'Build lasting friendships with people who understand' },
-      { title: 'Resettlement Guidance', desc: 'Navigate complexities with community wisdom' }
+      { title: 'Safe & Welcoming', desc: 'A trusting, judgment-free space where you can truly be yourself' },
+      { title: 'Chosen Family', desc: 'Build deep, lasting friendships with people who genuinely get it' },
+      { title: 'Shared Wisdom', desc: 'Navigate your new life with the love and support of the community' }
     ],
-    schedule: 'Weekly Sessions',
-    btnText: 'Join Support Circle',
+    schedule: 'Weekly Gatherings',
+    btnText: 'Join a Circle',
     link: '/programs/peer-support'
   },
   {
     id: 'wellness',
     title: 'Wellness Workshops',
-    desc: 'Programs addressing mental health, trauma recovery, and holistic wellness tailored to the specific needs of queer and trans newcomers.',
+    desc: 'Gentle, community-centered workshops focused on healing, mental well-being, and self-care, designed specially for the unique journeys of queer and trans newcomers.',
     emoji: '🧘',
     bgColor: 'bg-rose-50/60',
     accent: 'text-rose-600',
     features: [
-      { title: 'Mental Health Focus', desc: 'Evidence-based approaches to anxiety and depression' },
-      { title: 'Trauma Recovery', desc: 'Culturally-informed approaches to processing experiences' },
-      { title: 'Holistic Wellness', desc: 'Mind-body practices, meditation, and self-care' }
+      { title: 'Mental Well-being', desc: 'Gentle, affirming approaches to easing anxiety and finding peace' },
+      { title: 'Healing Together', desc: 'A culturally-aware space to process our experiences together' },
+      { title: 'Holistic Care', desc: 'Explore art therapy, movement, and everyday self-care practices' }
     ],
     schedule: 'Monthly Workshops',
-    btnText: 'Book Wellness Session',
+    btnText: 'Explore Wellness',
     link: '/programs/wellness'
   },
   {
     id: 'cultural',
-    title: 'Cultural Events',
-    desc: 'Celebrations and gatherings that honor the diverse identities and cultures within our community, fostering belonging and pride.',
+    title: 'Cultural & Community Events',
+    desc: 'Joyful gatherings and celebrations where we honor our diverse backgrounds, share our beautiful cultures, and build a chosen family together.',
     emoji: '🎉',
     bgColor: 'bg-teal-50/60',
     accent: 'text-teal-600',
     features: [
-      { title: 'Cultural Celebration', desc: 'Honor your heritage while celebrating your identity' },
-      { title: 'Diverse Community', desc: 'Connect with people from many cultures and backgrounds' },
-      { title: 'Pride & Belonging', desc: 'Experience the joy of being fully seen and celebrated' }
+      { title: 'Celebrate Heritage', desc: 'Honor where you come from while embracing exactly who you are' },
+      { title: 'Joyful Gatherings', desc: 'Share food, music, and laughter with a beautiful, diverse family' },
+      { title: 'True Belonging', desc: 'Experience the magic of being fully seen and loved by your community' }
     ],
     schedule: 'Monthly Events',
-    btnText: 'Join Celebrations',
+    btnText: 'Join the Joy',
     link: '/programs/cultural'
   },
   {
     id: 'navigation',
     title: 'Resource Navigation',
-    desc: 'Assistance connecting newcomers with essential services such as healthcare, legal aid, housing, and employment in culturally sensitive ways.',
+    desc: 'A helping hand to guide you through finding the right doctors, housing, and legal help. We are here to navigate the system with you, step by step.',
     emoji: '🧭',
     bgColor: 'bg-amber-50/60',
     accent: 'text-amber-600',
     features: [
-      { title: 'Healthcare Access', desc: 'Connect with LGBTQ+ affirming healthcare providers' },
-      { title: 'Legal Aid Support', desc: 'Immigration lawyers and refugee claim assistance' },
-      { title: 'Housing & Employment', desc: 'Safe housing options and inclusive opportunities' }
+      { title: 'Affirming Care', desc: "We'll help you find doctors and therapists who celebrate who you are" },
+      { title: 'Legal Support', desc: 'Compassionate guidance for refugee claims and immigration paperwork' },
+      { title: 'Everyday Needs', desc: 'Help with the basics, from finding safe housing to writing a resume' }
     ],
     schedule: 'By Appointment',
-    btnText: 'Get Navigation Help',
+    btnText: 'Get Support',
     link: '/resources'
+  },
+  {
+    id: 'youth',
+    title: 'Youth & Newcomer Programs',
+    desc: 'Dedicated, uplifting spaces for young LGBTQ+ newcomers to hang out, express themselves, learn new skills, and grow together.',
+    emoji: '🌱',
+    bgColor: 'bg-emerald-50/60',
+    accent: 'text-emerald-600',
+    features: [
+      { title: 'Safe Hangouts', desc: 'A relaxed, fun environment just for young folks to be themselves' },
+      { title: 'Life Skills', desc: 'Gentle guidance on everything from resume building to self-care' },
+      { title: 'Peer Mentorship', desc: 'Connect with older community members who truly understand' }
+    ],
+    schedule: 'Ongoing Programs',
+    btnText: 'Join Youth Programs',
+    link: '/programs/youth'
+  },
+  {
+    id: 'movie-night',
+    title: 'Queer Afro Movie Night',
+    desc: 'A cozy monthly gathering celebrating vibrant queer African stories through film, thoughtful conversation, and a strong sense of community.',
+    emoji: '🍿',
+    bgColor: 'bg-fuchsia-50/60',
+    accent: 'text-fuchsia-600',
+    features: [
+      { title: 'African Stories', desc: 'Celebrate beautiful, diverse queer cinema from the continent' },
+      { title: 'Community Chat', desc: 'Warm conversations and genuine connection after the film' },
+      { title: 'Launch Date', desc: 'Join us for our very first kickoff event on April 25!' }
+    ],
+    schedule: 'Every Last Saturday',
+    btnText: 'Save Your Seat',
+    link: '/programs/movie-night'
+  },
+  {
+    id: 'summer-camp',
+    title: 'Summer Community Camp',
+    desc: 'A beautiful summer program focused on outdoor connection, creative expression, and deep belonging for our LGBTQ+ newcomer family.',
+    emoji: '⛺',
+    bgColor: 'bg-sky-50/60',
+    accent: 'text-sky-600',
+    features: [
+      { title: 'Nature & Connection', desc: 'Enjoy the beautiful outdoors in a safe, affirming space' },
+      { title: 'Creative Belonging', desc: 'Share stories, create art, and build lifelong friendships' },
+      { title: 'Summer Launch', desc: 'Get ready—our camp activities officially begin on July 17!' }
+    ],
+    schedule: 'Starting July 17',
+    btnText: 'Register for Camp',
+    link: '/programs/summer-camp'
   }
 ];
 
