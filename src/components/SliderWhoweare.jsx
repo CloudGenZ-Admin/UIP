@@ -1,20 +1,36 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 
-import img1 from '../assets/gallerySlid/DSC00293.jpg';
-import img2 from '../assets/gallerySlid/DSC00001.jpg';
-import img3 from '../assets/gallerySlid/DSC00002.jpg';
-import img4 from '../assets/gallerySlid/DSC00003.jpg';
-import img5 from '../assets/gallerySlid/DSC00004.jpg';
-import img6 from '../assets/gallerySlid/DSC00005.jpg';
-import img7 from '../assets/gallerySlid/DSC00289.jpg';
-import img8 from '../assets/gallerySlid/DSC00290.jpg';
-import img9 from '../assets/gallerySlid/DSC00291.jpg';
-
+import img1 from '../assets/gallerySlid/DSC00239.jpg';
+import img2 from '../assets/gallerySlid/DSC00253.jpg';
+import img3 from '../assets/gallerySlid/DSC00254.jpg';
+import img4 from '../assets/gallerySlid/DSC00270.jpg';
+import img5 from '../assets/gallerySlid/DSC00271.jpg';
+import img6 from '../assets/gallerySlid/DSC00282.jpg';
+import img7 from '../assets/gallerySlid/DSC00283.jpg';
+import img8 from '../assets/gallerySlid/DSC00293.jpg';
+import img9 from '../assets/gallerySlid/DSC00294.jpg';
+import img10 from '../assets/gallerySlid/DSC00303.jpg';
+import img11 from '../assets/gallerySlid/DSC00304.jpg';
+import img12 from '../assets/gallerySlid/_DSC00001.jpg';
+import img13 from '../assets/gallerySlid/_DSC00002.jpg';
+import img14 from '../assets/gallerySlid/_DSC00003.jpg';
+import img15 from '../assets/gallerySlid/_DSC00005.jpg';
+import img16 from '../assets/gallerySlid/_DSC00289.jpg';
+import img17 from '../assets/gallerySlid/DSC00001.jpg';
+import img18 from '../assets/gallerySlid/DSC00157.jpg';
+import img19 from '../assets/gallerySlid/DSC00158.jpg';
+import img20 from '../assets/gallerySlid/DSC00160.jpg';
+import img21 from '../assets/gallerySlid/DSC00161.jpg';
+import img22 from '../assets/gallerySlid/DSC00238.jpg';
 
 const GALLERY_IMAGES = [
-  img1, img2, img3, img4, img5, img6, img7, img8, img9
+  img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, 
+  img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, 
+  img21, img22
 ];
+
+
 
 export default function CommunityGallery() {
   const scrollRef = useRef(null);
