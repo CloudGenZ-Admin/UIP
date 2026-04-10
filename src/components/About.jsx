@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import aboutImage from '../assets/WhatsApp Image 2026-03-26 at 10.51.06 AM (1).jpeg';
-
+import CommunityGallery from './CommunityGallery';
+import SliderWhoweare from './SliderWhoweare';
 export default function About() {
   return (
     <section id="about" className="py-[100px] px-6 overflow-hidden bg-[#FAFAFA]">
@@ -45,6 +46,7 @@ export default function About() {
         </motion.div>
         
       </div>
+      < SliderWhoweare />
     </section>
   );
 }

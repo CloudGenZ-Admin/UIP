@@ -14,7 +14,7 @@ const PARTNERS = [
     name: "Empower Youth Canada", 
     summary: "Empowering young people through inclusive programs, safe spaces, and dedicated community support.", 
     type: "Community Partner",
-    website: "#" 
+   website: "https://empoweryouthcanada.ca"
   }
 ];
 
@@ -84,7 +84,7 @@ export default function ResourceDirectory() {
                 {partner.summary}
               </p>
 
-              {/* <div className="mt-auto pt-6 border-t border-slate-50">
+              <div className="mt-auto pt-6 border-t border-slate-50">
                 <a 
                   href={partner.website} 
                   target="_blank" 
@@ -93,7 +93,7 @@ export default function ResourceDirectory() {
                 >
                   Visit Website
                 </a>
-              </div> */}
+              </div>
             </motion.div>
           ))}
         </div>
