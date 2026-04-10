@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 // Aapke YouTube videos ki IDs
@@ -10,10 +10,11 @@ const YOUTUBE_VIDEOS = [
 
 export default function CommunityStories() {
   const scrollRef = useRef(null);
+  // State track karne ke liye ki kaunsa video play ho raha hai
+  const [activeVideo, setActiveVideo] = useState(null);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      // Videos thode wide hain, isliye scroll amount thoda badha diya hai
       const scrollAmount = window.innerWidth < 768 ? window.innerWidth * 0.85 : 560;
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
@@ -73,7 +74,6 @@ export default function CommunityStories() {
         <div 
           ref={scrollRef}
           className="flex gap-6 md:gap-8 overflow-x-auto snap-x snap-mandatory hide-scroll pb-16 pt-4 pr-12 scroll-smooth items-center"
-          // Aligning first video perfectly with the header text
           style={{ paddingLeft: 'max(1.5rem, calc((100vw - 1200px) / 2))' }}
         >
           {YOUTUBE_VIDEOS.map((video, i) => (
@@ -83,20 +83,45 @@ export default function CommunityStories() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
-              // Changed aspect-[4/5] to aspect-video (16:9) and adjusted width for videos
-              className="relative shrink-0 snap-center group w-[85vw] sm:w-[60vw] md:w-[450px] lg:w-[560px] aspect-video rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-[6px] border-slate-50 bg-slate-100"
+              className="relative shrink-0 snap-center group w-[85vw] sm:w-[60vw] md:w-[450px] lg:w-[560px] aspect-video rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-[6px] border-slate-50 bg-slate-900"
             >
-              <iframe 
-                className="absolute top-0 left-0 w-full h-full rounded-[1.5rem]"
-                src={`https://www.youtube.com/embed/${video.id}?rel=0`} 
-                title={video.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowFullScreen
-              ></iframe>
+              {/* Check if this video is clicked to play */}
+              {activeVideo === video.id ? (
+                <iframe 
+                  className="absolute top-0 left-0 w-full h-full rounded-[1.5rem]"
+                  // autoplay=1 ensures video plays immediately. modestbranding=1 removes youtube logo from control bar.
+                  src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&controls=1`} 
+                  title={video.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                /* Custom Custom UI before playing */
+                <div 
+                  className="absolute inset-0 w-full h-full cursor-pointer flex items-center justify-center"
+                  onClick={() => setActiveVideo(video.id)}
+                >
+                  {/* High Quality Thumbnail Image fetched directly from YouTube servers */}
+                  <img 
+                    src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`} 
+                    alt={video.title}
+                    className="absolute inset-0 w-full h-full object-cover rounded-[1.5rem]"
+                  />
+                  
+                  {/* Dark overlay on hover for better play button visibility */}
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300 rounded-[1.5rem]"></div>
+                  
+                  {/* Custom Play Button - Source ka pata nahi chalega */}
+                  <div className="relative z-10 w-16 h-16 md:w-20 md:h-20 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.3)] group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-[#A855F7] ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              )}
               
-              {/* Optional overlay effect for design */}
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/30 rounded-[2rem] transition-colors duration-300 pointer-events-none z-10"></div>
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/30 rounded-[2rem] transition-colors duration-300 pointer-events-none z-20"></div>
             </motion.div>
           ))}
         </div>
