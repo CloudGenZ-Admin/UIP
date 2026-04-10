@@ -11,7 +11,8 @@ import Stories from '../components/Stories';
 import Footer from '../components/Footer';
 import Partners from '../components/Partners';
 import WhatWeDo from '../components/WhatWeDo';
-
+import CommunityGallery from '../components/CommunityGallery';
+import CommunityVid from '../components/CommunityVid';
 export default function Home() {
   return (
    <div className="min-h-screen bg-[#FAFAFA]  overflow-x-hidden text-[#1e1e2e]">
@@ -21,7 +22,9 @@ export default function Home() {
         <Stats />
         <Ticker />
         <WhatWeDo />
+      
         <About />
+        <CommunityVid/>
         <Partners />
         {/* <Programs /> */}
         <Donate />

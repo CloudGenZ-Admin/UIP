@@ -14,7 +14,7 @@ export default function Partners() {
   ];
 
   return (
-    <section className="py-[100px] px-6 bg-[#FAFAFA] overflow-hidden">
+    <section className="py-[2px] px-6 bg-[#FAFAFA] overflow-hidden">
       <div className="max-w-[1000px] mx-auto text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="text-[2.5rem] font-extrabold leading-tight mb-4 text-slate-800">
