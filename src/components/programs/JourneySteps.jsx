@@ -33,7 +33,7 @@ export default function JourneySteps() {
               <h3 className="text-2xl font-black text-slate-900 mb-4">{step.title}</h3>
               <p className="text-slate-500 leading-relaxed mb-6 flex-1">{step.desc}</p>
               <a href="#" className="font-black text-sm uppercase tracking-widest text-[#A855F7] hover:text-[#FF6B6B] transition-colors">
-                {step.link}
+                {/* {step.link} */}
               </a>
             </motion.div>
           ))}
