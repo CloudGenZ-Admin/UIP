@@ -106,7 +106,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)]">
               <li><Link to="/about" onClick={scrollToTop} className="hover:text-white transition-colors">About</Link></li>
               <li><Link to="/programs" onClick={scrollToTop} className="hover:text-white transition-colors">Programs</Link></li>
-              <li><Link to="/support" onClick={scrollToTop} className="hover:text-white transition-colors">Get Support</Link></li>
+              <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Get Support</Link></li>
               <li><Link to="/involed" onClick={scrollToTop} className="hover:text-white transition-colors">Get Involved</Link></li>
               <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
@@ -133,8 +133,8 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)] mb-6">
               <li><Link to="/donate" onClick={scrollToTop} className="hover:text-white transition-colors">Donate</Link></li>
-              <li><Link to="/Partnership" onClick={scrollToTop} className="hover:text-white transition-colors">Partner With Us</Link></li>
-              <li><Link to="/volunteer" onClick={scrollToTop} className="hover:text-white transition-colors">Volunteer With Us</Link></li>
+              <li><Link to="/ourpartners" onClick={scrollToTop} className="hover:text-white transition-colors">Partner With Us</Link></li>
+              <li><Link to="/Waystogive" onClick={scrollToTop} className="hover:text-white transition-colors">Volunteer With Us</Link></li>
               <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
 
