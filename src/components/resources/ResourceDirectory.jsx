@@ -15,6 +15,13 @@ const PARTNERS = [
     summary: "Empowering young people through inclusive programs, safe spaces, and dedicated community support.", 
     type: "Community Partner",
    website: "https://empoweryouthcanada.ca"
+  },
+  { 
+    "id": 3, 
+    "name": "Velor Digital", 
+    "summary": "Tailored digital marketing solutions to elevate your brand.", 
+    "type": "Community Partner",
+    "website": "https://www.velordigital.ca"
   }
 ];
 

@@ -11,6 +11,12 @@ export default function Partners() {
       name: "Empower Youth Canada",
       url: "https://empoweryouthcanada.ca/"
     }
+    ,
+    { 
+     
+    name: "Velor Digital", 
+    url: "https://www.velordigital.ca"
+  }
   ];
 
   return (
