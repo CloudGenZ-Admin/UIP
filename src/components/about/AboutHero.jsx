@@ -49,7 +49,8 @@ export default function AboutHero() {
           transition={{ delay: 0.2 }}
           className="text-white/80 text-lg md:text-[1.25rem] leading-[1.8] max-w-[700px] mx-auto"
         >
-         A world where LGBTQ+ newcomers, immigrants, and refugees feel safe, supported, and deeply connected — not just surviving, but thriving in a community they can call home.
+         {/* A world where LGBTQ+ newcomers, immigrants, and refugees feel safe, supported, and deeply connected —
+          not just surviving, but thriving in a community they can call home. */}
         </motion.p>
       </div>
 
