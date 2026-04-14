@@ -39,11 +39,11 @@ export default function CulturalForm() {
 
     try {
       await apiService.submitCultural(payload);
-      setShowPopup(true); // Trigger Popup
+      setShowPopup(true); 
       e.target.reset();
     } catch (error) {
       console.error(error);
-      alert('Submission failed. Please try again.');
+      alert('Oh no! Something went wrong. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -64,10 +64,10 @@ export default function CulturalForm() {
             animate={{ opacity: 1, y: 0 }}
             className="text-white text-4xl md:text-6xl font-black leading-tight mb-6"
           >
-            Join Our <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">Cultural Celebrations</span>
+            Come Celebrate <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]">With Us!</span>
           </motion.h1>
           <p className="text-white/80 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Experience the richness of our diverse community through joyful celebrations that honor our heritage and build lasting memories.
+            Experience the beautiful richness of our community through joyful gatherings. Honor your diverse roots, share stories, and build lifelong friendships in a space made for you. 🌺
           </p>
         </div>
 
@@ -92,24 +92,24 @@ export default function CulturalForm() {
               <section className="space-y-8">
                 <div className="flex items-center gap-5">
                   <span className="w-12 h-12 rounded-2xl bg-[#FF6B6B]/10 text-[#FF6B6B] flex items-center justify-center font-black text-xl shadow-sm">1</span>
-                  <h2 className="text-2xl font-black text-slate-900 italic">Personal Information</h2>
+                  <h2 className="text-2xl font-black text-slate-900 italic">Tell Us About Yourself</h2>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Full Name *</label>
-                    <input type="text" name="name" placeholder="Enter your full name" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none font-bold" required />
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">What's your name? *</label>
+                    <input type="text" name="name" placeholder="Your chosen name" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none font-bold" required />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Pronouns</label>
                     <input type="text" name="pronouns" placeholder="e.g., she/her, they/them" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none font-bold" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Email Address *</label>
-                    <input type="email" name="email" placeholder="your@email.com" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none font-bold" required />
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Best Email *</label>
+                    <input type="email" name="email" placeholder="So we can send you invites" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none font-bold" required />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Phone (optional)</label>
-                    <input type="tel" name="phone" placeholder="For event updates" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none font-bold" />
+                    <input type="tel" name="phone" placeholder="For quick event updates" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] transition-all outline-none font-bold" />
                   </div>
                 </div>
               </section>
@@ -118,17 +118,22 @@ export default function CulturalForm() {
               <section className="space-y-8">
                 <div className="flex items-center gap-5">
                   <span className="w-12 h-12 rounded-2xl bg-[#A855F7]/10 text-[#A855F7] flex items-center justify-center font-black text-xl shadow-sm">2</span>
-                  <h2 className="text-2xl font-black text-slate-900 italic">Event Interests</h2>
+                  <h2 className="text-2xl font-black text-slate-900 italic">What Excites You?</h2>
                 </div>
                 <div className="space-y-6">
-                  <label className="text-xs font-black uppercase tracking-widest text-slate-400 block ml-2">Which celebrations interest you? (select all that apply) *</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-slate-400 block ml-2">Which gatherings would you love to attend? (Check all you like) *</label>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {[
-                      'Pride Month Celebrations', 'Heritage & Cultural Festivals', 
-                      'Holiday Gatherings', 'Seasonal Celebrations', 
-                      'Community Achievement Events', 'Cultural Food Festivals', 
-                      'Music & Dance Events', 'Art & Creativity Showcases', 
-                      'Sports & Games Days', 'Storytelling & Poetry Nights'
+                      '🍿 Queer Afro Movie Night',
+                      '🌈 Pride Month Celebrations', 
+                      '🌍 Heritage & Cultural Feasts', 
+                      '🎉 Holiday Get-Togethers', 
+                      '🏆 Community Milestones', 
+                      '🍲 Potlucks & Food Festivals', 
+                      '🎵 Music & Dance Jams', 
+                      '🎨 Art & Creativity Showcases', 
+                      '⚽ Sports & Park Days', 
+                      '📖 Storytelling & Poetry Nights'
                     ].map(event => (
                       <label key={event} className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 cursor-pointer hover:bg-slate-100 transition-all group">
                         <input type="checkbox" name="interests_checkbox" value={event} className="w-5 h-5 accent-[#A855F7] rounded" /> 
@@ -153,16 +158,16 @@ export default function CulturalForm() {
               <section className="space-y-8">
                 <div className="flex items-center gap-5">
                   <span className="w-12 h-12 rounded-2xl bg-[#3B82F6]/10 text-[#3B82F6] flex items-center justify-center font-black text-xl shadow-sm">3</span>
-                  <h2 className="text-2xl font-black text-slate-900 italic">Cultural Background</h2>
+                  <h2 className="text-2xl font-black text-slate-900 italic">Your Beautiful Roots</h2>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Country/Region of Origin</label>
-                    <input type="text" name="country" placeholder="Helps us plan inclusively" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Country or Region of Origin</label>
+                    <input type="text" name="country" placeholder="This helps us plan inclusively!" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Cultural/Ethnic Background</label>
-                    <input type="text" name="background" placeholder="Share what you feel comfortable with" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
+                    <input type="text" name="background" placeholder="Share whatever you feel comfortable with" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
                   </div>
                 </div>
               </section>
@@ -171,16 +176,16 @@ export default function CulturalForm() {
               <section className="space-y-8">
                 <div className="flex items-center gap-5">
                   <span className="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-sm">4</span>
-                  <h2 className="text-2xl font-black text-slate-900 italic">Needs & Preferences</h2>
+                  <h2 className="text-2xl font-black text-slate-900 italic">How Can We Support You?</h2>
                 </div>
                 <div className="space-y-8">
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Dietary Restrictions</label>
-                    <textarea name="dietary" rows="2" placeholder="e.g., vegetarian, halal, allergies, etc." className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none resize-none font-medium"></textarea>
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Dietary Needs or Allergies</label>
+                    <textarea name="dietary" rows="2" placeholder="e.g., vegetarian, halal, nut allergy, gluten-free" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none resize-none font-medium"></textarea>
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Accessibility Needs</label>
-                    <textarea name="access_needs" rows="2" placeholder="ASL, wheelchair access, etc." className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none resize-none font-medium"></textarea>
+                    <textarea name="access_needs" rows="2" placeholder="Let us know about ASL, wheelchair access, low stimulation space, etc." className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none resize-none font-medium"></textarea>
                   </div>
                 </div>
               </section>
@@ -189,21 +194,21 @@ export default function CulturalForm() {
               <section className="space-y-8">
                 <div className="flex items-center gap-5">
                   <span className="w-12 h-12 rounded-2xl bg-[#FF6B6B]/10 text-[#FF6B6B] flex items-center justify-center font-black text-xl shadow-sm">5</span>
-                  <h2 className="text-2xl font-black text-slate-900 italic">Emergency & Volunteering</h2>
+                  <h2 className="text-2xl font-black text-slate-900 italic">Connections & Community</h2>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Emergency Contact Name</label>
-                    <input type="text" name="emergency_name" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
+                    <input type="text" name="emergency_name" placeholder="A trusted friend or family member" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Emergency Phone</label>
-                    <input type="tel" name="emergency_phone" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
+                    <input type="tel" name="emergency_phone" placeholder="Their phone number" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none font-bold" />
                   </div>
                 </div>
                 <label className="flex items-center gap-4 p-6 rounded-[2rem] bg-slate-900 text-white cursor-pointer hover:shadow-xl transition-all group">
                   <input type="checkbox" name="volunteering" className="w-6 h-6 accent-[#FF6B6B] rounded" />
-                  <span className="font-bold text-sm uppercase tracking-widest">I'm interested in volunteering for celebration planning 💜</span>
+                  <span className="font-bold text-sm uppercase tracking-widest">I'd love to help plan or volunteer at events! 💜</span>
                 </label>
               </section>
 
@@ -211,12 +216,12 @@ export default function CulturalForm() {
               <section className="space-y-8">
                 <div className="flex items-center gap-5">
                   <span className="w-12 h-12 rounded-2xl bg-[#A855F7]/10 text-[#A855F7] flex items-center justify-center font-black text-xl shadow-sm">6</span>
-                  <h2 className="text-2xl font-black text-slate-900 italic">Consent & Preferences</h2>
+                  <h2 className="text-2xl font-black text-slate-900 italic">Final Touches</h2>
                 </div>
                 
                 <div className="space-y-6">
                   <div className="space-y-4">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 block ml-2">Photo and Video Consent</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 block ml-2">Are you okay with being in event photos?</label>
                     <div className="flex flex-wrap gap-6 p-4 bg-slate-50 rounded-2xl">
                       {['Yes, I consent', 'No photos please', 'Ask me first'].map(opt => (
                         <label key={opt} className="flex items-center gap-2 font-bold text-slate-600 cursor-pointer">
@@ -227,14 +232,14 @@ export default function CulturalForm() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Comments or Questions</label>
-                    <textarea name="comments" rows="3" placeholder="Any suggestions for our celebrations?" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none resize-none font-medium"></textarea>
+                    <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Got any thoughts or fun ideas?</label>
+                    <textarea name="comments" rows="3" placeholder="Tell us what kind of gatherings you'd love to see!" className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-[#A855F7] outline-none resize-none font-medium"></textarea>
                   </div>
                 </div>
               </section>
 
               <button type="submit" disabled={loading} className="w-full py-5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white font-black text-xl rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all disabled:opacity-50">
-                {loading ? 'Submitting Registration...' : 'Join Our Celebrations 🌈'}
+                {loading ? 'Sending to our community...' : 'Join the Celebration! 🌈'}
               </button>
             </form>
           </motion.div>
@@ -247,13 +252,26 @@ export default function CulturalForm() {
               style={cardBorderStyle}
               className="bg-white rounded-[2.5rem] p-8 border-2 border-transparent shadow-xl"
             >
-              <h3 className="text-2xl font-black text-slate-900 mb-2 italic">Upcoming Events</h3>
+              <h3 className="text-2xl font-black text-slate-900 mb-2 italic">Coming Up!</h3>
               <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8 border-b border-slate-50 pb-4">Mark your calendar</p>
               
               <div className="space-y-6">
-                <EventCard title="Pride Month Celebration" desc="Vibrant celebration with food, music, and performances." loc="Community Centre" />
-                <EventCard title="Heritage Festival" desc="Experience diverse traditions through storytelling." loc="Riverside Park" />
-                <EventCard title="Harvest Gathering" desc="Season traditions, games, and community gratitude." loc="Outdoor Venue" />
+                {/* NEW MOVIE NIGHT EVENT */}
+                <EventCard 
+                  title="Queer Afro Movie Night 🍿" 
+                  desc="A monthly gathering celebrating beautiful queer African stories through film, conversation, and community." 
+                  loc="Every Last Saturday (First event: Apr 25)" 
+                />
+                <EventCard 
+                  title="Pride Month Kickoff 🌈" 
+                  desc="A vibrant evening with delicious food, great music, and local community performances." 
+                  loc="Community Centre" 
+                />
+                <EventCard 
+                  title="Summer Harvest Potluck 🍲" 
+                  desc="Share a dish from your culture, play games, and enjoy a day outdoors together." 
+                  loc="Riverside Park" 
+                />
               </div>
             </motion.div>
 
@@ -262,11 +280,11 @@ export default function CulturalForm() {
               animate={{ opacity: 1, x: 0 }}
               className="bg-[#1e1b4b] rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden"
             >
-              <h3 className="text-xl font-black mb-8 text-[#FF6B6B] italic">What to Expect</h3>
+              <h3 className="text-xl font-black mb-8 text-[#FF6B6B] italic">What You Can Expect</h3>
               <div className="space-y-8 relative z-10">
-                <ExpectItem icon="🍲" title="Delicious Food" desc="Authentic dishes prepared with love. Restrictions accommodated." />
-                <ExpectItem icon="🎵" title="Music & Dance" desc="Opportunities to share and experience diverse traditions." />
-                <ExpectItem icon="🤝" title="Connection" desc="Meet new friends in a joyful, affirming environment." />
+                <ExpectItem icon="🍲" title="Delicious Eats" desc="Authentic food prepared with love, and we always respect your dietary needs." />
+                <ExpectItem icon="🎵" title="Music & Good Vibes" desc="Share your favorite tracks and experience amazing traditions." />
+                <ExpectItem icon="🤝" title="Real Connections" desc="Meet wonderful folks in a joyful, affirming, and entirely safe environment." />
               </div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#FF6B6B]/10 rounded-full blur-3xl"></div>
             </motion.div>
@@ -293,15 +311,15 @@ export default function CulturalForm() {
               <div className="w-20 h-20 bg-gradient-to-br from-[#FF6B6B] to-[#A855F7] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <span className="text-4xl text-white">🎉</span>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 mb-3">Celebration Joined!</h3>
+              <h3 className="text-2xl font-black text-slate-900 mb-3">You're on the list!</h3>
               <p className="text-slate-500 mb-8 font-medium leading-relaxed">
-                You have successfully joined our cultural celebrations! We can't wait to see you there. 🌈
+                We're thrilled to have you join our cultural gatherings. Keep an eye on your email for the next invite. Can't wait to see you there! 🌈
               </p>
               <button 
                 onClick={() => setShowPopup(false)}
                 className="w-full py-4 bg-slate-900 text-white font-black rounded-2xl shadow-md hover:bg-slate-800 hover:shadow-xl transition-all"
               >
-                Close
+                Awesome!
               </button>
             </motion.div>
           </motion.div>
@@ -315,8 +333,8 @@ function EventCard({ title, desc, loc }) {
   return (
     <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-all group">
       <div className="flex justify-between items-start mb-3">
-        <h4 className="font-black text-slate-900 text-sm">{title}</h4>
-        <span className="bg-[#FF6B6B]/10 text-[#FF6B6B] text-[0.6rem] font-black uppercase px-3 py-1 rounded-full whitespace-nowrap">Coming soon</span>
+        <h4 className="font-black text-slate-900 text-sm leading-tight pr-2">{title}</h4>
+        <span className="bg-[#FF6B6B]/10 text-[#FF6B6B] text-[0.6rem] font-black uppercase px-3 py-1 rounded-full whitespace-nowrap mt-1">Coming up</span>
       </div>
       <p className="text-[0.7rem] text-slate-500 mb-3 leading-relaxed">{desc}</p>
       <p className="text-[0.7rem] font-black text-[#3B82F6] uppercase tracking-widest">📍 {loc}</p>

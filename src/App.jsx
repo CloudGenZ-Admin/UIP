@@ -12,11 +12,14 @@ import ContactPage from './pages/ContactPage.jsx';
 import VolunteerPage from './pages/VolunteerPage.jsx';
 import Donate from './pages/DonatePage.jsx';
 import PartnershipPage from './pages/PartnershipPage.jsx';
+import InvolvedPage from './pages/InvoledPage.jsx';
+import ScrollToTop from './pages/ScrollToTop.jsx';
+
+// Program Specific Pages
 import PeerSupportPage from './pages/PeerSupportPage.jsx';
 import WellnessPage from './pages/WellnessPage.jsx';
 import CulturalPage from './pages/CulturalPage.jsx';
-import InvolvedPage from './pages/InvoledPage.jsx';
-import ScrollToTop from './pages/ScrollToTop.jsx';
+import YouthProgramPage from './pages/YouthProgramPage.jsx'; // NEW 🌱
 
 // --- ADMIN PAGES IMPORT ---
 import AdminLogin from './pages/admin/AdminLogin.jsx';
@@ -25,6 +28,7 @@ import AdminStories from './pages/admin/AdminStories.jsx';
 import AdminPeer from './pages/admin/AdminPeer.jsx';
 import AdminWellness from './pages/admin/AdminWellness.jsx';
 import AdminCultural from './pages/admin/AdminCultural.jsx';
+import AdminYouth from './pages/admin/AdminYouth.jsx';           // NEW 🌱
 import AdminEvent from './pages/admin/AdminEvents.jsx';
 import AdminPartnerships from './pages/admin/AdminPartnerships.jsx';
 import AdminVolunteers from './pages/admin/AdminVolunteers.jsx'
@@ -42,9 +46,13 @@ export default function App() {
         {/* ===================== PUBLIC ROUTES ===================== */}
         <Route path="/" element={<Home/>} />
         <Route path="/programs" element={<Programs />} />
+        
+        {/* Individual Program Forms */}
         <Route path="/programs/peer-support" element={<PeerSupportPage />} />
         <Route path="/programs/wellness" element={<WellnessPage />} />
         <Route path="/programs/cultural" element={<CulturalPage />} />
+        <Route path="/programs/youth-programs" element={<YouthProgramPage />} /> {/* NEW 🌱 */}
+  
         <Route path="/about" element={<About />} />
         <Route path="/stories" element={<Stories />} />
         {/* <Route path="/support" element={<SupportPage />} /> */}
@@ -67,11 +75,14 @@ export default function App() {
           
           {/* CRUD Pages */}
           <Route path="/admin/stories" element={<AdminStories />} />
+          
+          {/* Admin Programs */}
           <Route path="/admin/peer-support" element={<AdminPeer />} />
           <Route path="/admin/wellness" element={<AdminWellness />} />
           <Route path="/admin/cultural" element={<AdminCultural />} />
-          <Route path="/admin/events" element={<AdminEvent />} />
+          <Route path="/admin/youth-programs" element={<AdminYouth />} />     {/* NEW 🌱 */}
 
+          <Route path="/admin/events" element={<AdminEvent />} />
           <Route path="/admin/partnerships" element={<AdminPartnerships />} />
           <Route path="/admin/volunteers" element={<AdminVolunteers />} />
           <Route path="/admin/support-requests" element={<AdminSupportRequests />} />

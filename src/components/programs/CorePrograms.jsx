@@ -64,7 +64,7 @@ const PROGRAMS = [
     ],
     schedule: 'By Appointment',
     btnText: 'Get Support',
-    link: '/resources'
+    link: '/ourpartners'
   },
   {
     id: 'youth',
@@ -80,40 +80,9 @@ const PROGRAMS = [
     ],
     schedule: 'Ongoing Programs',
     btnText: 'Join Youth Programs',
-    link: '/programs/youth'
+    link: '/programs/youth-programs'
   },
-  {
-    id: 'movie-night',
-    title: 'Queer Afro Movie Night',
-    desc: 'A cozy monthly gathering celebrating vibrant queer African stories through film, thoughtful conversation, and a strong sense of community.',
-    emoji: '🍿',
-    bgColor: 'bg-fuchsia-50/60',
-    accent: 'text-fuchsia-600',
-    features: [
-      { title: 'African Stories', desc: 'Celebrate beautiful, diverse queer cinema from the continent' },
-      { title: 'Community Chat', desc: 'Warm conversations and genuine connection after the film' },
-      { title: 'Launch Date', desc: 'Join us for our very first kickoff event on April 25!' }
-    ],
-    schedule: 'Every Last Saturday',
-    btnText: 'Save Your Seat',
-    link: '/programs/movie-night'
-  },
-  {
-    id: 'summer-camp',
-    title: 'Summer Community Camp',
-    desc: 'A beautiful summer program focused on outdoor connection, creative expression, and deep belonging for our LGBTQ+ newcomer family.',
-    emoji: '⛺',
-    bgColor: 'bg-sky-50/60',
-    accent: 'text-sky-600',
-    features: [
-      { title: 'Nature & Connection', desc: 'Enjoy the beautiful outdoors in a safe, affirming space' },
-      { title: 'Creative Belonging', desc: 'Share stories, create art, and build lifelong friendships' },
-      { title: 'Summer Launch', desc: 'Get ready—our camp activities officially begin on July 17!' }
-    ],
-    schedule: 'Starting July 17',
-    btnText: 'Register for Camp',
-    link: '/programs/summer-camp'
-  }
+  
 ];
 
 export default function CorePrograms() {

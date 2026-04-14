@@ -21,6 +21,7 @@ export default function AdminSidebar() {
       icon: '🌈',
       links: [
         { name: 'Peer Support', path: '/admin/peer-support', icon: '🤝' },
+        { name: 'Youth & Newcomer', path: '/admin/youth-programs', icon: '🌱' }, // NEW
         { name: 'Wellness Sessions', path: '/admin/wellness', icon: '🧘' },
         { name: 'Cultural Events', path: '/admin/cultural', icon: '🎉' },
         { name: 'Contact Partnerships', path: '/admin/contactPartnerships', icon: '✉️' }
@@ -36,7 +37,8 @@ export default function AdminSidebar() {
         { name: 'Care Packs', path: '/admin/care-packs', icon: '📦' },
         { name: 'Contact Messages', path: '/admin/contact', icon: '✉️' }
       ]
-    }
+    },
+
   ];
 
   // State to handle which dropdowns are open. (By default, keeping them all open)
