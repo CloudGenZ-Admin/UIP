@@ -15,6 +15,7 @@ const partnershipController = require('../controllers/partnershipController');
 const contactController = require('../controllers/contactController');
 const carePackController = require('../controllers/carePackController');
 const contactPartnershipController = require('../controllers/contactpartnershipController');
+const youthCtrl = require('../controllers/youthController');
 
 router.post('/volunteers', volunteerController.create);
 router.get('/volunteers', authMiddleware, volunteerController.getAll); 
@@ -82,6 +83,14 @@ router.post('/contactpartnerships', contactPartnershipController.create);
 // Protected routes - Admin panel fetches and deletes from here
 router.get('/contactpartnerships', authMiddleware, contactPartnershipController.getAll); 
 router.delete('/contactpartnerships/:id', authMiddleware, contactPartnershipController.delete);
+
+// Public Routes (For website forms)
+router.post('/youth-programs', youthCtrl.create);
+
+// Protected Routes (For Admin Panel only)
+router.get('/youth-programs', authMiddleware, youthCtrl.getAll);
+router.delete('/youth-programs/:id', authMiddleware, youthCtrl.delete);
+
 
 
 module.exports = router;
