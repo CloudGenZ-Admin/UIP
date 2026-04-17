@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import aboutImage from '../assets/WhatsApp Image 2026-03-26 at 10.51.06 AM (1).jpeg';
+import aboutImage from '../assets/whoweare.jpg';
 import CommunityGallery from './CommunityGallery';
 import SliderWhoweare from './SliderWhoweare';
 export default function About() {

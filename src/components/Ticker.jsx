@@ -2,10 +2,8 @@ import React from 'react';
 
 const Ticker = () => {
   const items = [
-    "🌈 Pride Month Celebrations Coming Soon — Join Us!",
-    "✨ New Youth Support Program Launching This Spring",
-    "💜 Community Art Exhibition — Submissions Open Now",
-    "🎉 Annual Gala Tickets Available — Don't Miss Out!"
+    "🎥 Queer Movie Night — Every Last Saturday of the Month, Starting April 25",
+    "🏕️ Upcoming Camp — July 17"
   ];
 
   return (
