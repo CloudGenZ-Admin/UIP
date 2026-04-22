@@ -225,7 +225,34 @@ export default function ContactMain() {
             <h2 className="text-3xl font-black text-slate-900 mb-8">Connect With Us</h2>
             <div className="space-y-8">
               <ContactBlock icon="✉️" title="Email Us" detail="info@unitedinpride.ca" sub="We typically respond within 24–48 hours" />
-              <ContactBlock icon="📱" title="Instagram" detail="@unitedinpride" sub="Prefer a quicker response? Reach out via Instagram" />
+              <div className="flex gap-6">
+                <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl shrink-0 shadow-sm">
+                  📱
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">Social Media</h4>
+                  <p className="text-xl font-black text-slate-900 mb-2">@unitedinpride</p>
+                  <div className="flex flex-wrap gap-3 mb-2">
+                    <a href="https://www.facebook.com/people/United-in-Pride/61579117565491/?mibextid=wwXIfr&rdid=yKDvw6J1FEk8NY4q&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19nM1NbmSt%2F%3Fmibextid%3DwwXIfr" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#A855F7] hover:underline flex items-center gap-1"><Facebook size={15} /> Facebook</a>
+                    <a href="https://www.tiktok.com/@unitedinpride1?_t=ZS-8yhxvJbUwYi&_r=1" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#A855F7] hover:underline flex items-center gap-1">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg> TikTok
+                    </a>
+                    <a href="https://www.linkedin.com/company/youpride/" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#A855F7] hover:underline flex items-center gap-1"><Linkedin size={15} /> LinkedIn</a>
+                    <a href="https://www.instagram.com/unite_in_pride?igsh=Z3VtdjJsaTB5ZTR3&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#A855F7] hover:underline flex items-center gap-1"><Instagram size={15} /> Instagram</a>
+                  </div>
+                  <p className="text-sm text-slate-500">Prefer a quicker response? Reach out via social media</p>
+                </div>
+              </div>
+              <div className="flex gap-6">
+                <div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl shrink-0 shadow-sm">
+                  💬
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-400 text-xs uppercase tracking-widest mb-1">WhatsApp</h4>
+                  <a href="https://whatsapp.com/channel/0029VbC7CIMJpe8eQBfVNN3K" target="_blank" rel="noopener noreferrer" className="inline-block mt-1 px-5 py-2.5 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-sm rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all">Join Our Channel →</a>
+                  <p className="text-sm text-slate-500 mt-1">Stay connected with our WhatsApp community</p>
+                </div>
+              </div>
               <ContactBlock icon="📍" title="Location" detail="Ottawa, Ontario" sub="Programs are hosted at trusted community partner spaces across the city" />
 
               {/* Added Office Hours Here */}
