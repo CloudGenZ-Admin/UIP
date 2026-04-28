@@ -36,7 +36,7 @@ import AdminSupportRequests from './pages/admin/AdminSupportRequests.jsx'
 import AdminCarePacks from './pages/admin/AdminCarePacks.jsx';
 import AdminContact from './pages/admin/AdminContact.jsx';
 import AdminContactPartnerships from './pages/admin/AdminContactPartnerships.jsx';
-
+import AdminNews from './pages/admin/AdminNews.jsx';
 export default function App() {
    return (
     <Router>
@@ -89,7 +89,7 @@ export default function App() {
           <Route path="/admin/care-packs" element={<AdminCarePacks />} />
           <Route path="/admin/contact" element={<AdminContact />} />
           <Route path="/admin/contactPartnerships" element={<AdminContactPartnerships />} />
-
+          <Route path="/admin/news" element={<AdminNews />} />
         </Route>
         
       </Routes>

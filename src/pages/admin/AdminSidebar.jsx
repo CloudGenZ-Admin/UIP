@@ -14,6 +14,7 @@ export default function AdminSidebar() {
       links: [
         { name: 'Shared Stories', path: '/admin/stories', icon: '📖' },
         { name: 'Upcoming Events', path: '/admin/events', icon: '📅' },
+        { name: 'Global News', path: '/admin/news', icon: '📰' }
       ]
     },
     {
