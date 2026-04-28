@@ -49,6 +49,10 @@ export const apiService = {
   getEvents: () => apiClient.get('/getEvent'),
   deleteEvent: (id) => apiClient.delete(`/events/${id}`),
 
+   // --- NEWS & ADVOCACY ---
+  submitNews: (data) => apiClient.post('/news', data),
+  getNews: () => apiClient.get('/news'),
+  deleteNews: (id) => apiClient.delete(`/news/${id}`),
 
   // --- VOLUNTEERS ---
   submitVolunteer: (data) => apiClient.post('/volunteers', data),
