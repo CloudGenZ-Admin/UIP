@@ -39,7 +39,7 @@ router.delete('/contact/:id', authMiddleware, contactController.delete); // Admi
 
 // ==========================================
 // 5. CARE PACKS ROUTES (/api/care-packs)
-// ==========================================
+// =========================================
 router.post('/care-packs', carePackController.create); // Public
 router.get('/care-packs', authMiddleware, carePackController.getAll); // Admin Only
 router.delete('/care-packs/:id', authMiddleware, carePackController.delete); // Admin Only
