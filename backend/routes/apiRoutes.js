@@ -16,6 +16,7 @@ const contactController = require('../controllers/contactController');
 const carePackController = require('../controllers/carePackController');
 const contactPartnershipController = require('../controllers/contactpartnershipController');
 const youthCtrl = require('../controllers/youthController');
+const newsController = require('../controllers/newsController');
 
 router.post('/volunteers', volunteerController.create);
 router.get('/volunteers', authMiddleware, volunteerController.getAll); 
@@ -91,6 +92,11 @@ router.post('/youth-programs', youthCtrl.create);
 router.get('/youth-programs', authMiddleware, youthCtrl.getAll);
 router.delete('/youth-programs/:id', authMiddleware, youthCtrl.delete);
 
+// Public route to fetch news for the frontend
+router.get('/news', newsController.getNews);
 
+// Admin routes (Protected by authMiddleware)
+router.post('/news', authMiddleware, newsController.createNews); 
+router.delete('/news/:id', authMiddleware, newsController.deleteNews);
 
 module.exports = router;
