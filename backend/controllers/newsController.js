@@ -2,7 +2,6 @@ const News = require('../models/News');
 
 exports.getNews = async (req, res) => {
   try {
-    // Fetch news ordered by newest date first
     const news = await News.findAll({ 
       order: [['date', 'DESC']] 
     });
