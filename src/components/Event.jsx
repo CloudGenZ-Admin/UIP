@@ -189,10 +189,20 @@ export default function Events() {
                             <span className="flex items-center gap-1">📍 {ev.loc}</span>
                             <span className="flex items-center gap-1">🕐 {formatTime12hr(ev.time)}</span>
                           </div>
-                          {ev.featured && (
-                            <span className="inline-block mt-3 px-3.5 py-1 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full text-[0.75rem] font-bold shadow-sm">
-                              Featured Event
-                            </span>
+                          
+                          {(ev.featured || ev.link) && (
+                            <div className="flex flex-wrap gap-2 mt-3 items-center">
+                              {ev.featured && (
+                                <span className="px-3.5 py-1 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full text-[0.75rem] font-bold shadow-sm">
+                                  Featured Event
+                                </span>
+                              )}
+                              {ev.link && (
+                                <a href={ev.link} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1 border border-slate-200 text-slate-600 hover:text-[#A855F7] hover:border-[#A855F7] rounded-full text-[0.75rem] font-bold transition-colors inline-flex items-center gap-1">
+                                  Event Link <span className="text-[10px]">↗</span>
+                                </a>
+                              )}
+                            </div>
                           )}
                         </div>
                       </div>

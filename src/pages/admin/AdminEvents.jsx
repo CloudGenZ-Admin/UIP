@@ -40,6 +40,7 @@ export default function AdminEvents() {
     desc: '',
     loc: '',
     time: '',
+    link: '', // Added Event Link
     featured: false
   });
 
@@ -109,7 +110,7 @@ export default function AdminEvents() {
 
     try {
       await apiService.submitEvent(formData); 
-      setFormData({ date: '', title: '', desc: '', loc: '', time: '', featured: false });
+      setFormData({ date: '', title: '', desc: '', loc: '', time: '', link: '', featured: false });
       setCurrentPage(1); 
       fetchEvents(); 
     } catch (error) {
@@ -165,6 +166,12 @@ export default function AdminEvents() {
                             <span>📍 {ev.loc}</span>
                             <span className="hidden sm:inline">|</span>
                             <span>🕐 {formatTime12hr(ev.time)}</span>
+                            {ev.link && (
+                              <>
+                                <span className="hidden sm:inline">|</span>
+                                <a href={ev.link} target="_blank" rel="noopener noreferrer" className="text-[#A855F7] hover:underline cursor-pointer">🔗 Link</a>
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -249,6 +256,11 @@ export default function AdminEvents() {
             <div>
               <label className="text-xs font-bold text-slate-500 uppercase">Location</label>
               <input required type="text" name="loc" placeholder="Room 204" value={formData.loc} onChange={handleChange} className="w-full mt-1 p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-white outline-none transition-shadow" />
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-slate-500 uppercase">Event Link (Optional)</label>
+              <input type="url" name="link" placeholder="https://" value={formData.link} onChange={handleChange} className="w-full mt-1 p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-white outline-none transition-shadow" />
             </div>
 
             <label className="flex items-center gap-3 mt-4 p-3 bg-white rounded-xl ring-1 ring-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
