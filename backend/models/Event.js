@@ -12,6 +12,7 @@ const Event = sequelize.define('Event', {
   loc: { type: DataTypes.STRING, allowNull: false }, 
   // Stored as 'HH:mm' from the HTML5 time picker
   time: { type: DataTypes.STRING, allowNull: false },
+  link: { type: DataTypes.STRING, allowNull: true }, // Added optional link field
   featured: { type: DataTypes.BOOLEAN, defaultValue: false }
 }, {
   tableName: 'events',
