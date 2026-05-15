@@ -7,6 +7,7 @@ import AboutLeadership from '../components/about/AboutLeadership';
 import AboutWhyAndValues from '../components/about/AboutWhyAndValues';
 import AboutCTA from '../components/about/AboutCTA';
 import AboutVideo from '../components/about/AboutVideo';
+import TeamBios from '../components/about/TeamBios';
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white font-sans text-pride-navy">
@@ -17,6 +18,7 @@ export default function AboutPage() {
         <AboutMissionVision />
         <AboutLeadership />
         <AboutWhyAndValues />
+        <TeamBios />
         <AboutCTA />
       </main>
       <Footer />
