@@ -24,8 +24,6 @@ export default function AboutCTA() {
               </Link>
             </div>
 
-          
-
           </div>
         </div>
       </div>
