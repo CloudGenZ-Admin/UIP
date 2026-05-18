@@ -72,7 +72,6 @@ export default function TeamBios() {
     <section className="py-24 px-6 bg-white">
       <div className="max-w-[1200px] mx-auto">
         
-        {/* Main Grid: items-start removed so cards naturally stretch to equal heights */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {TEAM_MEMBERS.map((person) => {
             const isLongText = person.bio.length > MAX_LENGTH;
@@ -86,25 +85,30 @@ export default function TeamBios() {
             return (
               <div 
                 key={person.id} 
-                className={`h-full p-10 md:p-12 rounded-[3rem] ${person.bgColor} border border-transparent hover:border-slate-100 transition-all shadow-sm flex flex-col relative overflow-hidden`}
+                className={`h-full p-8 md:p-12 rounded-[3rem] ${person.bgColor} border border-transparent hover:border-slate-100 transition-all shadow-sm flex flex-col relative overflow-hidden`}
               >
                 {/* Decorative Gradient Bar at the bottom */}
                 <div className="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6]"></div>
 
                 {/* Header: Profile Image & Role Badge */}
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex flex-col mb-8 gap-5">
                   <img 
                     src={person.image} 
                     alt={person.name} 
-                    className="w-20 h-20 md:w-24 md:h-24 rounded-3xl object-cover shadow-sm border-4 border-white"
+                    /* 
+                      FIXED: Used aspect-square so it's always a perfect square 
+                      and never stretches or cuts off awkwardly on any size!
+                    */
+                    className="w-full aspect-square sm:w-72 sm:h-72 lg:w-64 lg:h-64 xl:w-72 xl:h-72 object-cover object-top rounded-3xl shadow-sm border-4 border-white"
                   />
-                  <span className="bg-white px-4 py-1.5 rounded-full font-black text-[0.6rem] md:text-xs text-slate-900 uppercase tracking-[0.2em] shadow-sm text-center">
-                    {person.role}
-                  </span>
+                  <div className="flex">
+                    <span className="bg-white px-4 py-2 rounded-full font-black text-[0.65rem] md:text-xs text-slate-900 uppercase tracking-[0.2em] shadow-sm text-center">
+                      {person.role}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Title (Name) & Description (Bio) */}
-                {/* flex-grow pushes the button down if the card is stretched by an adjacent taller card */}
                 <div className="flex-grow flex flex-col">
                   <h3 className={`text-3xl md:text-4xl font-black text-slate-900 leading-tight italic mb-4 ${person.accent}`}>
                     {person.name}
@@ -131,5 +135,5 @@ export default function TeamBios() {
 
       </div>
     </section>
-  );
+  ); 
 }
