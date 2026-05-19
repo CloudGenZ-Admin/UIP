@@ -198,8 +198,9 @@ export default function Events() {
                                 </span>
                               )}
                               {ev.link && (
+                                // --- NEW: Render buttonText dynamically ---
                                 <a href={ev.link} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1 border border-slate-200 text-slate-600 hover:text-[#A855F7] hover:border-[#A855F7] rounded-full text-[0.75rem] font-bold transition-colors inline-flex items-center gap-1">
-                                  Event Link <span className="text-[10px]">↗</span>
+                                  {ev.buttonText || 'Event Link'} <span className="text-[10px]">↗</span>
                                 </a>
                               )}
                             </div>

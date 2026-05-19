@@ -10,7 +10,7 @@ const TEAM_MEMBERS = [
   {
     id: 'winifred',
     name: 'Winifred Ikilai',
-    role: 'Public Health Professional',
+    role: 'Board Member',
     image: winifredImg,
     bgColor: 'bg-indigo-50/60',
     accent: 'text-indigo-600',
@@ -19,7 +19,7 @@ const TEAM_MEMBERS = [
   {
     id: 'khaled',
     name: 'Khaled Salam',
-    role: 'Executive Director',
+    role: 'Board Member',
     image: khaledImg,
     bgColor: 'bg-rose-50/60',
     accent: 'text-rose-600',
@@ -28,7 +28,7 @@ const TEAM_MEMBERS = [
   {
     id: 'saddic',
     name: 'Saddic Lubega',
-    role: 'Teaching Assistant',
+    role: 'Board Member',
     image: saddicImg,
     bgColor: 'bg-teal-50/60',
     accent: 'text-teal-600',
@@ -37,7 +37,7 @@ const TEAM_MEMBERS = [
   {
     id: 'marsha',
     name: 'Marsha Clyne',
-    role: 'Nonprofit Leader',
+    role: 'Board Member',
     image: marshaImg,
     bgColor: 'bg-amber-50/60',
     accent: 'text-amber-600',
@@ -46,7 +46,7 @@ const TEAM_MEMBERS = [
   {
     id: 'raymond',
     name: 'Raymond Gukiina',
-    role: 'Community Leader',
+    role: 'Board Member',
     image: raymondImg,
     bgColor: 'bg-emerald-50/60',
     accent: 'text-emerald-600',
