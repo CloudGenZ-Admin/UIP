@@ -185,26 +185,32 @@ export default function Events() {
                         <div className="flex-1">
                           <h3 className="text-[1.1rem] font-bold text-slate-800 mb-1.5">{ev.title}</h3>
                           <p className="text-slate-500 text-[0.9rem] leading-[1.6] mb-2.5">{ev.desc}</p>
-                          <div className="flex flex-wrap gap-4 text-[0.8rem] text-slate-400">
+                          <div className="flex  flex-wrap gap-4 text-[0.8rem] text-slate-400">
                             <span className="flex items-center gap-1">📍 {ev.loc}</span>
                             <span className="flex items-center gap-1">🕐 {formatTime12hr(ev.time)}</span>
                           </div>
                           
                           {(ev.featured || ev.link) && (
-                            <div className="flex flex-wrap gap-2 mt-3 items-center">
-                              {ev.featured && (
-                                <span className="px-3.5 py-1 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full text-[0.75rem] font-bold shadow-sm">
-                                  Featured Event
-                                </span>
-                              )}
-                              {ev.link && (
-                                // --- NEW: Render buttonText dynamically ---
-                                <a href={ev.link} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1 border border-slate-200 text-slate-600 hover:text-[#A855F7] hover:border-[#A855F7] rounded-full text-[0.75rem] font-bold transition-colors inline-flex items-center gap-1">
-                                  {ev.buttonText || 'Event Link'} <span className="text-[10px]">↗</span>
-                                </a>
-                              )}
-                            </div>
-                          )}
+  <div className="flex flex-col gap-2 mt-3 items-start">
+    {ev.featured && (
+      <span className="px-3.5 py-1 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full text-[0.75rem] font-bold shadow-sm">
+        Featured Event
+      </span>
+    )}
+
+    {ev.link && (
+      <a
+        href={ev.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="px-3.5 py-1 border border-slate-200 text-slate-600 hover:text-[#A855F7] hover:border-[#A855F7] rounded-full text-[0.75rem] font-bold transition-colors inline-flex items-center gap-1"
+      >
+        {ev.buttonText || 'Event Link'}{" "}
+        <span className="text-[10px]">↗</span>
+      </a>
+    )}
+  </div>
+)}
                         </div>
                       </div>
                     </motion.div>
