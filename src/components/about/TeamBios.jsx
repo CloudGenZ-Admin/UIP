@@ -6,6 +6,7 @@ import raymondImg from '../../assets/Raymond.jpeg';
 import khaledImg from '../../assets/Khaled.jpeg';
 import saddicImg from '../../assets/Saddic.jpeg';
 import corettaImg from '../../assets/Coretta Gordon.jpeg';
+import Xtra from '../../assets/Xtra.jpeg';
 const TEAM_MEMBERS = [
   {
     id: 'winifred',
@@ -65,7 +66,26 @@ She works as a Financial Management Advisor with a Bachelor's in Commerce degree
 Corie also has background in Public Relations from McGill University. 
 As a lover of the Arts, Corie has a diverse interest including dance, music, fashion, & drawing. She studied piano for 12-years. Her hobbies include doing classical ballet, competing & performing Highland dance, and horseback riding.
 She is a strong proponent & advocate for LGBTQ2+ rights and believes that everyone deserves dignity, respect, safety.`
-  }
+  },
+  
+  {
+    id: 'Xtra ',
+    name: 'Xtra ',
+    role: 'Board Member',
+    image: Xtra,
+    bgColor: 'bg-emerald-50/60',
+    accent: 'text-emerald-600',
+    bio: `Xtra is a force,an electrifying Canadian drag queen whose artistry is rooted in a bold fusion of cultures and African heritage. As a Black African trans woman, she does not just perform femininity,she reclaims it, embodies it, and celebrates it with unapologetic power, sensuality, and grace.
+
+Her journey is one of courage and defiance,rising through adversity, challenging societal norms, and carving out space in a world that too often tries to silence voices like hers. Every step of her story is a testament to resilience, self-love, and the radical act of living authentically.
+
+Through drag, Xtra transforms the stage into a platform for visibility, liberation, and empowerment. She doesn’t just entertain,she disrupts, she inspires, and she creates space for others, especially those from marginalized communities, to see themselves, to feel seen, and to exist boldly without apology.
+
+With magnetic energy and a commanding presence, Xtra leaves audiences captivated and transformed,carrying with them a powerful message: to live freely, love deeply, and stand fully in their truth.`
+  },
+
+
+
 ];
 
 export default function TeamBios() {
