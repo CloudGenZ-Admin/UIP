@@ -5,7 +5,7 @@ import winifredImg from '../../assets/Winifred (1).jpeg';
 import raymondImg from '../../assets/Raymond.jpeg';
 import khaledImg from '../../assets/Khaled.jpeg';
 import saddicImg from '../../assets/Saddic.jpeg';
-
+import corettaImg from '../../assets/Coretta Gordon.jpeg';
 const TEAM_MEMBERS = [
   {
     id: 'winifred',
@@ -51,6 +51,20 @@ const TEAM_MEMBERS = [
     bgColor: 'bg-emerald-50/60',
     accent: 'text-emerald-600',
     bio: `Raymond Gukiina is a refugee community leader, youth advocate and the Executive Director of the National Network for Immigrants and Refugees– Canada (NNIR-Canada). Work focuses on supporting Black immigrants, refugees and LGBTQI+ communities through culturally responsive programming centered on health equity, youth empowerment, leadership and community engagement. Passionate about creating safe and inclusive spaces that uplift underserved communities and amplify lived experiences through advocacy, dialogue and collaboration.`
+  },
+
+   {
+    id: 'coretta ',
+    name: 'Coretta Gordon',
+    role: 'Board Member',
+    image: corettaImg,
+    bgColor: 'bg-emerald-50/60',
+    accent: 'text-emerald-600',
+    bio: `Coretta Gordon, known to friends as, Corie, is a 1st generation Canadian who's parents immigrated to Canada from Jamaica.
+She works as a Financial Management Advisor with a Bachelor's in Commerce degree for Accountancy from Concordia University and is currently working towards a Chartered Professional Accountant designation.
+Corie also has background in Public Relations from McGill University. 
+As a lover of the Arts, Corie has a diverse interest including dance, music, fashion, & drawing. She studied piano for 12-years. Her hobbies include doing classical ballet, competing & performing Highland dance, and horseback riding.
+She is a strong proponent & advocate for LGBTQ2+ rights and believes that everyone deserves dignity, respect, safety.`
   }
 ];
 
