@@ -53,7 +53,7 @@ const TEAM_MEMBERS = [
     bio: `Raymond Gukiina is a refugee community leader, youth advocate and the Executive Director of the National Network for Immigrants and Refugees– Canada (NNIR-Canada). Work focuses on supporting Black immigrants, refugees and LGBTQI+ communities through culturally responsive programming centered on health equity, youth empowerment, leadership and community engagement. Passionate about creating safe and inclusive spaces that uplift underserved communities and amplify lived experiences through advocacy, dialogue and collaboration.`
   },
 
-   {
+  {
     id: 'coretta ',
     name: 'Coretta Gordon',
     role: 'Board Member',
@@ -85,20 +85,20 @@ export default function TeamBios() {
   return (
     <section className="py-24 px-6 bg-white">
       <div className="max-w-[1200px] mx-auto">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {TEAM_MEMBERS.map((person) => {
             const isLongText = person.bio.length > MAX_LENGTH;
             const isExpanded = expandedCards[person.id];
-            
+
             // Truncate at the nearest space to avoid cutting words in half
-            const truncatedBio = isLongText 
+            const truncatedBio = isLongText
               ? person.bio.slice(0, MAX_LENGTH).trim() + '...'
               : person.bio;
 
             return (
-              <div 
-                key={person.id} 
+              <div
+                key={person.id}
                 className={`h-full p-8 md:p-12 rounded-[3rem] ${person.bgColor} border border-transparent hover:border-slate-100 transition-all shadow-sm flex flex-col relative overflow-hidden`}
               >
                 {/* Decorative Gradient Bar at the bottom */}
@@ -106,9 +106,9 @@ export default function TeamBios() {
 
                 {/* Header: Profile Image & Role Badge */}
                 <div className="flex flex-col mb-8 gap-5">
-                  <img 
-                    src={person.image} 
-                    alt={person.name} 
+                  <img
+                    src={person.image}
+                    alt={person.name}
                     /* 
                       FIXED: Used aspect-square so it's always a perfect square 
                       and never stretches or cuts off awkwardly on any size!
@@ -127,14 +127,14 @@ export default function TeamBios() {
                   <h3 className={`text-3xl md:text-4xl font-black text-slate-900 leading-tight italic mb-4 ${person.accent}`}>
                     {person.name}
                   </h3>
-                  
+
                   <p className="text-slate-600 text-lg leading-relaxed whitespace-pre-line mb-4">
                     {isExpanded ? person.bio : truncatedBio}
                   </p>
-                  
+
                   {/* Read More / Read Less Button */}
                   {isLongText && (
-                    <button 
+                    <button
                       onClick={() => toggleExpand(person.id)}
                       className={`mt-auto self-start font-black text-sm uppercase tracking-widest hover:opacity-70 transition-opacity ${person.accent}`}
                     >
@@ -149,5 +149,5 @@ export default function TeamBios() {
 
       </div>
     </section>
-  ); 
+  );
 }
