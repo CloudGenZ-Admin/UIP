@@ -1,5 +1,5 @@
 const Event = require('../models/Event');
-
+const Registration = require('../models/Registration');
 
 exports.getEvents = async (req, res) => {
   try {
@@ -39,5 +39,42 @@ exports.deleteEvent = async (req, res) => {
   } catch (error) {
     console.error("Error deleting event:", error);
     res.status(500).json({ error: 'Failed to delete event' });
+  }
+};
+
+exports.registerForEvent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { firstName, lastName, email } = req.body;
+    
+    const event = await Event.findByPk(id);
+    if (!event) return res.status(404).json({ error: 'Event not found' });
+
+    const newRegistration = await Registration.create({
+      eventId: id,
+      firstName,
+      lastName,
+      email
+    });
+
+    res.status(201).json({ message: 'Registered successfully', data: newRegistration });
+  } catch (error) {
+    console.error("Registration error:", error);
+    res.status(500).json({ error: 'Registration failed' });
+  }
+};
+
+// --- NEW: Admin fetch registrations for specific event ---
+exports.getEventRegistrations = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const registrations = await Registration.findAll({
+      where: { eventId: id },
+      order: [['createdAt', 'DESC']]
+    });
+    res.status(200).json(registrations);
+  } catch (error) {
+    console.error("Error fetching registrations:", error);
+    res.status(500).json({ error: 'Failed to fetch registrations' });
   }
 };

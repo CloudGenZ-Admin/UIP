@@ -77,7 +77,10 @@ router.get('/getEvent', eventController.getEvents);
 
 // Admin routes to create and delete events (authMiddleware ke sath)
 router.post('/createEvent', authMiddleware, eventController.createEvent); 
-router.delete('/events/:id', authMiddleware, eventController.deleteEvent); 
+router.delete('/events/:id', authMiddleware, eventController.deleteEvent);
+router.post('/events/:id/register', eventController.registerForEvent); 
+// Protected route so only admin can view the list of registered users
+router.get('/events/:id/registrations', authMiddleware, eventController.getEventRegistrations); 
 
 router.post('/contactpartnerships', contactPartnershipController.create); 
 

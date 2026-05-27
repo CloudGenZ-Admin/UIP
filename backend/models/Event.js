@@ -14,7 +14,8 @@ const Event = sequelize.define('Event', {
   time: { type: DataTypes.STRING, allowNull: false },
   link: { type: DataTypes.STRING, allowNull: true }, // Added optional link field
   buttonText: { type: DataTypes.STRING, allowNull: true, defaultValue: 'More Info' }, 
-  featured: { type: DataTypes.BOOLEAN, defaultValue: false }
+  featured: { type: DataTypes.BOOLEAN, defaultValue: false },
+  isMovieNight: { type: DataTypes.BOOLEAN, defaultValue: false }
 }, {
   tableName: 'events',
   timestamps: true,
