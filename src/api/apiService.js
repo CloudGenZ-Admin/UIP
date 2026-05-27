@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://mintcream-buffalo-179597.hostingersite.com/api'; 
-// const API_URL = 'http://localhost:5000/api'; // For local development
+// const API_URL = 'https://mintcream-buffalo-179597.hostingersite.com/api'; 
+const API_URL = 'http://localhost:5000/api'; // For local development
 const apiClient = axios.create({
   baseURL: API_URL,
 });
@@ -48,6 +48,9 @@ export const apiService = {
   submitEvent: (data) => apiClient.post('/createEvent', data),
   getEvents: () => apiClient.get('/getEvent'),
   deleteEvent: (id) => apiClient.delete(`/events/${id}`),
+
+  registerForEvent: (eventId, data) => apiClient.post(`/events/${eventId}/register`, data),
+  getEventRegistrations: (eventId) => apiClient.get(`/events/${eventId}/registrations`),
 
    // --- NEWS & ADVOCACY ---
   submitNews: (data) => apiClient.post('/news', data),
