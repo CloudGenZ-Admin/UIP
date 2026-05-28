@@ -41,11 +41,10 @@ exports.deleteEvent = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete event' });
   }
 };
-
 exports.registerForEvent = async (req, res) => {
   try {
     const { id } = req.params;
-    const { firstName, lastName, email } = req.body;
+    const { firstName, lastName, email, phone, guestStatus } = req.body;
     
     const event = await Event.findByPk(id);
     if (!event) return res.status(404).json({ error: 'Event not found' });
@@ -54,7 +53,9 @@ exports.registerForEvent = async (req, res) => {
       eventId: id,
       firstName,
       lastName,
-      email
+      email,
+      phone,
+      guestStatus: guestStatus || 'Attending Alone'
     });
 
     res.status(201).json({ message: 'Registered successfully', data: newRegistration });
@@ -64,7 +65,6 @@ exports.registerForEvent = async (req, res) => {
   }
 };
 
-// --- NEW: Admin fetch registrations for specific event ---
 exports.getEventRegistrations = async (req, res) => {
   try {
     const { id } = req.params;
@@ -77,4 +77,4 @@ exports.getEventRegistrations = async (req, res) => {
     console.error("Error fetching registrations:", error);
     res.status(500).json({ error: 'Failed to fetch registrations' });
   }
-};
+}; 

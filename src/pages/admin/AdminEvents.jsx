@@ -29,7 +29,7 @@ export default function AdminEvents() {
   const [itemToDelete, setItemToDelete] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
   
-  // NEW: State for Viewing Registrations
+  // State for Viewing Registrations
   const [viewingRegistrationsEvent, setViewingRegistrationsEvent] = useState(null);
   const [registrationsList, setRegistrationsList] = useState([]);
   const [isRegistrationsLoading, setIsRegistrationsLoading] = useState(false);
@@ -47,7 +47,7 @@ export default function AdminEvents() {
     link: '',
     buttonText: '', 
     featured: false,
-    isMovieNight: false // --- NEW
+    inAppRegistration: false // UPDATED to Generic
   });
 
   const fetchEvents = async () => {
@@ -100,37 +100,10 @@ export default function AdminEvents() {
     }));
   };
 
-  // --- NEW: Helper to auto-calculate the Next Upcoming Last Saturday ---
-  const handleSetLastSaturday = () => {
-    const d = new Date();
-    // Start by checking this month's last Saturday
-    let date = new Date(d.getFullYear(), d.getMonth() + 1, 0);
-    while (date.getDay() !== 6) {
-      date.setDate(date.getDate() - 1);
-    }
-    
-    // If this month's last Saturday has already passed, get next month's
-    if (date < d && date.getDate() !== d.getDate()) {
-      date = new Date(d.getFullYear(), d.getMonth() + 2, 0);
-      while (date.getDay() !== 6) {
-        date.setDate(date.getDate() - 1);
-      }
-    }
-
-    const isoDate = date.toISOString().split('T')[0];
-    setFormData(prev => ({ 
-      ...prev, 
-      date: isoDate, 
-      isMovieNight: true, 
-      title: 'Monthly Movie Night' 
-    }));
-  };
-
   const openRegistrationsModal = async (event) => {
     setViewingRegistrationsEvent(event);
     setIsRegistrationsLoading(true);
     try {
-      // Assumes you added this to apiService
       const res = await apiService.getEventRegistrations(event.id);
       setRegistrationsList(res.data || []);
     } catch (error) {
@@ -152,14 +125,14 @@ export default function AdminEvents() {
       return;
     }
 
-    if (!formData.isMovieNight && formData.link && (!formData.buttonText || formData.buttonText.trim() === '')) {
+    if (!formData.inAppRegistration && formData.link && (!formData.buttonText || formData.buttonText.trim() === '')) {
       setErrorMsg(`Please provide a "Button Text" for your event link (e.g., "Join Meeting", "Buy Tickets").`);
       return;
     }
 
     try {
       await apiService.submitEvent(formData);
-      setFormData({ date: '', title: '', desc: '', loc: '', time: '', link: '', buttonText: '', featured: false, isMovieNight: false });
+      setFormData({ date: '', title: '', desc: '', loc: '', time: '', link: '', buttonText: '', featured: false, inAppRegistration: false });
       setCurrentPage(1);
       fetchEvents();
     } catch (error) {
@@ -205,14 +178,13 @@ export default function AdminEvents() {
                           <h3 className="font-bold text-slate-800 flex flex-wrap items-center gap-2">
                             {ev.title}
                             {ev.featured && <span className="text-[10px] bg-gradient-to-r from-[#FF6B6B]/10 to-[#A855F7]/10 text-[#A855F7] px-2 py-0.5 rounded-full uppercase font-bold border border-purple-200">Featured</span>}
-                            {ev.isMovieNight && <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full uppercase font-bold border border-blue-200">🎬 Movie Night</span>}
                           </h3>
                           <p className="text-sm text-slate-500 line-clamp-1 mt-0.5">{ev.desc}</p>
                           <div className="text-xs font-semibold text-slate-400 mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
                             <span>📍 {ev.loc}</span>
                             <span className="hidden sm:inline">|</span>
                             <span>🕐 {formatTime12hr(ev.time)}</span>
-                            {!ev.isMovieNight && ev.link && (
+                            {!ev.inAppRegistration && ev.link && (
                               <>
                                 <span className="hidden sm:inline">|</span>
                                 <a href={ev.link} target="_blank" rel="noopener noreferrer" className="text-[#A855F7] hover:underline cursor-pointer">
@@ -224,7 +196,7 @@ export default function AdminEvents() {
                         </div>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto shrink-0">
-                        {ev.isMovieNight && (
+                        {ev.inAppRegistration && (
                           <button
                             onClick={() => openRegistrationsModal(ev)}
                             className="p-2 sm:p-3 w-full sm:w-auto text-blue-600 bg-blue-50 hover:bg-blue-500 hover:text-white rounded-xl transition-colors font-bold text-sm"
@@ -263,14 +235,6 @@ export default function AdminEvents() {
         <div className="bg-gradient-to-br from-[#FF6B6B]/10 to-[#A855F7]/10 p-5 md:p-6 rounded-3xl border border-purple-100 shadow-sm lg:sticky lg:top-24 mt-4 lg:mt-0">
           <div className="flex justify-between items-center mb-6">
              <h2 className="text-xl font-bold text-slate-800">Add New Event</h2>
-             {/* Auto-Schedule Helper Button */}
-             <button 
-                type="button" 
-                onClick={handleSetLastSaturday}
-                className="text-[10px] bg-white border border-[#A855F7] text-[#A855F7] px-2 py-1 rounded-full font-bold hover:bg-[#A855F7] hover:text-white transition-colors"
-             >
-               Auto-Set Last Saturday
-             </button>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -300,7 +264,7 @@ export default function AdminEvents() {
               <input required type="text" name="loc" placeholder="Room 204" value={formData.loc} onChange={handleChange} className="w-full mt-1 p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-white outline-none transition-shadow" />
             </div>
 
-            {!formData.isMovieNight && (
+            {!formData.inAppRegistration && (
               <div className="flex flex-col gap-4">
                 <div>
                   <label className="text-xs font-bold text-slate-500 uppercase">Event Link</label>
@@ -320,8 +284,8 @@ export default function AdminEvents() {
               </label>
 
               <label className="flex items-center gap-3 p-3 bg-white rounded-xl ring-1 ring-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
-                <input type="checkbox" name="isMovieNight" checked={formData.isMovieNight} onChange={handleChange} className="w-5 h-5 text-blue-500 rounded focus:ring-blue-500" />
-                <span className="font-bold text-sm text-slate-700">Is Movie Night (In-app Registration)</span>
+                <input type="checkbox" name="inAppRegistration" checked={formData.inAppRegistration} onChange={handleChange} className="w-5 h-5 text-blue-500 rounded focus:ring-blue-500" />
+                <span className="font-bold text-sm text-slate-700">Enable In-App Registration</span>
               </label>
             </div>
 
@@ -345,7 +309,7 @@ export default function AdminEvents() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-white rounded-[2rem] p-6 md:p-8 max-w-2xl w-full shadow-2xl border border-slate-100 flex flex-col max-h-[80vh]"
+              className="bg-white rounded-[2rem] p-6 md:p-8 max-w-4xl w-full shadow-2xl border border-slate-100 flex flex-col max-h-[80vh]"
             >
               <div className="flex justify-between items-center mb-6 border-b pb-4">
                 <div>
@@ -357,7 +321,7 @@ export default function AdminEvents() {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto min-h-[200px]">
+              <div className="flex-1 overflow-y-auto min-h-[200px] -mx-4 px-4 sm:mx-0 sm:px-0">
                 {isRegistrationsLoading ? (
                   <div className="text-center py-10 text-slate-500">Loading attendees...</div>
                 ) : registrationsList.length === 0 ? (
@@ -370,7 +334,9 @@ export default function AdminEvents() {
                       <tr className="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider">
                         <th className="pb-3 px-2">First Name</th>
                         <th className="pb-3 px-2">Last Name</th>
-                        <th className="pb-3 px-2">Email</th>
+                        <th className="pb-3 px-2 hidden sm:table-cell">Email</th>
+                        <th className="pb-3 px-2">Phone</th>
+                        <th className="pb-3 px-2 text-right">Guest Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -378,7 +344,13 @@ export default function AdminEvents() {
                         <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50">
                           <td className="py-3 px-2 font-medium text-slate-800">{reg.firstName}</td>
                           <td className="py-3 px-2 font-medium text-slate-800">{reg.lastName}</td>
-                          <td className="py-3 px-2 text-slate-600">{reg.email}</td>
+                          <td className="py-3 px-2 text-slate-600 hidden sm:table-cell">{reg.email}</td>
+                          <td className="py-3 px-2 text-slate-600">{reg.phone || '-'}</td>
+                          <td className="py-3 px-2 text-right">
+                            <span className="bg-slate-100 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap">
+                              {reg.guestStatus}
+                            </span>
+                          </td>
                         </tr>
                       ))}
                     </tbody>

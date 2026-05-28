@@ -6,9 +6,15 @@ const Registration = sequelize.define('Registration', {
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
   email: { type: DataTypes.STRING, allowNull: false },
+  phone: { type: DataTypes.STRING, allowNull: true }, // --- NEW: Phone field (Optional)
+  guestStatus: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'Attending Alone'
+  },
   // Foreign Key
-  eventId: { 
-    type: DataTypes.INTEGER, 
+  eventId: {
+    type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: Event,

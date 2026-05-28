@@ -35,8 +35,8 @@ export default function Events() {
   const [isFiltered, setIsFiltered] = useState(false); 
 
   // Registration Modal States
-  const [selectedMovieEvent, setSelectedMovieEvent] = useState(null);
-  const [regData, setRegData] = useState({ firstName: '', lastName: '', email: '' });
+  const [selectedEventForReg, setSelectedEventForReg] = useState(null);
+  const [regData, setRegData] = useState({ firstName: '', lastName: '', email: '', phone: '', guestStatus: 'Attending Alone' });
   const [regSuccess, setRegSuccess] = useState(false);
 
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -101,19 +101,18 @@ export default function Events() {
   const submitRegistration = async (e) => {
     e.preventDefault();
     try {
-      await apiService.registerForEvent(selectedMovieEvent.id, regData);
+      await apiService.registerForEvent(selectedEventForReg.id, regData);
       setRegSuccess(true);
       setTimeout(() => {
         setRegSuccess(false);
-        setSelectedMovieEvent(null);
-        setRegData({ firstName: '', lastName: '', email: '' });
+        setSelectedEventForReg(null);
+        setRegData({ firstName: '', lastName: '', email: '', phone: '', guestStatus: 'Attending Alone' });
       }, 2500);
     } catch (error) {
       alert("Registration failed. Please try again.");
     }
   };
 
-  // --- NEW LOGIC: Dynamic Filter for Movie Nights ---
   const isEventInCurrentMonth = (dateString) => {
     if (!dateString) return false;
     const [y, m] = dateString.split('-');
@@ -121,26 +120,21 @@ export default function Events() {
   };
 
   let displayedEvents = visibleEvents.filter(ev => {
-    // Agar movie night hai, toh current active calendar month check karo
-    if (ev.isMovieNight) {
+    if (ev.inAppRegistration) {
       return isEventInCurrentMonth(ev.date);
     }
-    // Baaki normal events jaise the waise hi render honge
     return true; 
   });
 
   if (!isFiltered) {
-    const currentMonthMovieNights = eventsData.filter(ev => ev.isMovieNight && isEventInCurrentMonth(ev.date));
-    currentMonthMovieNights.forEach(mn => {
-      // Ensure current month ki movie night array mein ho
+    const currentMonthInApp = eventsData.filter(ev => ev.inAppRegistration && isEventInCurrentMonth(ev.date));
+    currentMonthInApp.forEach(mn => {
       if (!displayedEvents.some(ev => ev.id === mn.id)) {
         displayedEvents.push(mn);
       }
     });
-    // Chronological order maintain karne ke liye sort
     displayedEvents.sort((a, b) => a.date.localeCompare(b.date));
   }
-  // ------------------------------------------------
 
   return (
     <section id="events" className="py-[100px] bg-[#FAFAFA] px-6">
@@ -204,7 +198,6 @@ export default function Events() {
                         <div className="flex-1">
                           <h3 className="text-[1.1rem] font-bold text-slate-800 mb-1.5 flex items-center gap-2">
                             {ev.title}
-                            {ev.isMovieNight && <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full uppercase font-bold border border-blue-200">🎬 Movie Night</span>}
                           </h3>
                           <p className="text-slate-500 text-[0.9rem] leading-[1.6] mb-2.5">{ev.desc}</p>
                           <div className="flex flex-wrap gap-4 text-[0.8rem] text-slate-400">
@@ -212,7 +205,7 @@ export default function Events() {
                             <span className="flex items-center gap-1">🕐 {formatTime12hr(ev.time)}</span>
                           </div>
                           
-                          {(ev.featured || ev.link || ev.isMovieNight) && (
+                          {(ev.featured || ev.link || ev.inAppRegistration) && (
                             <div className="flex flex-col gap-2 mt-3 items-start">
                               {ev.featured && (
                                 <span className="px-3.5 py-1 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7] text-white rounded-full text-[0.75rem] font-bold shadow-sm">
@@ -220,12 +213,12 @@ export default function Events() {
                                 </span>
                               )}
 
-                              {ev.isMovieNight ? (
+                              {ev.inAppRegistration ? (
                                 <button
-                                  onClick={() => setSelectedMovieEvent(ev)}
+                                  onClick={() => setSelectedEventForReg(ev)}
                                   className="px-4 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:shadow-lg hover:-translate-y-0.5 rounded-full text-[0.8rem] font-bold transition-all inline-flex items-center gap-1"
                                 >
-                                  Register for Movie Night 🍿
+                                  Register for Event
                                 </button>
                               ) : ev.link ? (
                                 <a
@@ -333,7 +326,7 @@ export default function Events() {
 
       {/* --- REGISTRATION POPUP MODAL --- */}
       <AnimatePresence>
-        {selectedMovieEvent && (
+        {selectedEventForReg && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -346,31 +339,40 @@ export default function Events() {
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               className="bg-white rounded-[2rem] p-8 md:p-10 max-w-sm w-full shadow-2xl border border-slate-100 relative overflow-hidden"
             >
-              <button onClick={() => setSelectedMovieEvent(null)} className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center bg-slate-100 text-slate-500 rounded-full hover:bg-slate-200 font-bold">✕</button>
+              <button onClick={() => setSelectedEventForReg(null)} className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center bg-slate-100 text-slate-500 rounded-full hover:bg-slate-200 font-bold">✕</button>
 
               {regSuccess ? (
                 <div className="text-center py-8">
                   <div className="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">🎉</div>
                   <h3 className="text-2xl font-black text-slate-800 mb-2">Registered!</h3>
-                  <p className="text-slate-500 text-sm">We've saved your spot for {selectedMovieEvent.title}. See you there!</p>
+                  <p className="text-slate-500 text-sm">We've saved your spot for {selectedEventForReg.title}. See you there!</p>
                 </div>
               ) : (
                 <>
                   <div className="mb-6">
-                    <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded-full uppercase font-bold mb-3 inline-block tracking-wider">Movie Night Sign Up</span>
-                    <h3 className="text-2xl font-black text-slate-900 leading-tight">{selectedMovieEvent.title}</h3>
-                    <p className="text-slate-500 text-sm mt-1">🗓️ {formatDateParts(selectedMovieEvent.date).month} {formatDateParts(selectedMovieEvent.date).day} @ {formatTime12hr(selectedMovieEvent.time)}</p>
+                    <span className="text-[10px] bg-blue-100 text-blue-600 px-2 py-1 rounded-full uppercase font-bold mb-3 inline-block tracking-wider">Event Registration</span>
+                    <h3 className="text-2xl font-black text-slate-900 leading-tight">{selectedEventForReg.title}</h3>
+                    <p className="text-slate-500 text-sm mt-1">🗓️ {formatDateParts(selectedEventForReg.date).month} {formatDateParts(selectedEventForReg.date).day} @ {formatTime12hr(selectedEventForReg.time)}</p>
                   </div>
                   
                   <form onSubmit={submitRegistration} className="space-y-4">
-                    <div>
+                    <div className="grid grid-cols-2 gap-3">
                       <input required type="text" name="firstName" placeholder="First Name" value={regData.firstName} onChange={handleRegChange} className="w-full p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-slate-50 focus:bg-white outline-none transition-all text-sm font-medium" />
-                    </div>
-                    <div>
                       <input required type="text" name="lastName" placeholder="Last Name" value={regData.lastName} onChange={handleRegChange} className="w-full p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-slate-50 focus:bg-white outline-none transition-all text-sm font-medium" />
                     </div>
                     <div>
                       <input required type="email" name="email" placeholder="Email Address" value={regData.email} onChange={handleRegChange} className="w-full p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-slate-50 focus:bg-white outline-none transition-all text-sm font-medium" />
+                    </div>
+                    <div>
+                      <input type="tel" name="phone" placeholder="Phone Number (Optional)" value={regData.phone} onChange={handleRegChange} className="w-full p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-slate-50 focus:bg-white outline-none transition-all text-sm font-medium" />
+                    </div>
+                    <div>
+                      <select required name="guestStatus" value={regData.guestStatus} onChange={handleRegChange} className="w-full p-3 rounded-xl border-0 ring-1 ring-slate-200 focus:ring-2 focus:ring-[#A855F7] bg-slate-50 focus:bg-white outline-none transition-all text-sm font-medium text-slate-700">
+                        <option value="Attending Alone">Attending Alone</option>
+                        <option value="Bringing 1 Guest">Bringing 1 Guest</option>
+                        <option value="Bringing 2 Guests">Bringing 2 Guests</option>
+                        <option value="Bringing 3+ Guests">Bringing 3+ Guests</option>
+                      </select>
                     </div>
                     <button type="submit" className="w-full py-3.5 mt-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all">
                       Confirm Registration
