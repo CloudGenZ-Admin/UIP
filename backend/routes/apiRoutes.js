@@ -81,6 +81,7 @@ router.delete('/events/:id', authMiddleware, eventController.deleteEvent);
 router.post('/events/:id/register', eventController.registerForEvent); 
 // Protected route so only admin can view the list of registered users
 router.get('/events/:id/registrations', authMiddleware, eventController.getEventRegistrations); 
+router.delete('/registrations/:id', authMiddleware, eventController.deleteRegistration); // NEW: Delete Registration
 
 router.post('/contactpartnerships', contactPartnershipController.create); 
 

@@ -33,10 +33,15 @@ export default function AdminEvents() {
   const [viewingRegistrationsEvent, setViewingRegistrationsEvent] = useState(null);
   const [registrationsList, setRegistrationsList] = useState([]);
   const [isRegistrationsLoading, setIsRegistrationsLoading] = useState(false);
+  const [regToDelete, setRegToDelete] = useState(null); 
 
-  // Pagination States
+  // Main Event Pagination States
   const [currentPage, setCurrentPage] = useState(1);
   const eventsPerPage = 4;
+
+  // Registration Pagination States
+  const [regCurrentPage, setRegCurrentPage] = useState(1);
+  const regsPerPage = 5;
 
   const [formData, setFormData] = useState({
     date: '',
@@ -47,7 +52,7 @@ export default function AdminEvents() {
     link: '',
     buttonText: '', 
     featured: false,
-    inAppRegistration: false // UPDATED to Generic
+    inAppRegistration: false
   });
 
   const fetchEvents = async () => {
@@ -67,6 +72,7 @@ export default function AdminEvents() {
     fetchEvents();
   }, []);
 
+  // Events Pagination calculations
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
   const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
@@ -75,6 +81,12 @@ export default function AdminEvents() {
   const goToNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const goToPage = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Registration Pagination calculations
+  const indexOfLastReg = regCurrentPage * regsPerPage;
+  const indexOfFirstReg = indexOfLastReg - regsPerPage;
+  const currentRegs = registrationsList.slice(indexOfFirstReg, indexOfLastReg);
+  const regTotalPages = Math.ceil(registrationsList.length / regsPerPage);
 
   const confirmDelete = async () => {
     if (!itemToDelete) return;
@@ -92,6 +104,25 @@ export default function AdminEvents() {
     }
   };
 
+  const confirmDeleteReg = async () => {
+    if (!regToDelete) return;
+    try {
+      await apiService.deleteEventRegistration(regToDelete);
+      const updatedList = registrationsList.filter((reg) => reg.id !== regToDelete);
+      setRegistrationsList(updatedList);
+      
+      const newTotalPages = Math.ceil(updatedList.length / regsPerPage);
+      if (regCurrentPage > newTotalPages && newTotalPages > 0) {
+        setRegCurrentPage(newTotalPages);
+      }
+    } catch (error) {
+      console.error("Delete registration failed:", error);
+      alert("Failed to delete registration.");
+    } finally {
+      setRegToDelete(null);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
@@ -102,6 +133,7 @@ export default function AdminEvents() {
 
   const openRegistrationsModal = async (event) => {
     setViewingRegistrationsEvent(event);
+    setRegCurrentPage(1); // Reset Pagination on load
     setIsRegistrationsLoading(true);
     try {
       const res = await apiService.getEventRegistrations(event.id);
@@ -216,7 +248,7 @@ export default function AdminEvents() {
                 })}
               </div>
 
-              {totalPages > 1 && (
+              {totalPages > 0 && (
                 <div className="flex flex-col sm:flex-row justify-between items-center mt-8 pt-4 border-t border-slate-100 gap-4">
                   <button onClick={goToPrevPage} disabled={currentPage === 1} className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all w-full sm:w-auto hidden sm:block ${currentPage === 1 ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-purple-50 text-[#A855F7] hover:bg-purple-100'}`}>Previous</button>
                   <div className="flex flex-wrap justify-center gap-2">
@@ -303,13 +335,13 @@ export default function AdminEvents() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-white rounded-[2rem] p-6 md:p-8 max-w-4xl w-full shadow-2xl border border-slate-100 flex flex-col max-h-[80vh]"
+              className="bg-white rounded-[2rem] p-6 md:p-8 max-w-5xl w-full shadow-2xl border border-slate-100 flex flex-col max-h-[85vh]"
             >
               <div className="flex justify-between items-center mb-6 border-b pb-4">
                 <div>
@@ -329,32 +361,76 @@ export default function AdminEvents() {
                     No users have registered for this event yet.
                   </div>
                 ) : (
-                  <table className="w-full text-left border-collapse text-sm">
-                    <thead>
-                      <tr className="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider">
-                        <th className="pb-3 px-2">First Name</th>
-                        <th className="pb-3 px-2">Last Name</th>
-                        <th className="pb-3 px-2 hidden sm:table-cell">Email</th>
-                        <th className="pb-3 px-2">Phone</th>
-                        <th className="pb-3 px-2 text-right">Guest Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {registrationsList.map((reg, idx) => (
-                        <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50">
-                          <td className="py-3 px-2 font-medium text-slate-800">{reg.firstName}</td>
-                          <td className="py-3 px-2 font-medium text-slate-800">{reg.lastName}</td>
-                          <td className="py-3 px-2 text-slate-600 hidden sm:table-cell">{reg.email}</td>
-                          <td className="py-3 px-2 text-slate-600">{reg.phone || '-'}</td>
-                          <td className="py-3 px-2 text-right">
-                            <span className="bg-slate-100 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap">
-                              {reg.guestStatus}
-                            </span>
-                          </td>
+                  <div className="flex flex-col justify-between h-full">
+                    <table className="w-full text-left border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider">
+                          <th className="pb-3 px-2">First Name</th>
+                          <th className="pb-3 px-2">Last Name</th>
+                          <th className="pb-3 px-2 hidden sm:table-cell">Email</th>
+                          <th className="pb-3 px-2">Phone</th>
+                          <th className="pb-3 px-2 text-center">Guest Status</th>
+                          <th className="pb-3 px-2 text-right">Actions</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {currentRegs.map((reg, idx) => (
+                          <tr key={reg.id || idx} className="border-b border-slate-100 hover:bg-slate-50">
+                            <td className="py-3 px-2 font-medium text-slate-800">{reg.firstName}</td>
+                            <td className="py-3 px-2 font-medium text-slate-800">{reg.lastName}</td>
+                            <td className="py-3 px-2 text-slate-600 hidden sm:table-cell">{reg.email}</td>
+                            <td className="py-3 px-2 text-slate-600">{reg.phone || '-'}</td>
+                            <td className="py-3 px-2 text-center">
+                              <span className="bg-slate-100 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full text-[11px] font-bold whitespace-nowrap">
+                                {reg.guestStatus}
+                              </span>
+                            </td>
+                            <td className="py-3 px-2 text-right">
+                              <button 
+                                onClick={() => setRegToDelete(reg.id)}
+                                className="text-red-500 hover:text-red-600 bg-red-50 hover:bg-red-100 px-3 py-1 rounded-lg transition-colors font-bold text-xs"
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
+                    {/* Pagination for Registrations - CHANGED TO > 0 so it always shows! */}
+                    {regTotalPages > 0 && (
+                      <div className="flex flex-col sm:flex-row justify-between items-center mt-6 pt-4 border-t border-slate-100 gap-4">
+                        <button 
+                          onClick={() => setRegCurrentPage(prev => Math.max(prev - 1, 1))} 
+                          disabled={regCurrentPage === 1} 
+                          className={`px-4 py-2 rounded-xl font-bold text-sm transition-all w-full sm:w-auto hidden sm:block ${regCurrentPage === 1 ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
+                        >
+                          Previous
+                        </button>
+                        
+                        <div className="flex flex-wrap justify-center gap-2">
+                          {Array.from({ length: regTotalPages }, (_, i) => i + 1).map((num) => (
+                            <button 
+                              key={num} 
+                              onClick={() => setRegCurrentPage(num)} 
+                              className={`w-8 h-8 flex items-center justify-center rounded-xl font-bold text-sm transition-all ${regCurrentPage === num ? 'bg-[#A855F7] text-white shadow-md' : 'bg-purple-50 text-[#A855F7] hover:bg-purple-100'}`}
+                            >
+                              {num}
+                            </button>
+                          ))}
+                        </div>
+
+                        <button 
+                          onClick={() => setRegCurrentPage(prev => Math.min(prev + 1, regTotalPages))} 
+                          disabled={regCurrentPage === regTotalPages} 
+                          className={`px-4 py-2 rounded-xl font-bold text-sm transition-all w-full sm:w-auto hidden sm:block ${regCurrentPage === regTotalPages ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
+                        >
+                          Next
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 )}
               </div>
             </motion.div>
@@ -390,7 +466,7 @@ export default function AdminEvents() {
         )}
       </AnimatePresence>
 
-      {/* DELETE CONFIRMATION MODAL */}
+      {/* DELETE EVENT CONFIRMATION MODAL */}
       <AnimatePresence>
         {itemToDelete && (
           <motion.div
@@ -418,6 +494,41 @@ export default function AdminEvents() {
                 </button>
                 <button onClick={confirmDelete} className="w-full py-4 bg-red-500 text-white font-black rounded-2xl shadow-md hover:bg-red-600 hover:shadow-xl transition-all">
                   Yes, Delete
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* DELETE REGISTRATION CONFIRMATION MODAL */}
+      <AnimatePresence>
+        {regToDelete && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white rounded-[2rem] p-8 md:p-10 max-w-sm w-full text-center shadow-2xl border border-slate-100"
+            >
+              <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-red-100">
+                <span className="text-4xl font-bold">🗑️</span>
+              </div>
+              <h3 className="text-2xl font-black text-slate-900 mb-3">Remove Attendee?</h3>
+              <p className="text-slate-500 mb-8 font-medium leading-relaxed">
+                Are you sure you want to delete this <strong className="text-slate-700">registration</strong>? This action cannot be undone.
+              </p>
+              <div className="flex gap-3">
+                <button onClick={() => setRegToDelete(null)} className="w-full py-4 bg-slate-100 text-slate-700 font-black rounded-2xl shadow-sm hover:bg-slate-200 transition-all">
+                  Cancel
+                </button>
+                <button onClick={confirmDeleteReg} className="w-full py-4 bg-red-500 text-white font-black rounded-2xl shadow-md hover:bg-red-600 hover:shadow-xl transition-all">
+                  Yes, Remove
                 </button>
               </div>
             </motion.div>

@@ -51,7 +51,7 @@ export const apiService = {
 
   registerForEvent: (eventId, data) => apiClient.post(`/events/${eventId}/register`, data),
   getEventRegistrations: (eventId) => apiClient.get(`/events/${eventId}/registrations`),
-
+ deleteEventRegistration: (id) => apiClient.delete(`/registrations/${id}`), // NEW
    // --- NEWS & ADVOCACY ---
   submitNews: (data) => apiClient.post('/news', data),
   getNews: () => apiClient.get('/news'),

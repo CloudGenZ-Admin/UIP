@@ -78,3 +78,20 @@ exports.getEventRegistrations = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch registrations' });
   }
 }; 
+
+exports.deleteRegistration = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const registration = await Registration.findByPk(id);
+
+    if (!registration) {
+      return res.status(404).json({ error: 'Registration not found' });
+    }
+
+    await registration.destroy();
+    res.status(200).json({ message: 'Registration deleted successfully' });
+  } catch (error) {
+    console.error("Error deleting registration:", error);
+    res.status(500).json({ error: 'Failed to delete registration' });
+  }
+};
