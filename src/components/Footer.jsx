@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/updatelogo.png';
 import {
   Instagram,
   Facebook,
-  Linkedin, // LinkedIn add kiya gaya hai
+  Linkedin, 
   MapPin,
   Phone,
   Mail,
@@ -18,6 +18,26 @@ export default function Footer() {
       top: 0,
       behavior: "smooth" 
     });
+  };
+
+
+  const scrollToVolunteerForm = () => {
+    setTimeout(() => {
+      const formElement = document.getElementById('apply-form');
+      if (formElement) {
+        const elementPosition = formElement.getBoundingClientRect().top + window.scrollY;
+        
+        
+        const offsetPosition = elementPosition - 100; 
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 150); 
   };
 
   // Social Media Links Array
@@ -38,7 +58,6 @@ export default function Footer() {
       href: 'https://www.linkedin.com/company/youpride/' 
     },
     { 
-      // TikTok Custom SVG Icon
       i: (
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
@@ -78,7 +97,7 @@ export default function Footer() {
               A community for LGBTQ+ newcomers, immigrants, and refugees to heal, connect, and build a sense of belonging in a new home.
             </p>
 
-            {/* SOCIAL LINKS - Updated with your URLs */}
+            {/* SOCIAL LINKS */}
             <h4 className="font-bold text-[1rem] mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
               Follow Our Journey
             </h4>
@@ -134,7 +153,18 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 text-[0.9rem] text-[rgba(255,255,255,0.6)] mb-6">
               <li><Link to="/donate" onClick={scrollToTop} className="hover:text-white transition-colors">Donate</Link></li>
               <li><Link to="/ourpartners" onClick={scrollToTop} className="hover:text-white transition-colors">Partner With Us</Link></li>
-              <li><Link to="/Waystogive" onClick={scrollToTop} className="hover:text-white transition-colors">Volunteer With Us</Link></li>
+              
+              {/* YAHA PAR CHANGE KIYA GAYA HAI */}
+              <li>
+                <Link 
+                  to="/Waystogive" 
+                  onClick={scrollToVolunteerForm} 
+                  className="hover:text-white transition-colors"
+                >
+                  Volunteer With Us
+                </Link>
+              </li>
+
               <li><Link to="/contact" onClick={scrollToTop} className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
 
@@ -163,18 +193,6 @@ export default function Footer() {
           <p className="text-[rgba(255,255,255,0.5)] text-[0.85rem] text-center md:text-left">
             © 2025 United in Pride. All rights reserved. Built with love in Ottawa for LGBTQ+ newcomers across Canada.
           </p>
-          {/* <div className="flex gap-6">
-            {['Privacy', 'Terms', 'Accessibility'].map((item) => (
-              <Link 
-                key={item} 
-                to={`/${item.toLowerCase()}`} 
-                onClick={scrollToTop}
-                className="text-[rgba(255,255,255,0.5)] text-[0.85rem] hover:text-white transition-colors"
-              >
-                {item}
-              </Link>
-            ))}
-          </div> */}
         </div>
       </div>
     </footer>

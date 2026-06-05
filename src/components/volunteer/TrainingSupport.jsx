@@ -112,13 +112,7 @@ export default function VolunteerDetails() {
               Volunteering with United in Pride means becoming part of a community, not just offering your time.
             </p>
             
-            {/* --- UPDATED CONTACT INFO HERE --- */}
-            {/* <div className="space-y-6">
-              <div className="flex items-center gap-4 text-lg font-bold text-slate-800">
-                <span className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">✉</span>
-                info@unitedinpride.ca
-              </div>
-            </div> */}
+        
             {/* --------------------------------- */}
             
           </div>

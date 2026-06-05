@@ -42,7 +42,7 @@ export default function Donate() {
           {/* UPDATED GIVE BUTTON WITH ZEFFY LINK */}
           {/* ================================== */}
           <a 
-            href="https://www.zeffy.com/en-CA/embed/donation-form/youre-not-alone?modal"
+            href="https://www.zeffy.com/en-CA/donation-form/youre-not-alone"
             target="_blank"
             rel="noopener noreferrer"
             className="block text-center w-full py-5 bg-gradient-to-r from-[#FF6B6B] via-[#A855F7] to-[#3B82F6] text-white rounded-[1.5rem] font-black text-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all mb-4"

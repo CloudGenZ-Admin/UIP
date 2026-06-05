@@ -17,13 +17,10 @@ export default function PartnershipPage() {
                 {/* 1. Hero Section (Reused from Volunteer) */}
                 <PartnershipHero />
 
-                {/* 2. Main Partnership Content Built Above */}
-                {/* <Partnerships /> */}
-                {/* <VolunteerRoles /> */}
+              
                 <TrainingSupport />
                
-                {/* 3. Call to Action (Reused from Volunteer) */}
-                {/* <VolunteerCTA /> */}
+             
             </main>
 
             <Footer />

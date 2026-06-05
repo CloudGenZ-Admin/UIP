@@ -128,7 +128,7 @@ export default function WaysToGiveOptions() {
             >
               <h3 className="text-2xl font-black text-slate-900 mb-6 text-center">Secure Donation Form</h3>
               <iframe
-                src="https://www.zeffy.com/en-CA/embed/donation-form/youre-not-alone"
+                src="https://www.zeffy.com/en-CA/donation-form/youre-not-alone"
                 title="Zeffy Donation"
                 className="w-full h-[850px] md:h-[900px] border-0 rounded-2xl shadow-inner bg-white"
                 allow="payment"
@@ -300,28 +300,7 @@ export default function WaysToGiveOptions() {
         {/* ======================= */}
         {/* 4. VOLUNTEER WITH US    */}
         {/* ======================= */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="lg:col-span-2 bg-white rounded-[2.5rem] p-8 md:p-14 shadow-xl border border-slate-100 flex flex-col md:flex-row gap-10 items-center text-center md:text-left"
-        >
-          <div className="flex-1">
-            <h2 className="text-3xl font-black text-slate-900 mb-4">Volunteer With Us</h2>
-            <p className="text-slate-600 text-lg leading-relaxed">
-              Your time and skills can make a direct impact. Join our team of dedicated volunteers and help us build a stronger, more inclusive community.
-            </p>
-          </div>
-          <div className="flex-1 w-full md:text-right">
-             <a
-              href="/volunteer" 
-              className="inline-flex items-center justify-center px-10 py-4 bg-slate-900 text-white rounded-2xl font-black shadow-lg hover:bg-black transition-colors"
-            >
-              Apply to Volunteer
-            </a>
-          </div>
-        </motion.div> */}
+       
 
         {/* ======================= */}
         {/* 5. SHARE OUR WORK BANNER*/}
