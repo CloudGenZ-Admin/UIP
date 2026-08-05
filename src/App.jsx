@@ -40,7 +40,7 @@ import AdminNews from './pages/admin/AdminNews.jsx';
 export default function App() {
    return (
     <Router>
-      <ScrollToTop /> 
+      <ScrollToTop />
       <Routes>
         
         {/* ===================== PUBLIC ROUTES ===================== */}
