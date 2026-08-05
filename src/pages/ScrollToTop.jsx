@@ -5,7 +5,6 @@ export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    // Hash present hai to us section par scroll karo
     if (hash) {
       const id = hash.substring(1);
 
