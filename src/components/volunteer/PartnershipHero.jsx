@@ -185,6 +185,7 @@ export default function WaysToGiveOptions() {
         {/* 3. PARTNER FORM SECTION */}
         {/* ======================= */}
         <motion.div
+          id='partner'
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
