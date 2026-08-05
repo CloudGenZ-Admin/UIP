@@ -97,7 +97,7 @@ export default function VolunteerDetails() {
   };
 
   return (
-    <section className="pb-24 px-6 bg-[#FAFAFA] overflow-hidden relative">
+    <section className="pb-24 px-6 bg-[#FAFAFA] overflow-hidden relative" id='volunteer'>
       <div className="max-w-[1250px] mx-auto">
 
         {/* --- Form Section --- */}
